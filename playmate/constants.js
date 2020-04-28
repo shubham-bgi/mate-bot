@@ -10,11 +10,12 @@ const clanByTagUrl = '/clans/';
 const playersByClanTagUrl = '/members';
 const playerByTagUrl = '/players/';
 
+const TOWNHALL_MAX = 13;
+const LAB_MAX = 11;
+
 import axios from 'axios';
 axios.defaults.headers.common['Authorization'] = token;
 
 export default { 
-                 cocUrl, clanByTagUrl, playerByTagUrl, playersByClanTagUrl, 
-                 axios 
-                
+                 cocUrl, clanByTagUrl, playerByTagUrl, playersByClanTagUrl, axios
                 };
