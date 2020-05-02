@@ -1,11 +1,17 @@
-import Constants from './constants.js';
-import fs from 'fs';
+const Constants = require('./constants.js');
+const fs = require('fs');
+const path = require('path');
 
-export function getUrl(relativeUrl) {
+function getUrl(relativeUrl) {
 	return Constants.cocUrl + relativeUrl;
 }
 
-export function readJson(filePath) {
-	let rawData = fs.readFileSync(filePath);
+function readJson(filePath) {
+	console.log(filePath);
+	let rawData = fs.readFileSync(path.resolve(__dirname, filePath));
 	return JSON.parse(rawData);
+}
+
+module.exports = {
+	getUrl, readJson
 }

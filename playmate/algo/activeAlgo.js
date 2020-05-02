@@ -1,12 +1,13 @@
-import Constants from './constants.js';
-import { getUrl } from './utils.js';
+const Constants = require('../constants.js');
+const Utils =  require('../utils.js');
 
+const getUrl = Utils.getUrl;
 const playerByTagUrl = Constants.playerByTagUrl;
 const playersByClanTagUrl = Constants.playersByClanTagUrl;
 const clanByTagUrl = Constants.clanByTagUrl;
 const axios = Constants.axios;
 
-export default class ActiveAlgo {
+class ActiveAlgo {
 
     constructor() {
         this.clanDonations = 0;
@@ -69,4 +70,8 @@ export default class ActiveAlgo {
         }
     }
 
+}
+
+module.exports = {
+    ActiveAlgo: ActiveAlgo
 }

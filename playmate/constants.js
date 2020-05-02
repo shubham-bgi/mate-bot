@@ -13,9 +13,9 @@ const playerByTagUrl = '/players/';
 const TOWNHALL_MAX = 13;
 const LAB_MAX = 11;
 
-import axios from 'axios';
+const axios = require('axios');
 axios.defaults.headers.common['Authorization'] = token;
 
-export default { 
+module.exports = { 
                  cocUrl, clanByTagUrl, playerByTagUrl, playersByClanTagUrl, axios
                 };

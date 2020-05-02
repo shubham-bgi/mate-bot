@@ -1,10 +1,13 @@
-import { readJson } from './utils.js';
+const Utils = require('../utils');
+const readJson = Utils.readJson;
 
-export default class RushedAlgo {
+console.log(readJson);
+
+class RushedAlgo {
     constructor()  {
-        this.troopsMaxLevels = readJson('./json/troops.json');
-        this.spellsMaxLevels = readJson('./json/spells.json');
-        this.herosMaxLevels = readJson('./json/heros.json');
+        this.troopsMaxLevels = readJson('json/troops.json');
+        this.spellsMaxLevels = readJson('json/spells.json');
+        this.herosMaxLevels = readJson('json/heros.json');
     }
 
     checkRushed(playerDetails) {
@@ -43,8 +46,10 @@ export default class RushedAlgo {
             this.status = "SEMI RUSHED";
         }
 
-        console.log(this.metrics);
-        console.log(this.status);
+        return {
+            metrics: this.metrics,
+            status: this.status
+        }
 
     }
 
@@ -84,4 +89,8 @@ export default class RushedAlgo {
         const weaponExist = weaponMaxLevels[weaponName];
         return weaponExist && weaponExist[this.compareLabLevel.toString()];
     }
+}
+
+module.exports = {
+    RushedAlgo
 }

@@ -1,9 +1,13 @@
+const Algo = require('./algo');
+const RushedAlgo = Algo.RushedAlgo;
 
-import ActiveAlgo from './activeAlgo.js';
-import RushedAlgo from './rushedAlgo.js';
+console.log(RushedAlgo);
 
-import { readJson, getUrl } from './utils.js';
-import Constants from './constants.js';
+const Utils = require('./utils.js');
+const  Constants = require('./constants.js');
+
+const readJson = Utils.readJson;
+const getUrl = Utils.getUrl;
 
 //let activeAlgo = new ActiveAlgo();
 
@@ -17,13 +21,18 @@ let playerName = 'bibyeo';
 let rushedAlgo = new RushedAlgo();
 
 playerTag = '#LOYJOJOO8';
-
 playerTag = '#8CPVOPRJ9'
 
-getPlayerDetails(playerTag, checkedForRush);
+function getPlayerCommandDetails(playerTag, botMsgChannel) {
+    getPlayerDetails(playerTag, checkedForRush(botMsgChannel));
+}
 
-function checkedForRush(playerDetails) {
-    rushedAlgo.checkRushed(playerDetails);
+function checkedForRush(botMsgChannel) {
+    return (playerDetails) => {
+        const result = rushedAlgo.checkRushed(playerDetails);
+        botMsgChannel.send("You are "+result.status);
+        botMsgChannel.send("Rushed stats"+result.metrics);
+    }
 }
 
  function getPlayerDetails(playerTag, successCallback) {
@@ -37,4 +46,8 @@ function checkedForRush(playerDetails) {
         console.log(error.response);
         console.log(`*********** Got Error for player tag ${playerTag} *********`);
     });
+}
+
+module.exports = {
+    getPlayerCommandDetails: getPlayerCommandDetails
 }
