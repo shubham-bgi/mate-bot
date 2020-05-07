@@ -1,10 +1,11 @@
 const Algo = require('./algo');
 const RushedAlgo = Algo.RushedAlgo;
-
-console.log(RushedAlgo);
+const ActiveAlgo = Algo.ActiveAlgo;
 
 const Utils = require('./utils.js');
-const  Constants = require('./constants.js');
+const Constants = require('./constants.js');
+
+const Api = require('./api.js');
 
 const readJson = Utils.readJson;
 const getUrl = Utils.getUrl;
@@ -15,37 +16,47 @@ const getUrl = Utils.getUrl;
 //activeAlgo.check('#LVJVJ2QL');
 
 let playerTag = 'Y8JCPRYU9';
-let clanTag = '9RL9CJQV';
+let clanTag = '#9RL9CJQV';
 let playerName = 'bibyeo';
 //let playerDetails = readJson(`./json/data/${clanTag}/${playerTag}-${playerName}.json`);
 let rushedAlgo = new RushedAlgo();
+//let activeAlgo = new ActiveAlgo();
 
 playerTag = '#LOYJOJOO8';
-playerTag = '#8CPVOPRJ9'
+playerTag = '#8CPVOPRJ9';
+
+//getPlayerCommandDetails(playerTag, undefined)
+//getClanCommandDetails(clanTag, undefined);
 
 function getPlayerCommandDetails(playerTag, botMsgChannel) {
-    getPlayerDetails(playerTag, checkedForRush(botMsgChannel));
+    Api.getPlayerDetails(playerTag)
+        .then( playerDetails => {
+            getMetricForPlayer(playerDetails, botMsgChannel);
+        });
 }
 
-function checkedForRush(botMsgChannel) {
-    return (playerDetails) => {
+function getClanCommandDetails(clanTag, botMsgChannel) {
+    Api.getClanDetails(clanTag)
+        .then( clanData => {
+            Api.getAllPlayerDetails(clanData)
+            .then( allPlayersData => {
+                getMetriceForAllPlayersOfClan(allPlayersData, clanData, botMsgChannel);
+            })
+        })
+}
+
+function getMetriceForAllPlayersOfClan(allPlayersData, clanData, botMsgChannel) {
+    console.log(allPlayersData);
+    console.log(clanData);
+    console.log(allPlayersData.length);
+}
+
+
+function getMetricForPlayer(playerDetails, botMsgChannel) {
         const result = rushedAlgo.checkRushed(playerDetails);
+        console.log(result);
         botMsgChannel.send("You are "+result.status);
         botMsgChannel.send("Rushed stats"+result.metrics);
-    }
-}
-
- function getPlayerDetails(playerTag, successCallback) {
-    const url = getUrl(Constants.playerByTagUrl) + encodeURIComponent(playerTag) ;
-    Constants.axios.get(url)
-    .then(response => {
-        //console.log(`********* Player ${response.data.name} *************`);
-        successCallback(response.data);
-    })
-    .catch(error => {
-        console.log(error.response);
-        console.log(`*********** Got Error for player tag ${playerTag} *********`);
-    });
 }
 
 module.exports = {
