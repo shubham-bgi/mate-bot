@@ -26,7 +26,7 @@ playerTag = '#LOYJOJOO8';
 playerTag = '#8CPVOPRJ9';
 
 //getPlayerCommandDetails(playerTag, undefined)
-//getClanCommandDetails(clanTag, undefined);
+getClanCommandDetails(clanTag, undefined);
 
 function getPlayerCommandDetails(playerTag, botMsgChannel) {
     Api.getPlayerDetails(playerTag)
@@ -46,15 +46,22 @@ function getClanCommandDetails(clanTag, botMsgChannel) {
 }
 
 function getMetriceForAllPlayersOfClan(allPlayersData, clanData, botMsgChannel) {
-    console.log(allPlayersData);
-    console.log(clanData);
-    console.log(allPlayersData.length);
+    //console.log(allPlayersData);
+    //console.log(clanData);
+    //console.log(allPlayersData.length);
+
+    const result = rushedAlgo.checkClanRushed(allPlayersData);
+    console.log(result);
+    if(!botMsgChannel) { return; }
+    botMsgChannel.send("You are "+result.status);
+    botMsgChannel.send("Rushed stats"+result.metrics);
 }
 
 
 function getMetricForPlayer(playerDetails, botMsgChannel) {
         const result = rushedAlgo.checkRushed(playerDetails);
         console.log(result);
+        if(!botMsgChannel) { return; }
         botMsgChannel.send("You are "+result.status);
         botMsgChannel.send("Rushed stats"+result.metrics);
 }

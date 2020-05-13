@@ -1,0 +1,121 @@
+{
+    "4":{
+        "1":{
+            "Balloon":"3"
+        },
+        "2":{
+            "Giant":"3",
+            "Heal Spell":"2"
+        }
+    },
+    "7":{
+        "1":{
+            "Dragon":"1",
+            "Lightining Spell":"4"
+        },
+        "2":{
+            "Hogs":"2",
+            "Heal spell":"4"
+        },
+        "3":{
+
+        }
+
+    },
+    "8":{
+        "1":{
+            "Dragon":"2",
+            "Lightining Spell":"4"
+        },
+        "2":{
+            "Golem":"1",
+            "Hogs":"4",
+            "Heal Spell":"5"
+        },
+        "3":{
+            "Golem":"1",
+            "Pekka":"3",
+            "Wizard":"5"
+        },
+        "4":{
+            
+        }
+    },
+
+    "9":{
+        "Lavaloon":{
+            "Lavahound":"2",
+            "Balloon":"6",
+            "Healer":"4"
+        },
+        "Witch Slap":{
+            "Golem":"4",
+            "witch":"2",
+            "Healer":"4"
+        },
+        "GoHo":{
+            "Golem":"4",
+            "Hogs":"5",
+            "Heal Spell":"6"
+        },
+        "QW Hogs":{
+            "Golem":"4",
+            "Hogs":"5",
+            "Healer":"4"
+        },
+        "GoHoPe":{
+            "Pekka":"4",
+            "Golem":"4",
+            "Hogs":"5"
+        }
+    },
+
+    "10":{
+        "Lavaloon":{
+            "Lavahound":"3",
+            "Balloon":"6",
+            "Healer":"4"
+        },
+        "Bowitch":{
+            "Golem":"5",
+            "Witch":"3",
+            "Bowler":"2"
+        },
+        "GoBoHo":{
+            "Golem":"5",
+            "Bowler":"2",
+            "Hogs":"6"
+        },
+        "QW Hogs":{
+            "Golem":"5",
+            "Hogs":"6",
+            "Healer":"4"
+        },
+        "GoHoPe":{
+            "Golem":"5",
+            "Pekka":"6",
+            "Hogs":"6"
+        },
+        "QW Miners":{
+            "Miners":"3",
+            "Healer":"4",
+            "Heal Spell":"6"
+
+        },
+        "Pekkabobat":{
+            "Pekka":"6",
+            "Bowler":"2",
+            "Bat spell":"3",
+            "Freeze spell":"5"
+        }
+    },
+
+    "11":{
+        "QC Hogs":{
+            "Healer":"5",
+            "Hog Rider":"7",
+            ""
+        }
+        
+    }
+}yea.

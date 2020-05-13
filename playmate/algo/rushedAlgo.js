@@ -10,6 +10,27 @@ class RushedAlgo {
         this.herosMaxLevels = readJson('json/heros.json');
     }
 
+    checkClanRushed(allPlayerDetails) {
+        let clanPlayerRush = [];
+        //console.log(allPlayerDetails);
+        allPlayerDetails.map(playerDetails =>{
+            clanPlayerRush.push(this.checkRushed(playerDetails.data));
+        })
+        console.log(clanPlayerRush);
+        let percentagePerPlayer = 100/clanPlayerRush.length;
+        //console.log(percentagePerPlayer);
+        let clanRushPercentage = 0;
+        
+        for (let i = 0;i < clanPlayerRush.length;i++){
+            clanRushPercentage += percentagePerPlayer*clanPlayerRush[i].metrics;
+        }
+        clanRushPercentage = Math.round(clanRushPercentage/100);
+        console.log('Clan Rush percentage ' + clanRushPercentage);
+        return {
+            clanRushPercentage: clanRushPercentage
+        }
+    }
+
     checkRushed(playerDetails) {
         this.playDetails = playerDetails;
         this.townHallLevel = this.playDetails.townHallLevel;
@@ -22,12 +43,12 @@ class RushedAlgo {
         this.status = '';
 
         if(this.compareLabLevel < 1) {
-            console.log(`Rushed cannot be checked for 
-                        townhall level ${this.townhallLevel} 
+            console.log(`Rushed cannot be checked for
+                        townhall level ${this.townhallLevel}
                         of player ${this.playDetails.tag} - ${this.playDetails.name}`);
             return;
         }
-        
+
         console.log('\n********* Troops check:');
         this.fetchTroopsRushedCount(this.playDetails.troops, this.troopsMaxLevels);
         console.log('\n********* Heroes check:');
@@ -37,12 +58,12 @@ class RushedAlgo {
 
         if(this.rushedCount == 0) {
             this.status = "NON RUSHED";
-            this.metrics = 1;
+            this.metrics = 100;
         } else  if(this.nonRushedCount == 0) {
             this.status = "RUSHED";
             this.metrics = 0;
         } else {
-            this.metrics =  this.nonRushedCount/ this.checked.length;
+            this.metrics =  Math.round((this.nonRushedCount/ this.checked.length) * 100);
             this.status = "SEMI RUSHED";
         }
 
@@ -65,7 +86,7 @@ class RushedAlgo {
 
     fetchTroopsRushedCount(weapons, weaponMaxLevels) {
 
-        
+
         console.log("Total count "+ weapons.length);
         for(let weapon of weapons) {
             const weaponName = weapon.name;
