@@ -54,6 +54,40 @@ class ActiveAlgo {
         });
     }
 
+    getActiveAlgoParametersForClan( playerDetails ) {
+        this.clanDonations = 0;
+        this.clanAttackWins = 0;
+        this.playersCount = playerDetails.length;
+        playerDetails.forEach( playerDetail => {
+            playerDetail = playerDetail.data;
+            this.clanDonations += playerDetail.donations + playerDetail.donationsReceived;
+            this.clanAttackWins += playerDetail.attackWins;
+        });
+
+        console.log('Clan donations' + this.clanDonations);
+        console.log('Clan attack wins' +  this.clanAttackWins);
+
+        return {
+            clanDonations: this.clanDonations/this.playersCount,
+            clanAttackWins: this.clanAttackWins/this.playersCount
+        }
+    }
+
+    getActiveMetricForClan( topClanPlayerDetails, playerDetails) {
+        console.log("**** Top clan *****");
+        let topClanParamters = this.getActiveAlgoParametersForClan(topClanPlayerDetails);
+        console.log("**** Clan ***")
+        let clanParameters = this.getActiveAlgoParametersForClan(playerDetails);
+
+        let attackWinsDiversionFromTopClan = clanParameters.clanAttackWins / topClanParamters.clanAttackWins;
+        let clanDonationDiversionFromTopClan = clanParameters.clanDonations / topClanParamters.clanDonations;
+
+        console.log('Attack wins diversion '+ attackWinsDiversionFromTopClan);
+        console.log('Donations diversion' + clanDonationDiversionFromTopClan);
+
+        return (attackWinsDiversionFromTopClan * 0.5 + clanDonationDiversionFromTopClan * 0.5);
+    }
+
      calculate(playerDetails) {
         this.clanDonations += playerDetails.donations + playerDetails.donationsReceived;
         this.clanAttackWins += playerDetails.attackWins;
@@ -73,5 +107,5 @@ class ActiveAlgo {
 }
 
 module.exports = {
-    ActiveAlgo: ActiveAlgo
+    ActiveAlgo
 }
