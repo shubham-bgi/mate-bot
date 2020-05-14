@@ -9,18 +9,14 @@
         }
     },
     "7":{
-        "1":{
+        "Mass Dragons":{
             "Dragon":"1",
             "Lightining Spell":"4"
         },
-        "2":{
-            "Hogs":"2",
+        "Mass Hogs":{
+            "Hog Rider":"2",
             "Heal spell":"4"
-        },
-        "3":{
-
         }
-
     },
     "8":{
         "1":{
@@ -29,7 +25,7 @@
         },
         "2":{
             "Golem":"1",
-            "Hogs":"4",
+            "Hog Rider":"4",
             "Heal Spell":"5"
         },
         "3":{
@@ -55,23 +51,23 @@
         },
         "GoHo":{
             "Golem":"4",
-            "Hogs":"5",
+            "Hog Rider":"5",
             "Heal Spell":"6"
         },
         "QW Hogs":{
             "Golem":"4",
-            "Hogs":"5",
+            "Hog Rider":"5",
             "Healer":"4"
         },
         "GoHoPe":{
             "Pekka":"4",
             "Golem":"4",
-            "Hogs":"5"
+            "Hog Rider":"5"
         }
     },
 
     "10":{
-        "Lavaloon":{
+        "QW/QC Lavaloon":{
             "Lavahound":"3",
             "Balloon":"6",
             "Healer":"4"
@@ -84,22 +80,22 @@
         "GoBoHo":{
             "Golem":"5",
             "Bowler":"2",
-            "Hogs":"6"
+            "Hog Rider":"6"
         },
-        "QW Hogs":{
+        "QW/QC Hogs":{
             "Golem":"5",
-            "Hogs":"6",
+            "Hog Rider":"6",
             "Healer":"4"
         },
         "GoHoPe":{
             "Golem":"5",
             "Pekka":"6",
-            "Hogs":"6"
+            "Hog Rider":"6"
         },
-        "QW Miners":{
+        "QW/QC Mass Miners":{
             "Miners":"3",
             "Healer":"4",
-            "Heal Spell":"6"
+            "Healing  Spell":"6"
 
         },
         "Pekkabobat":{
@@ -107,6 +103,11 @@
             "Bowler":"2",
             "Bat spell":"3",
             "Freeze spell":"5"
+        },
+        "Hybrid":{
+            "Hog Rider":"6",
+            "Miners":"3",
+            "Healing Spell":"7"
         }
     },
 
@@ -114,8 +115,56 @@
         "QC Hogs":{
             "Healer":"5",
             "Hog Rider":"7",
-            ""
+            "Archer Queen":"40"
+        },
+        "Pekkabobat":{
+            "Pekka":"7",
+            "Bowler":"3",
+            "Bat spell":"4",
+            "Freeze spell":"6"
+        },
+        "Pekka Smash":{
+            "Pekka":"7",
+            "Bowler":"3",
+            "Healer":"5"
+        },
+        "Electrone":{
+            "Electro Dragon":"2",
+            "Rage spell":"5",
+            "Clone spell":"5"
+        },
+        "Lavaloon":{
+            "Lavahound":"4",
+            "Balloon":"7",
+            "Rage Spell":"5"
         }
-        
+    },
+    "12":{
+        "Drag Bat":{
+            "Dragon":"7",
+            "Balloons":"8",
+            "Bat Spell":"5",
+            "Freeze Spell":"7"
+        },
+        ""
+
+    },
+    "13":{
+        "QC Hybrid":{
+            "Healer":"6",
+            "Hog Rider":"10",
+            "Miner":"7",
+            "Healing Spell":"8",
+            "Archer Queen":"60"
+        },
+        "Drag Bat":{
+            "Dragon":"8",
+            "Balloons":"9",
+            "Bat Spell":"5",
+            "Freeze Spell":"7" 
+        },
+        "QC Hog":{
+
+        }
     }
-}yea.
+}
