@@ -12,10 +12,11 @@ const playerByTagUrl = '/players/';
 
 const TOWNHALL_MAX = 13;
 const LAB_MAX = 11;
+const TOP_PLAYER_CLAN_TAG = '#LVJVJ2QL';
 
 const axios = require('axios');
 axios.defaults.headers.common['Authorization'] = token;
 
 module.exports = { 
-                 cocUrl, clanByTagUrl, playerByTagUrl, playersByClanTagUrl, axios
+                 cocUrl, clanByTagUrl, playerByTagUrl, playersByClanTagUrl, axios, TOP_PLAYER_CLAN_TAG
                 };
