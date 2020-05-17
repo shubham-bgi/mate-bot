@@ -9,7 +9,7 @@ module.exports = {
       if(args.length > 0) {
         App.getClanCommandDetails(args[0], msg.channel);
       }
-      msg.channel.send('Get the details');
+      msg.channel.send('Get the clan details');
     },
   };
   

@@ -8,6 +8,8 @@ const Constants = require('./constants.js');
 const Api = require('./api.js');
 
 const readJson = Utils.readJson;
+const writeJsonClanData = Utils.writeJsonClanData;
+const readJsonClanData = Utils.readJsonClanData;
 const getUrl = Utils.getUrl;
 
 
@@ -25,15 +27,19 @@ let activeAlgo = new ActiveAlgo();
 playerTag = '#LOYJOJOO8';
 playerTag = '#8CPVOPRJ9';
 
-var topPlayersData = [];
-getTopClanDetails(Constants.TOP_PLAYER_CLAN_TAG);
+(function init() {
+    getTopClanDetails(Constants.TOP_PLAYER_CLAN_TAG);
+})();
+
 function getTopClanDetails(topClanTag) {
     Api.getClanDetails(topClanTag)
     .then( clanData => {
         Api.getAllPlayerDetails(clanData)
         .then( allPlayersData => {
-            topPlayersData = allPlayersData;
-            getClanCommandDetails(clanTag, undefined);
+            allPlayersData = allPlayersData.map((playerData) => {
+                return playerData.data;
+            })
+            writeJsonClanData(Constants.TOP_PLAYER_CLAN_TAG, { clanData: clanData, playersData: allPlayersData });
         })
     })
 }
@@ -63,18 +69,17 @@ function getMetriceForAllPlayersOfClan(allPlayersData, clanData, botMsgChannel) 
     //console.log(clanData);
     //console.log(allPlayersData.length);
 
-    //const rushedMetrics = rushedAlgo.checkClanRushed(allPlayersData);
-    //console.log('********* Rushed Metrics ************');
-    //console.log(rushedMetrics);
+    const rushedMetrics = rushedAlgo.checkClanRushed(allPlayersData);
+    console.log('********* Rushed Metrics ************');
+    console.log(rushedMetrics);
 
-    const activeMetric = activeAlgo.getActiveMetricForClan(topPlayersData, allPlayersData);
+    const activeMetric = activeAlgo.getActiveMetricForClan(readJsonClanData(Constants.TOP_PLAYER_CLAN_TAG).playersData, allPlayersData);
     console.log('******** Active Metrics *********');
     console.log(activeMetric);
 
     if(!botMsgChannel) { return; }
     botMsgChannel.send("You are "+ rushedMetrics.status);
-    botMsgChannel.send("Rushed stats"+ rushedMetrics.metrics);
-
+    botMsgChannel.send("Rushed stats "+ rushedMetrics.clanRushPercentage);
     botMsgChannel.send("Your clan activeness "+ activeMetric);
 }
 
@@ -88,5 +93,6 @@ function getMetricForPlayer(playerDetails, botMsgChannel) {
 }
 
 module.exports = {
-    getPlayerCommandDetails: getPlayerCommandDetails
+    getPlayerCommandDetails: getPlayerCommandDetails,
+    getClanCommandDetails: getClanCommandDetails
 }
