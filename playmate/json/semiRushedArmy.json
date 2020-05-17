@@ -139,6 +139,7 @@
             "Rage Spell":"5"
         }
     },
+
     "12":{
         "Drag Bat":{
             "Dragon":"7",
@@ -146,12 +147,30 @@
             "Bat Spell":"5",
             "Freeze Spell":"7"
         },
-        ""
+
+        "Pekka Smash":{
+            "Pekka":"8",
+            "Bowler":"4",
+            "Healer":"5"
+        },
+
+        "Yeti Smash":{
+            "Yeti":"2",
+            "Bowler":"4",
+            "Healer":"5"
+        },
+
+        "Mass Dragon":{
+            "Dragon":"7",
+            "Balloon":""
+        }
+
 
     },
+
     "13":{
         "QC Hybrid":{
-            "Healer":"6",
+            "Heal      er":"6",
             "Hog Rider":"10",
             "Miner":"7",
             "Healing Spell":"8",
