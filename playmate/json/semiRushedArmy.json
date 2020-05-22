@@ -143,11 +143,10 @@
     "12":{
         "Drag Bat":{
             "Dragon":"7",
-            "Balloons":"8",
+            "Balloon":"8",
             "Bat Spell":"5",
             "Freeze Spell":"7"
         },
-
         "Pekka Smash":{
             "Pekka":"8",
             "Bowler":"4",
@@ -159,22 +158,41 @@
             "Bowler":"4",
             "Healer":"5"
         },
-
-        "Mass Dragon":{
+        "Frozen Dragon":{
             "Dragon":"7",
-            "Balloon":""
+            "Balloon":"8",
+            "Freeze spell":"7"
+        },
+        "QC Mass miner":{
+            "Healer":"5",
+            "Miner":"6",
+            "Archer Queen":"60"
+        },
+        "Electrone Lalo":{
+            "Lava Hound":"5",
+            "Balloon":"8",
+            "Clone spell":"5"
+        },
+        "QC Hybrid":{
+            "Healer":"5",
+            "Hog rider":"9",
+            "Miner":"6",
+            "Archer Queen":"65"
+        },
+        "Mass Edrag":{
+            "Electro dragon":"3",
+            "Battle Blimp":"2",
+            "Rage spell":"5"
         }
-
-
     },
 
     "13":{
         "QC Hybrid":{
-            "Heal      er":"6",
+            "Healer":"6",
             "Hog Rider":"10",
             "Miner":"7",
             "Healing Spell":"8",
-            "Archer Queen":"60"
+            "Archer Queen":"65"
         },
         "Drag Bat":{
             "Dragon":"8",
@@ -183,7 +201,20 @@
             "Freeze Spell":"7" 
         },
         "QC Hog":{
-
+            "Healer":"6",
+            "Hog Rider":"10",
+            "Archer Queen":"65"
+        },
+        "Electro Loon":{
+            "Electro Dragon":"4",
+            "Balloons":"9",
+            "Freeze Spell":"7",
+            "Rage Spell":"6"
+        },
+        "Yeti Smash":{
+            "Healer":"6",
+            "Yeti":"3",
+            "Bowler":"5"
         }
     }
 }
