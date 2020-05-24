@@ -70,7 +70,8 @@
         "QW/QC Lavaloon":{
             "Lavahound":"3",
             "Balloon":"6",
-            "Healer":"4"
+            "Healer":"4",
+            "Archer Queen":"30"
         },
         "Bowitch":{
             "Golem":"5",
@@ -95,8 +96,8 @@
         "QW/QC Mass Miners":{
             "Miners":"3",
             "Healer":"4",
-            "Healing  Spell":"6"
-
+            "Healing  Spell":"6",
+            "Archer Queen":"30"
         },
         "Pekkabobat":{
             "Pekka":"6",
@@ -112,7 +113,7 @@
     },
 
     "11":{
-        "QC Hogs":{
+        "QC/QW Hogs":{
             "Healer":"5",
             "Hog Rider":"7",
             "Archer Queen":"40"
@@ -137,6 +138,12 @@
             "Lavahound":"4",
             "Balloon":"7",
             "Rage Spell":"5"
+        },
+        "Drag bat":{
+            "Dragon":"6",
+            "Balloon":"7",
+            "Bat Spell":"4",
+            "Freeze Spell":"6"
         }
     },
 
@@ -152,7 +159,6 @@
             "Bowler":"4",
             "Healer":"5"
         },
-
         "Yeti Smash":{
             "Yeti":"2",
             "Bowler":"4",
@@ -163,7 +169,7 @@
             "Balloon":"8",
             "Freeze spell":"7"
         },
-        "QC Mass miner":{
+        "QW/QC Mass miner":{
             "Healer":"5",
             "Miner":"6",
             "Archer Queen":"60"
@@ -173,7 +179,7 @@
             "Balloon":"8",
             "Clone spell":"5"
         },
-        "QC Hybrid":{
+        "QW/QC Hybrid":{
             "Healer":"5",
             "Hog rider":"9",
             "Miner":"6",
@@ -187,7 +193,7 @@
     },
 
     "13":{
-        "QC Hybrid":{
+        "QW/QC Hybrid":{
             "Healer":"6",
             "Hog Rider":"10",
             "Miner":"7",
@@ -200,7 +206,7 @@
             "Bat Spell":"5",
             "Freeze Spell":"7" 
         },
-        "QC Hog":{
+        "QW/QC Hog":{
             "Healer":"6",
             "Hog Rider":"10",
             "Archer Queen":"65"
