@@ -50,7 +50,7 @@ function getTopClanDetails(topClanTag) {
 function getPlayerCommandDetails(playerTag, botMsgChannel) {
     Api.getPlayerDetails(playerTag)
         .then( playerDetails => {
-            getMetricForPlayer(playerDetails, botMsgChannel);
+            getMetricForPlayer(playerDetails, botMsgChannel);``
         });
 }
 
@@ -77,10 +77,15 @@ function getMetriceForAllPlayersOfClan(allPlayersData, clanData, botMsgChannel) 
     console.log('******** Active Metrics *********');
     console.log(activeMetric);
 
+    const pushMetric = trophyPush.checkTrophyPushType(allPlayersData);
+    console.log('********* Trophy Push Metrics ************');
+    console.log(pushMetric);
+
     if(!botMsgChannel) { return; }
     botMsgChannel.send("You are "+ rushedMetrics.status);
     botMsgChannel.send("Rushed stats "+ rushedMetrics.clanRushPercentage);
     botMsgChannel.send("Your clan activeness "+ activeMetric);
+    botMsgChannel.send("Trophy Push stat "+ pushMetric);
 }
 
 
