@@ -17,27 +17,34 @@ const standardTrophiesPerTownHall = {
     "13": "5300" 
 }
 
+function checkTrophyPushForPlayer(playerDetails) {
+    let playerTrophyDeviation = calculatePercentDeviation(playerDetails);
+    return checkTrophyPushType(playerTrophyDeviation);
+}
 
+function checkTrophyPushForClan(allPlayerDetails) {
+    let totalPercentageDeviation = 0;
+    allPlayerDetails.forEach( playerDetail => {
+        playerDetail = playerDetail.data;
+        totalPercentageDeviation += calculatePercentDeviation(playerDetail);
+    });
+    let averagePercentageDeviation = totalPercentageDeviation / allPlayerDetails.length;
+    return checkTrophyPushType(averagePercentageDeviation);
+}
 
-let playerType;
-let TrophyDeviation;
-let clanTrophyDeviation = [];
-
-function calculatePercentDeviation(playerDetails) {
-    let playerTrophyDeviation;
-    let playerCurrentTrophies = playerDetails.;
-    playerTrophyDeviation = playerCurrentTrophies/standardTrophiesPerTownHall[playerDetails.townHallLevel];
+function calculatePercentDeviation(playerDetail) {
+    let playerTrophyDeviation = playerDetail.trophies / standardTrophiesPerTownHall[playerDetail.townHallLevel];
     return playerTrophyDeviation;
 }
 
-function checkTrophyPushType(TrophyDeviation) {
-    if (TrophyDeviation > 1) 
-    playerType = 'Trophy Pusher';
-    else
-    playerType = 'Farmer';
-    return playerType;
+function checkTrophyPushType(trophyDeviation) {
+    if (trophyDeviation > 1) 
+        return 'Trophy Pusher';
+    
+    return 'Farmer';
 }
 
 module.exports = {
-    calculatePercentDeviation
+    checkTrophyPushForPlayer,
+    checkTrophyPushForClan
 }

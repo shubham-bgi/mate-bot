@@ -1,6 +1,7 @@
 const Algo = require('./algo');
 const RushedAlgo = Algo.RushedAlgo;
 const ActiveAlgo = Algo.ActiveAlgo;
+const TrophyPush = Algo.TrophyPush;
 
 const Utils = require('./utils.js');
 const Constants = require('./constants.js');
@@ -12,10 +13,6 @@ const writeJsonClanData = Utils.writeJsonClanData;
 const readJsonClanData = Utils.readJsonClanData;
 const getUrl = Utils.getUrl;
 
-
-
-//activeAlgo.checkClanActive('#9RL9CJQV');
-//activeAlgo.check('#LVJVJ2QL');
 
 let playerTag = 'Y8JCPRYU9';
 let clanTag = '#9RL9CJQV';
@@ -54,6 +51,8 @@ function getPlayerCommandDetails(playerTag, botMsgChannel) {
         });
 }
 
+getClanCommandDetails(clanTag);
+
 function getClanCommandDetails(clanTag, botMsgChannel) {
     Api.getClanDetails(clanTag)
         .then( clanData => {
@@ -77,7 +76,7 @@ function getMetriceForAllPlayersOfClan(allPlayersData, clanData, botMsgChannel) 
     console.log('******** Active Metrics *********');
     console.log(activeMetric);
 
-    const pushMetric = trophyPush.checkTrophyPushType(allPlayersData);
+    const pushMetric = TrophyPush.checkTrophyPushForClan(allPlayersData);
     console.log('********* Trophy Push Metrics ************');
     console.log(pushMetric);
 

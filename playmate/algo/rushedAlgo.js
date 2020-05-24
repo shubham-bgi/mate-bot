@@ -85,8 +85,6 @@ class RushedAlgo {
     }
 
     fetchTroopsRushedCount(weapons, weaponMaxLevels) {
-
-
         console.log("Total count "+ weapons.length);
         for(let weapon of weapons) {
             const weaponName = weapon.name;
