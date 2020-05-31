@@ -1,9 +1,6 @@
 const Utils = require('../utils');
 const readJson = Utils.readJson;
 
-let clanRushLevel = 'Non Rushed';
-let totalWars = clanWarsLost + clanWarsWon + clanWarsTie;
-let warWinRate = clanWarsWon / totalWars * 100;
 let clanWarTpye = '';
 
 class warType{
@@ -11,14 +8,14 @@ class warType{
         this.fwaClans = readJson('json/farmWarAllianceClans');
     }
 
-    checkClanWarType(clanWarRecord){ 
+    checkClanWarType(clanWarRecord, clanRushStatus, clanTag){ 
         if (clanWarRecord.lost == null) {
             console.log('War log is not public');
         }
+
         let warWinRate = getWarWinRate(clanWarRecord);
 
-
-        if (clanWarsTie > clanWarsLost && clanWarsTie > clanWarsWon)
+        if (clanTag )
             clanWarTpye = 'Farm War alliance';
         
         else if (warWinRate > 75 && clanRushLevel == 'Non Rushed')
