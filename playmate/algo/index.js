@@ -1,5 +1,12 @@
 module.exports = {
     RushedAlgo: require('./rushedAlgo.js').RushedAlgo,
     ActiveAlgo: require('./activeAlgo.js').ActiveAlgo,
-    TrophyPush: require('./trophyPush.js')
+    ArmiesAlgo: require('./checkarmies.js').ArmiesAlgo,
+    WarTypeAlgo: require('./clanWarType').warType,
+    TrophyPushForPlayer: require('./trophyPush.js').checkTrophyPushForPlayer,
+    TrophyPushForClan: require('./trophyPush.js').checkTrophyPushForClan,
+    ClanTownHallLevel: require('./clanLevel.js').getTownHallStatus,
+    CheckSiege: require('./checkDonors').checkSiege,
+    GetPlayerWarTag: require('./playerWarStarsTag').getPlayerWarTag,
+    overallPoints: require('./overAllScore').overallPoints
 }

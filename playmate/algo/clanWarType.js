@@ -1,40 +1,54 @@
-const Utils = require('../utils');
-const readJson = Utils.readJson;
+const olf = require('../oneLineFunctions');
 
-let clanWarTpye = '';
-
-class warType{
-    constructor(){
-        this.fwaClans = readJson('json/farmWarAllianceClans');
-    }
-
-    checkClanWarType(clanWarRecord, clanRushStatus, clanTag){ 
-        if (clanWarRecord.lost == null) {
-            console.log('War log is not public');
+class warType {
+    checkClanWarType(clanDetails, clanRushPoints, warLog){
+        let type;
+        if (!clanDetails.isWarLogPublic) { 
+            type  = 'War Log not visible';
+            return {
+                type: type
+            }
+        }
+        if (olf.checkFWA(clanDetails.description)) { 
+            type = 'Farm War alliance'; 
         }
 
-        let warWinRate = getWarWinRate(clanWarRecord);
+        let warWinRate = this.getWarWinRate(clanDetails);
+        let lastFifteenWarWinRate = this.getLastFifteenWarsWinRate(warLog);
+        if (!lastFifteenWarWinRate) { lastFifteenWarWinRate = warWinRate; }
+        if (warWinRate > 75 && clanRushPoints >= 9) {
+            type = 'Serious War clan';
+        } else if (warWinRate > 50 && clanRushPoints > 5) {
+            type = 'Casual War clan';
+        } else {
+            type = 'Not a war clan';
+        }
 
-        if (clanTag )
-            clanWarTpye = 'Farm War alliance';
-        
-        else if (warWinRate > 75 && clanRushLevel == 'Non Rushed')
-            clanWarTpye = 'Serious War clan';
-        
-        else if (warWinRate > 50 && clanRushLevel != 'Rushed')
-            clanWarTpye = 'Casual War clan';
-        else
-            clanWarTpye = 'Clan Wars are fun';
-        
-        console.log('Clan War Type - ' + clanWarTpye); 
-        console.log('War Win rate - ' + Math.round(warWinRate) +'%');
-
+        return {
+            type: type,
+            winRate: warWinRate,
+            lastFifteenWinRate: lastFifteenWarWinRate
+        }
     }
 
-    getWarWinRate(clanWarRecord){
-        let totalWars = clanWarRecord.won + clanWarRecord.lost + clanWarRecord.tie;
-        return clanWarRecord.won/totalWars;
+    getWarWinRate(clanDetails){
+        let totalWars = clanDetails.warWins + clanDetails.warLosses + clanDetails.warTies;
+        return Math.round(clanDetails.warWins/totalWars * 100);
     }
 
-    
+    getLastFifteenWarsWinRate(warLog){
+        let count = 0;
+        if(warLog.length>15) {
+            for (let i = 0; i<15; i++) {
+                if (warLog[i].result == 'win') { count++; }
+            }
+            return Math.round((count/15) * 100); 
+        } else {
+            return false;
+        }
+    }
+}
+
+module.exports = {
+    warType
 }

@@ -11,13 +11,35 @@ class Api {
                     return response.data;
                 })
                 .catch(error => {
-                    console.log(error.response);
+                    console.log('Error status '+ error.response.status);
                     console.log(`*********** Got Error for player tag ${playerTag} *********`);
                 });
     }
 
-     static getClanDetails(clanTag) {
+     static getClanMembersDetails(clanTag) {
         const url =  getUrl(Constants.clanByTagUrl) + encodeURIComponent(clanTag) + Constants.playersByClanTagUrl;
+        return Constants.axios.get(url)
+                .then(response => {
+                    return response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+    }
+
+    static getClanDetails(clanTag) {
+        const url =  getUrl(Constants.clanByTagUrl) + encodeURIComponent(clanTag);
+        return Constants.axios.get(url)
+                .then(response => {
+                    return response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+    }
+
+    static getWarLog(clanTag) {
+        const url =  getUrl(Constants.clanByTagUrl) + encodeURIComponent(clanTag) + Constants.warLogByTagUrl;
         return Constants.axios.get(url)
                 .then(response => {
                     return response.data;
@@ -38,7 +60,7 @@ class Api {
                     return allPlayersData;
                 }))
                 .catch(errors => {
-                    console.log(error);
+                    console.log(errors);
                 })
     }
 
@@ -50,6 +72,8 @@ class Api {
 
 module.exports = {
     getPlayerDetails: Api.getPlayerDetails,
+    getClanMembersDetails: Api.getClanMembersDetails,
     getClanDetails: Api.getClanDetails,
-    getAllPlayerDetails: Api.getAllPlayerDetails
+    getAllPlayerDetails: Api.getAllPlayerDetails,
+    getWarLog: Api.getWarLog
 }

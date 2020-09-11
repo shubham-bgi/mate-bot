@@ -1,15 +1,13 @@
-const App = require('./../../playmate/app.js');
+const App = require('../../playmate/app.js');
 
 module.exports = {
     name: 'player',
-    description: 'Player info details',
-    execute(msg, args) {
-      console.log(msg.content);
+    description: 'Shows all the bases and clans link to the mentioned player.',
+    execute(msg, args, embed, msgCollector) {
       console.log(args);
       if(args.length > 0) {
-        App.getPlayerCommandDetails(args[0], msg.channel);
+        App.FetchPlayersBasesAndClans(args[0], msg.channel,msg.guild);
       }
-      msg.channel.send('Get the player details');
-    },
-  };
-  
+      //msg.channel.send('Get the clan details');
+    }
+}

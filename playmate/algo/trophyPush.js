@@ -11,11 +11,12 @@ const standardTrophiesPerTownHall = {
     "7" : "1600",
     "8" : "2000",
     "9" : "2600",
-    "10": "3200",
-    "11": "4100",
-    "12": "4700",
-    "13": "5300" 
+    "10": "3000",
+    "11": "3200",
+    "12": "3600",
+    "13": "4000" 
 }
+
 
 function checkTrophyPushForPlayer(playerDetails) {
     let playerTrophyDeviation = calculatePercentDeviation(playerDetails);
@@ -38,13 +39,21 @@ function calculatePercentDeviation(playerDetail) {
 }
 
 function checkTrophyPushType(trophyDeviation) {
-    if (trophyDeviation > 1) 
+    if (trophyDeviation > 1.6)
+        return 'Born To Push';
+    else if (trophyDeviation > 1.3) 
+        return 'Hard core Trophy Pusher';
+    else if (trophyDeviation > 1)
         return 'Trophy Pusher';
-    
-    return 'Farmer';
+    else if (trophyDeviation > 0.7)
+        return 'Farmer';
+    else if (trophyDeviation > 0.5)
+        return 'Hard core Farmer';
+    else
+        return 'Born to Farm';
 }
 
-module.exports = {
+module.exports = {   
     checkTrophyPushForPlayer,
     checkTrophyPushForClan
 }

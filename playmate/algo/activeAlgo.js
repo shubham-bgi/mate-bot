@@ -1,5 +1,7 @@
 const Constants = require('../constants.js');
 const Utils =  require('../utils.js');
+const player = require('../../bot/commands/base.js');
+const initializeActivityParameters = require('F:/playmate/playmate/initializeActivityParameters.js')
 
 const getUrl = Utils.getUrl;
 const playerByTagUrl = Constants.playerByTagUrl;
@@ -13,8 +15,6 @@ class ActiveAlgo {
         this.clanDonations = 0;
         this.clanAttackWins = 0;
         this.playersCount;
-        this.count = 0;
-        this.playerActive = 0;
     }
 
      checkClanActive(clanTag) {
@@ -63,9 +63,10 @@ class ActiveAlgo {
             this.clanDonations += playerDetail.donations + playerDetail.donationsReceived;
             this.clanAttackWins += playerDetail.attackWins;
         });
-
-        console.log('Clan donations' + this.clanDonations);
-        console.log('Clan attack wins' +  this.clanAttackWins);
+        let x = (this.clanDonations/this.playersCount);
+        let y = (this.clanAttackWins/this.playersCount);
+        /* console.log('Clan donations' + x);
+        console.log('Clan attack wins' +  y); */
 
         return {
             clanDonations: this.clanDonations/this.playersCount,
@@ -73,35 +74,96 @@ class ActiveAlgo {
         }
     }
 
-    getActiveMetricForClan( topClanPlayerDetails, playerDetails) {
-        console.log("**** Top clan *****");
-        let topClanParamters = this.getActiveAlgoParametersForClan(topClanPlayerDetails);
-        console.log("**** Clan ***")
+    initializeTopClanActiveParameters() {
+        this.topClanParamters = initializeActivityParameters.initializeActivityParameters();
+    }
+
+    getActiveMetricForClan(playerDetails) {
+        //console.log("**** Top clan *****");
+        //this.topClanParamters = this.getActiveAlgoParametersForClan(topClanPlayerDetails);
+        //console.log("**** Clan ***")
+
         let clanParameters = this.getActiveAlgoParametersForClan(playerDetails);
 
-        let attackWinsDiversionFromTopClan = clanParameters.clanAttackWins / topClanParamters.clanAttackWins;
-        let clanDonationDiversionFromTopClan = clanParameters.clanDonations / topClanParamters.clanDonations;
+        let attackWinsPoints = clanParameters.clanAttackWins / this.topClanParamters.clanAttackWins;
+        let clanDonationPoints = clanParameters.clanDonations / this.topClanParamters.clanDonations;
 
-        console.log('Attack wins diversion '+ attackWinsDiversionFromTopClan);
-        console.log('Donations diversion' + clanDonationDiversionFromTopClan);
+        //console.log('Attack wins diversion '+ attackWinsPoints);
+        //console.log('Donations diversion' + clanDonationPoints);
 
-        return (attackWinsDiversionFromTopClan * 0.5 + clanDonationDiversionFromTopClan * 0.5);
+        let activePoints = Math.round((attackWinsPoints*0.5 + clanDonationPoints*0.5)*100)/10;
+        let status;
+        if (activePoints > 15)
+            status = 'Legendary activity';
+        else if(activePoints > 10)
+            status = 'Broke the activity meter';
+        else if(activePoints>7)
+            status = 'Extremely Active';
+        else if(activePoints>5)
+            status = 'Very Active';
+        else if(activePoints>2)
+            status = 'Fairly Active';
+        else if(activePoints>1)
+            status = 'Low Activity';
+        else if(activePoints == 0)
+            status = 'Dead clan';
+        else
+            status = 'Very Low Activity'
+            
+        let activityFeel = Math.round(activePoints * this.playersCount / 5) / 10;
+        return {
+            activityPoints: activePoints,
+            activityFeel: activityFeel,
+            status: status
+        }
+
     }
+
+    getActiveMetricForPlayer(playerDetails) {
+        let attackWinsPoints = playerDetails.attackWins/this.topClanParamters.clanAttackWins;
+        let donationPoints = (playerDetails.donations+playerDetails.donationsReceived)/this.topClanParamters.clanDonations;
+        let activePoints = (Math.round((attackWinsPoints*0.5 + donationPoints*0.5)*100)/10).toFixed(1);
+        let status;
+        if (activePoints > 15)
+            status = 'Legendary activity';
+        else if(activePoints > 10)
+            status = 'Broke the activity meter';
+        else if(activePoints>9)
+            status = 'Extremely Active';
+        else if(activePoints>7)
+            status = 'Very Active';
+        else if(activePoints>5)
+            status = 'Active';
+        else if(activePoints>2)
+            status = 'Low Activity';
+        else if(activePoints == 0)
+            status = 'Dead Base';
+        else 
+            status = 'Very Low Activity';
+
+        return {
+            activityPoints: activePoints,
+            status: status
+        }
+    }
+
+    getClanActivityLeaderBoard(clanDetails) {
+        let activityLeaderboard = clanDetails.map((playerDetails) => {
+            return {
+                name: playerDetails.name,
+                tag: playerDetails.tag,
+                activityPoints: this.getActiveMetricForPlayer(playerDetails)
+            }
+        })
+        activityLeaderboard.sort((firstPlayer,secondPlayer) => secondPlayer.activityPoints.activityPoints - firstPlayer.activityPoints.activityPoints);
+    return activityLeaderboard;
+    }
+
+
 
      calculate(playerDetails) {
         this.clanDonations += playerDetails.donations + playerDetails.donationsReceived;
         this.clanAttackWins += playerDetails.attackWins;
-        this.count++;
-        if(playerDetails.attackWins > 185) {
-            this.playerActive += 1;
-        }
-        if(this.count == this.playersCount) {
-            console.log("Clan donations: "+this.clanDonations);
-            console.log("Clan Attack Wins: "+this.clanAttackWins);
-            console.log("Average donations: " + this.clanDonations/this.playersCount);
-            console.log("Average Attack wins: " + this.clanAttackWins/this.playersCount);
-            console.log("Player more than 185 attack wins " + this.playerActive);
-        }
     }
 
 }

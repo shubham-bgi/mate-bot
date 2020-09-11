@@ -5,7 +5,7 @@ class RushedAlgo {
     constructor()  {
         this.troopsMaxLevels = readJson('json/troops.json'); // conatins max troops levels at each Townhall level
         this.spellsMaxLevels = readJson('json/spells.json'); // contains max spells levels at each Townhall level
-        this.herosMaxLevels = readJson('json/heros.json');   // contains max heroes levels at each Townhall level
+        this.herosMaxLevels = readJson('json/heroes.json');   // contains max heroes levels at each Townhall level
     }
 
     checkClanRushed(allPlayerDetails) {  //checks the rush & max points of whole clan
@@ -23,9 +23,43 @@ class RushedAlgo {
         }
         clanRushPoints = Math.round(clanRushPoints*10)/10;
         clanMaxPoints = Math.round(clanMaxPoints*10)/10;
+        let rushStatus;
+        let maxStatus;
+        
+        if(clanRushPoints == 0){
+            rushStatus = 'Totally Rushed';
+        } else if( clanRushPoints < 5) {
+            rushStatus = 'Mostly Rushed';
+        } else if(clanRushPoints < 7) {
+            rushStatus = 'Somewhat Non-Rushed';
+        } else if(clanRushPoints < 9) {
+            rushStatus = 'Mostly Non-Rushed';
+        } else if(clanRushPoints < 10) {
+            rushStatus = 'Non Rushers';
+        } else if(clanRushPoints == 10) {
+            rushStatus = 'Only Non Rushers';
+        }
+
+        if(clanMaxPoints == 0){
+            maxStatus = 'Newbies';
+        } else if( clanMaxPoints < 5) {
+            maxStatus = 'Mostly Newbies';
+        } else if(clanMaxPoints < 7) {
+            maxStatus = 'Some Max players';
+        } else if(clanMaxPoints < 9) {
+            maxStatus = 'Mostly Maxers';
+        } else if(clanMaxPoints < 10) {
+            maxStatus = 'Maxers';
+        } else if(clanMaxPoints == 10) {
+            maxStatus = 'Only Maxers';
+        }
+
+
         return {
+            rushStatus: rushStatus,
             clanRushPoints: clanRushPoints,
-            clanMaxPoints: clanMaxPoints
+            clanMaxPoints: clanMaxPoints,
+            maxStatus: maxStatus
         }
     }
 
@@ -43,11 +77,13 @@ class RushedAlgo {
         this.rushStatus = '';
         this.maxStatus = '';
 
+        let playerRushPoints = 0;
+
         if(this.compareLabLevelForRush < 1) {
             console.log(`Rushed cannot be checked for
                         townhall level ${this.townhallLevel}
                         of player ${this.playDetails.tag} - ${this.playDetails.name}`);
-            return;
+            //return;
         }
 
         this.fetchPlayerRushAndMaxUnitsCounts(this.playDetails.troops, this.troopsMaxLevels);
@@ -56,33 +92,44 @@ class RushedAlgo {
         
 
         let totalPlayerUnit = this.playDetails.troops.length + this.playDetails.heroes.length + this.playDetails.spells.length;
-
+        
         if(this.rushedUnitsCount == 0) {
             this.rushStatus = "Unrushed base";
-            this.playerRushPoints = 10;
-
+            playerRushPoints = 10;
         } else  if(this.nonRushedUnitsCount == 0) {
             this.rushStatus = "Rushed as sh*t";
-            this.playerRushPoints = 0;
+            playerRushPoints = 0;
 
         } else {
-            this.playerRushPoints =  Math.round((this.nonRushedUnitsCount/ totalPlayerUnit) * 10);
-            this.rushStatus = "Rushed base";
+            playerRushPoints =  Math.round((this.nonRushedUnitsCount/ totalPlayerUnit) * 100)/10;
+            if(playerRushPoints < 5) {
+                this.rushStatus = "Extremely Rushed";
+            } else if(playerRushPoints < 9) {
+                this.rushStatus = "A lil' rushed";
+            } else {
+                this.rushStatus = "Tiny Bit Rushed";
+            }
         }
 
         if(this.nonMaxUnitsCount == 0) {
             this.playerMaxPoints = 10;
-            this.maxStatus = "Maxed out of the fu*king mind";
+            this.maxStatus = "Max out of the fing mind";
         } else if(this.maxUnitsCount == 0){
             this.playerMaxPoints = 0;
             this.maxStatus = "Newbie, you gon' learn";
         } else {
-            this.playerMaxPoints = Math.round((this.maxUnitsCount/ totalPlayerUnit) * 10 );
-            this.maxStatus = "On the way to max";
+            this.playerMaxPoints = Math.round((this.maxUnitsCount/ totalPlayerUnit) * 100 )/10;
+            if(this.playerMaxPoints < 5) {
+                this.maxStatus = "Long way to maxing it out";
+            } else if(this.playerMaxPoints < 9) {
+                this.maxStatus = "Will max out in some time";
+            } else {
+                this.maxStatus = "Just a tiny bit not max";
+            }
         }
 
         return {
-            playerRushPoints: this.playerRushPoints,
+            playerRushPoints: playerRushPoints,
             rushStatus: this.rushStatus,
             playerMaxPoints: this.playerMaxPoints,
             maxStatus: this.maxStatus

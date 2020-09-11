@@ -1,58 +1,69 @@
 {
     "4":{
-        "1":{
+        "Balloon Parade":{
             "Balloon":"3"
         },
-        "2":{
+        "GiWi":{
             "Giant":"3",
-            "Heal Spell":"2"
+            "Healing Spell":"2"
         }
+    },
+    "5":{
+        "GiWi":{
+            "Giant":"3",
+            "Healing Spell":"2"
+        }
+    },
+    "6":{
+        "GiWi":{
+            "Giant":"",
+            "Wizard":"",
+            "Healing Spell":""
+        }
+
     },
     "7":{
         "Mass Dragons":{
             "Dragon":"1",
-            "Lightining Spell":"4"
+            "Lightning Spell":"4"
         },
         "Mass Hogs":{
             "Hog Rider":"2",
-            "Heal spell":"4"
+            "Healing Spell":"4"
         }
     },
     "8":{
-        "1":{
+        "Mass Dragons":{
             "Dragon":"2",
-            "Lightining Spell":"4"
+            "Lightning Spell":"4"
         },
-        "2":{
+        "GoHo":{
             "Golem":"1",
             "Hog Rider":"4",
-            "Heal Spell":"5"
+            "Healing Spell":"5"
         },
-        "3":{
+        "GoWiPe":{
             "Golem":"1",
-            "Pekka":"3",
+            "P.E.K.K.A":"3",
             "Wizard":"5"
-        },
-        "4":{
-            
         }
     },
 
     "9":{
         "Lavaloon":{
-            "Lavahound":"2",
+            "Lava Hound":"2",
             "Balloon":"6",
             "Healer":"4"
         },
         "Witch Slap":{
             "Golem":"4",
-            "witch":"2",
+            "Witch":"1",
             "Healer":"4"
         },
         "GoHo":{
             "Golem":"4",
             "Hog Rider":"5",
-            "Heal Spell":"6"
+            "Healing Spell":"6"
         },
         "QW Hogs":{
             "Golem":"4",
@@ -60,7 +71,7 @@
             "Healer":"4"
         },
         "GoHoPe":{
-            "Pekka":"4",
+            "P.E.K.K.A":"4",
             "Golem":"4",
             "Hog Rider":"5"
         }
@@ -68,7 +79,7 @@
 
     "10":{
         "QW/QC Lavaloon":{
-            "Lavahound":"3",
+            "Lava Hound":"3",
             "Balloon":"6",
             "Healer":"4",
             "Archer Queen":"30"
@@ -90,24 +101,24 @@
         },
         "GoHoPe":{
             "Golem":"5",
-            "Pekka":"6",
+            "P.E.K.K.A":"6",
             "Hog Rider":"6"
         },
         "QW/QC Mass Miners":{
-            "Miners":"3",
+            "Miner":"3",
             "Healer":"4",
             "Healing  Spell":"6",
             "Archer Queen":"30"
         },
-        "Pekkabobat":{
-            "Pekka":"6",
+        "Pekka bobat":{
+            "P.E.K.K.A":"6",
             "Bowler":"2",
-            "Bat spell":"3",
-            "Freeze spell":"5"
+            "Bat Spell":"3",
+            "Freeze Spell":"5"
         },
         "Hybrid":{
             "Hog Rider":"6",
-            "Miners":"3",
+            "Miner":"3",
             "Healing Spell":"7"
         }
     },
@@ -118,24 +129,24 @@
             "Hog Rider":"7",
             "Archer Queen":"40"
         },
-        "Pekkabobat":{
-            "Pekka":"7",
+        "Pekka bobat":{
+            "P.E.K.K.A":"7",
             "Bowler":"3",
-            "Bat spell":"4",
-            "Freeze spell":"6"
+            "Bat Spell":"4",
+            "Freeze Spell":"6"
         },
-        "Pekka Smash":{
-            "Pekka":"7",
+        "P.E.K.K.A Smash":{
+            "P.E.K.K.A":"7",
             "Bowler":"3",
             "Healer":"5"
         },
         "Electrone":{
             "Electro Dragon":"2",
-            "Rage spell":"5",
-            "Clone spell":"5"
+            "Rage Spell":"5",
+            "Clone Spell":"5"
         },
         "Lavaloon":{
-            "Lavahound":"4",
+            "Lava Hound":"4",
             "Balloon":"7",
             "Rage Spell":"5"
         },
@@ -148,14 +159,14 @@
     },
 
     "12":{
-        "Drag Bat":{
+        "Drag Bat":{   
             "Dragon":"7",
             "Balloon":"8",
             "Bat Spell":"5",
             "Freeze Spell":"7"
         },
         "Pekka Smash":{
-            "Pekka":"8",
+            "P.E.K.K.A":"8",
             "Bowler":"4",
             "Healer":"5"
         },
@@ -167,7 +178,7 @@
         "Frozen Dragon":{
             "Dragon":"7",
             "Balloon":"8",
-            "Freeze spell":"7"
+            "Freeze Spell":"7"
         },
         "QW/QC Mass miner":{
             "Healer":"5",
@@ -177,18 +188,18 @@
         "Electrone Lalo":{
             "Lava Hound":"5",
             "Balloon":"8",
-            "Clone spell":"5"
+            "Clone Spell":"5"
         },
         "QW/QC Hybrid":{
             "Healer":"5",
-            "Hog rider":"9",
+            "Hog Rider":"9",
             "Miner":"6",
             "Archer Queen":"65"
         },
         "Mass Edrag":{
-            "Electro dragon":"3",
+            "Electro Dragon":"3",
             "Battle Blimp":"2",
-            "Rage spell":"5"
+            "Rage Spell":"5"
         }
     },
 
@@ -202,7 +213,7 @@
         },
         "Drag Bat":{
             "Dragon":"8",
-            "Balloons":"9",
+            "Balloon":"9",
             "Bat Spell":"5",
             "Freeze Spell":"7" 
         },
@@ -213,7 +224,7 @@
         },
         "Electro Loon":{
             "Electro Dragon":"4",
-            "Balloons":"9",
+            "Balloon":"9",
             "Freeze Spell":"7",
             "Rage Spell":"6"
         },
