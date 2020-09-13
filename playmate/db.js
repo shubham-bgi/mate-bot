@@ -1,4 +1,5 @@
 const model = require('../model');
+const baseRequirements = require('../model/baseRequirements');
 const clanDetails = require('../model/clanDetails');
 const Base = model.Base;
 const Clan = model.Clan;
@@ -141,6 +142,8 @@ class db {
     }
 
     static async getDetailsOfAvailableClans(baseDetails) {
+        let now = new Date();
+        now = new Date(now.setHours(now.getHours()-3))
         try {
             const clans = await BaseRequirements.find ({
                 $or: [{ 
@@ -186,7 +189,8 @@ class db {
                 isFWA: { $eq: baseDetails.needFWA },
                 searching: true,
                 searchingByAdmin: true,
-                searchingByUpdate: true
+                searchingByUpdate: true,
+                lastSearchDate: {$lte: now}
             })
             return clans;
         }
@@ -251,13 +255,13 @@ class db {
         }
     }
     
-    static async setSearchingByUpdateByDiscodId(discordId, setToThis){
+    static async setSearchingByUpdateByDiscordId(discordId, setToThis){
         try{
             const docsModified = await BaseRequirements.updateOne({
                 discordID: discordId
             }, {
                 $set: { 
-                    searchingByAdmin: setToThis
+                    searchingByUpdate: setToThis
                 }
             })
         }
@@ -269,7 +273,7 @@ class db {
                 discordID: discordId
             }, {
                 $set: { 
-                    searchingByAdmin: setToThis
+                    searchingByUpdate: setToThis
                 }
             })
             return docsModified;
@@ -333,7 +337,7 @@ class db {
             const docsModified = await ClanDetails.replaceOne( {discordID: discordId}, updatedClanDetails);
             return docsModified.nModified;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             console.log(`************Got an error for ${clanTag}************`);
         }
     }
@@ -343,9 +347,10 @@ class db {
             const clanDetailsToBeUpdated = await ClanDetails.find({date: {$lte: now}, searchingByUpdate: true, searching: true, searchingByAdmin: true})
             return clanDetailsToBeUpdated;
         } catch (error){
-            console.log(error);
+            console.error(error);
         }
     }
+
     static async pushNewClanDetails(clanDetailsToBeAdded) {
         const clanDetails = new ClanDetails(clanDetailsToBeAdded);
         try {
@@ -353,8 +358,23 @@ class db {
             return true;
         }
         catch (error) {
-            console.log(error);
+            console.error(error);
             return false;
+        }
+    }
+
+    static async foundPlayer(discordId){
+        let now = new Date();
+        try {
+            await baseRequirements.updateOne({
+                discordID: discordId
+            }, {
+                $inc: {totalPlayersFound: 1},
+                $set: {lastSearchDate: now}
+            })
+        }
+        catch (error) {
+            console.error(error);
         }
     }
 }
@@ -384,5 +404,6 @@ module.exports = {
     deleteClanDetailsByDiscordID: db.deleteClanDetailsByDiscordId,
     updateClanDetails: db.updateClanDetails,
     getClanDetailsToUpdate: db.getClanDetailsToUpdate,
-    setSearchingByUpdateByDiscodId: db.setSearchingByUpdateByDiscodId
+    setSearchingByUpdate: db.setSearchingByUpdateByDiscordId,
+    foundPlayer: db.foundPlayer,
 }

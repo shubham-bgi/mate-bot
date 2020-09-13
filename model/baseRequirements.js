@@ -102,7 +102,7 @@ const BaseRequirementsSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    foundDate: {
+    createdDate: {
         type: Date,
         default: Date.now
     }

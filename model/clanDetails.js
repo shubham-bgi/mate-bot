@@ -86,7 +86,7 @@ let ClanDetailsSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    date: {
+    createdDate: {
         type: Date,
         default: Date.now
     }

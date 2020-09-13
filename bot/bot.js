@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const botsettings = require('./botsettings.json') //contains token and prefix of the bot
 const bot = new Discord.Client({disableEveryone: true});       
 bot.commands = new Discord.Collection();
+const talkedRecently = new Set();
 const botCommands = require('./commands');
 
 Object.keys(botCommands).map(key => {
@@ -16,7 +17,7 @@ bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
   bot.user.setActivity("-help")// set bots activity as this
   bot.guilds.forEach((guild) => {
-    console.log(guild.name)//logs the name of the server bot is in
+    console.log('--'+guild.name+'--')//logs the name of the server bot is in
     /* guild.channels.forEach((channel) => {
       console.log(` - ${channel.name} ${channel.type} ${channel.id}`)//logs all the channel name in the server
     }) */
@@ -46,7 +47,7 @@ bot.on('message',async msg => {
     let msgCollector = new Discord.MessageCollector(msg.channel, m => m.author.id === msg.author.id, { time: 300000 });//maxMatches:1,
     let msgCollector2 = new Discord.MessageCollector(msg.channel, m => m.author.id === msg.author.id, { time: 20000 });//maxMatches:1,
     //console.log(msgCollector);
-    bot.commands.get(command).execute(msg, args, embed, msgCollector, bot, embed2, embed3);
+    bot.commands.get(command).execute(msg, args, embed, msgCollector, bot, embed2, embed3, talkedRecently);
   } catch (error) {
     console.error(error.stack);
     msg.reply('There was an error trying to execute that command!');

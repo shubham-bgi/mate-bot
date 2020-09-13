@@ -65,31 +65,31 @@ module.exports = {
             "default": [
                 {
                     "townHallLevel": "7",
-                    "sumOfHeroes": "0"
+                    "sumOfHeroes": "-1"
                 },
                 {
                     "townHallLevel": "8",
-                    "sumOfHeroes": "0"
+                    "sumOfHeroes": "-1"
                 },
                 {
                     "townHallLevel": "9",
-                    "sumOfHeroes": "0"
+                    "sumOfHeroes": "-1"
                 },
                 {
                     "townHallLevel": "10",
-                    "sumOfHeroes": "0"
+                    "sumOfHeroes": "-1"
                 },
                 {
                     "townHallLevel": "11",
-                    "sumOfHeroes": "0"
+                    "sumOfHeroes": "-1"
                 },
                 {
                     "townHallLevel": "12",
-                    "sumOfHeroes": "0"
+                    "sumOfHeroes": "-1"
                 },
                 {
                     "townHallLevel": "13",
-                    "sumOfHeroes": "0"
+                    "sumOfHeroes": "-1"
                 },
             ],
             "onWrongReply": "Not a valid sum of hero levels for that town hall level."
@@ -109,31 +109,31 @@ module.exports = {
             "default": [
                 {
                     "townHallLevel": "7",
-                    "heroLevels": ["0"]
+                    "heroLevels": ["-1"]
                 },
                 {
                     "townHallLevel": "8",
-                    "heroLevels": ["0"]
+                    "heroLevels": ["-1"]
                 },
                 {
                     "townHallLevel": "9",
-                    "heroLevels": ["0","0"]
+                    "heroLevels": ["-1","-1"]
                 },
                 {
                     "townHallLevel": "10",
-                    "heroLevels": ["0","0"]
+                    "heroLevels": ["-1","-1"]
                 },
                 {
                     "townHallLevel": "11",
-                    "heroLevels": ["0","0","0"]
+                    "heroLevels": ["-1","-1","-1"]
                 },
                 {
                     "townHallLevel": "12",
-                    "heroLevels": ["0","0","0"]
+                    "heroLevels": ["-1","-1","-1"]
                 },
                 {
                     "townHallLevel": "13",
-                    "heroLevels": ["0","0","0","0"]
+                    "heroLevels": ["-1","-1","-1","-1"]
                 }
             ],
             "onWrongReply": "Not valid hero levels, make sure to type hero levels like this <King level/Queen level/Warden level/Royal Champ level>."
@@ -150,31 +150,31 @@ module.exports = {
             "default": [
                 {
                     "townHallLevel": "7",
-                    "warStars": "0"
+                    "warStars": "-1"
                 },
                 {
                     "townHallLevel": "8",
-                    "warStars": "0"
+                    "warStars": "-1"
                 },
                 {
                     "townHallLevel": "9",
-                    "warStars": "0"
+                    "warStars": "-1"
                 },
                 {
                     "townHallLevel": "10",
-                    "warStars": "0"
+                    "warStars": "-1"
                 },
                 {
                     "townHallLevel": "11",
-                    "warStars": "0"
+                    "warStars": "-1"
                 },
                 {
                     "townHallLevel": "12",
-                    "warStars": "0"
+                    "warStars": "-1"
                 },
                 {
                     "townHallLevel": "13",
-                    "warStars": "0"
+                    "warStars": "-1"
                 }
             ],
             "onWrongReply": "Not a valid number. Type any number between ``0`` and ``1500``."

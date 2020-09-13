@@ -239,13 +239,6 @@ async function pushAddBaseCommandDetails(baseTag, botMsgChannel, botUserDetails,
 
 
 
-
-
-
-
-
-
-
 async function pullRemoveBaseCommandDetails(argument, botMsgChannel, botUserDetails) {
     if(argument.startsWith('#')) {
         baseTag = argument.replace('0', 'o').toLowerCase();
@@ -339,8 +332,8 @@ async function lookingForClanMatesCommandDetails(clanTag, msg, embed, msgCollect
             msg.channel.send('Clan is already registered by you bro.');
         }
     } else {
-       /*  baseRequirements = await db.getBaseRequirementsByDiscordID(msg.author.id);
-        if (!baseRequirements) { */
+        baseRequirements = await db.getBaseRequirementsByDiscordID(msg.author.id);
+        if (!baseRequirements) {
             let allClanData = await Api.getClanDetails(clanTag);
             if (allClanData) {
                 msg.channel.send('Getting clan info...');
@@ -366,16 +359,19 @@ async function lookingForClanMatesCommandDetails(clanTag, msg, embed, msgCollect
             } else {
                 msg.channel.send('Wrong clan tag bro.');
             }
-        /* } else {
+        } else {
             msg.channel.send('You can only register one clan right now.')
-        } */
+        }
     }
 }
 
-async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, embed2, embed3) {
+async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, embed2, embed3, talkedRecently) {
     baseTag = Olf.fixTag(baseTag);
     const baseDetails = await Api.getPlayerDetails(baseTag);
-    if(!baseDetails) { msg.channel.send('Base Tag is incorrect bro.'); return;} 
+    if(!baseDetails) { msg.channel.send('Base Tag is incorrect bro.'); return; }
+    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Wait 1 hrs before trying this command again, **" + msg.author.username + '**'); return; }
+    talkedRecently.add(msg.author.id);
+    setTimeout(() => { talkedRecently.delete(msg.author.id); }, 3600000)
     const baseMetrics = getMetricForBase(baseDetails);
     let heroes = baseDetails.heroes;
     let checkingBaseDetails = {};
@@ -401,7 +397,7 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     const bestClanDetails = await db.getBestClan(availableClanTags);
     msg.channel.send('Finding the best clan...');
     getClanCommandDetails(bestClanDetails[0].clanTag, msg.channel, embed);
-    setTimeout(() => { msg.reply(baseRegister.quiz[0].question) }, 6000);
+    setTimeout(() => { msg.reply(baseRegister.quiz[0].question) }, 7000);
     question.askQuestion(msg, msgCollector, baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,embed2, embed3, bestClanDetails, bot, 0))
 }
 
@@ -424,7 +420,8 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                     msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
                     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
                     embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stop searching`` in any server I am in.') }, 6000);
+                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearching`` in any server I am in.') }, 7000);
+                    let x = await db.foundPlayer(bestClanDetails[0].discordID);
                     msgCollector.stop('finished');
                     return;
                 } else if (message.content.toLowerCase() == baseRegister.quiz[0].answer[1]) {
@@ -433,11 +430,14 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                         questionNumber = 1;
                         msg.channel.send(baseRegister.quiz[1].info);
                         getClanCommandDetails(bestClanDetails[1].clanTag, msg.channel, embed3);
-                        setTimeout(()=> { msg.reply(baseRegister.quiz[1].question)}, 6000);
+                        setTimeout(()=> { msg.reply(baseRegister.quiz[1].question)}, 7000);
                         return;
                     } else {
-                        questionNumber = 2;
-                        msg.reply(baseRegister.quiz[2].question);
+                        msg.channel.send('Ok, I am still working where you can set your options.');
+                        /* questionNumber = 2;
+                        msg.reply(baseRegister.quiz[2].question); */
+                        msgCollector.stop('finished');
+
                         return;
                     }
                 } else if(count < baseRegister.wrongAnswerCount) {
@@ -458,13 +458,15 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                     msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
                     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
                     embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stop searching`` in any server I am in.') }, 6000);
+                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearching`` in any server I am in.') }, 7000);
+                    let y = await db.foundPlayer(bestClanDetails[0].discordID);
                     msgCollector.stop('finished');
                 } else if (message.content.toLowerCase() == baseRegister.quiz[1].answer[1]) {
                     count = 0;
                     msg.channel.send('Ok, I am still working where you can set your options.');
                     /* questionNumber = 2;
                     msg.reply(baseRegister.quiz[2].question); */
+                    msgCollector.stop('finished');
                     return;
                 } else if(count < baseRegister.wrongAnswerCount) {
                     count ++;
@@ -1002,6 +1004,7 @@ function deleteRequirementsQuestinaire(msg, baseRequirements) {
 }
 
 async function updateCommandDetails(msg) {
+    console.log('here');
     let oldClanDetails = await db.getClanDetailsByDiscordId(msg.author.id);
     if(!oldClanDetails) { msg.channel.send('No clans are registered by you.'); return; };
     let allClanData = await Api.getClanDetails(oldClanDetails.clanTag);
@@ -1020,11 +1023,14 @@ async function updateCommandDetails(msg) {
     let clanDetails = {};
     clanDetails = getClanDetailsDocument(clanMetrics, msg.author.id);
     const numberOfDocsModified = await db.updateClanDetails(msg.author.id, clanDetails);
+    
     if(numberOfDocsModified > 0) {
         msg.channel.send('Successfully Updated.');
     } else {
         msg.channel.send('Oops. Something went wrong.');
     }
+    const x = await db.setSearchingByDiscordID(msg.author.id, true);
+    const y = await db.setSearchingByUpdate(msg.author.id, true);
 }
 
 async function updateAllClanDetailsCommandDetails(msg, bot) {
@@ -1047,11 +1053,11 @@ async function updateAllClanDetailsCommandDetails(msg, bot) {
         }
         if(!allClanData.isWarLogPublic) {
             const user = await bot.fetchUser(clanDetailsToBeUpdated[i].discordID);
-            user.send('Your clan details have become old.\nI tried but your war long in invisble.\nPlease make it visble, and use ``update`` command in any servers I am in to continue searching.');
-            let docsModified = db.setSearchingByUpdateByDiscodId(clanDetailsToBeUpdated[i].discordID, false);
+            user.send('I tried updating your clan details, but your war long in invisble.\nPlease make it visble, and use ``update`` command in any servers I am in to continue searching.');
+            let docsModified = db.setSearchingByUpdate(clanDetailsToBeUpdated[i].discordID, false);
             if(docsModified == 0) {console.log('Failed to set searching by update');}
             stopped++;
-            return;
+            break;
         };
         let clanData = await Api.getClanMembersDetails(allClanData.tag);
         let allPlayersData = await Api.getAllPlayerDetails(clanData);
@@ -1091,6 +1097,94 @@ function getClanDetailsDocument(clanMetrics, discordId) {
     }      
 }
 
+async function showRequirementsCommandDetails(argument, msg, embed) {
+    let baseRequirements = await db.getBaseRequirementsByDiscordID(msg.author.id);
+    if(!baseRequirements) { msg.channel.send('Bruh, there are not clan requirements linked with you.'); return;}
+    let storedClanDetails = await db.getClanDetailsByDiscordId(msg.author.id);
+    embedFunctions.requirementsEmbed(baseRequirements, storedClanDetails, msg.channel, embed);
+}
+
+async function checkBaseCommandDetails(baseTag, msg, embed) {
+    let baseRequirements = await db.getBaseRequirementsByDiscordID(msg.author.id);
+    let flag = 1;
+    if(!baseRequirements) { msg.channel.send('Bruh, there are not clan requirements linked with you.'); return;}
+    baseTag = Olf.fixTag(baseTag);
+    let baseDetails = await Api.getPlayerDetails(baseTag);
+    if(!baseDetails) { msg.channel.send('Bruh base tag is incorrect.'); return; }
+    const baseMetrics = getMetricForBase(baseDetails);
+
+    let heroes = baseDetails.heroes;
+    let checkingBaseDetails = {};
+    checkingBaseDetails.townHallLevel = baseDetails.townHallLevel;
+    checkingBaseDetails.nonRushPoints = baseMetrics.result.playerRushPoints;
+    checkingBaseDetails.maxPoints = baseMetrics.result.playerMaxPoints;
+    checkingBaseDetails.activityPoints = Number(baseMetrics.playerActivity.activityPoints);
+    checkingBaseDetails.trophies = baseDetails.trophies;
+    checkingBaseDetails.versusTrophies = baseDetails.versusTrophies;
+    checkingBaseDetails.warStars = baseDetails.warStars;
+    checkingBaseDetails.sumOfHeroes = "0";
+    checkingBaseDetails.heroLevels = ["0"];
+    if(heroes) {
+        heroes = Olf.removeByProperty(heroes, "name", "Battle Machine");
+        checkingBaseDetails.sumOfHeroes = Olf.sum(heroes, 'level');
+        checkingBaseDetails.heroLevels = heroes.map(hero => hero.level);
+    }
+
+    if(!(baseRequirements.minimumTownHallLevel <= checkingBaseDetails.townHallLevel || baseRequirements.onlyTownHall == checkingBaseDetails.townHallLevel)) {
+        msg.channel.send(`❌ TownHall Level : ${checkingBaseDetails.townHallLevel}\n`);
+        flag = 0;
+    }
+    if(baseRequirements.nonRushPoints > checkingBaseDetails.nonRushPoints){
+        msg.channel.send(`❌ Non Rush Points : ${checkingBaseDetails.nonRushPoints}\n`);
+        flag = 0;
+    }
+    if(baseRequirements.maxPoints > checkingBaseDetails.maxPoints){
+        msg.channel.send(`❌ Max Points : ${checkingBaseDetails.maxPoints}\n`);
+        flag = 0;
+    }
+    if(baseRequirements.activityPoints > checkingBaseDetails.activityPoints){
+        msg.channel.send(`❌ Activity Points : ${checkingBaseDetails.activityPoints}\n`);
+        flag = 0;
+    }
+    if(baseRequirements.trophies > checkingBaseDetails.trophies){
+        msg.channel.send(`❌ Home Base Points : ${checkingBaseDetails.trophies}\n`);
+        flag = 0;
+    }
+    if(baseRequirements.versusTrophies > checkingBaseDetails.versusTrophies){
+        msg.channel.send(`❌ Builder Base Points : ${checkingBaseDetails.versusTrophies}\n`);
+        flag = 0;
+    }
+
+    baseRequirements.sumOfHeroes.map(sumOfHeroes => {
+        if(sumOfHeroes.townHallLevel == checkingBaseDetails.townHallLevel) {
+            if(sumOfHeroes.sumOfHeroes > checkingBaseDetails.sumOfHeroes) {
+                msg.channel.send(`❌ Sum Of Heroes : ${checkingBaseDetails.sumOfHeroes}\n`);
+                flag = 0;
+            }
+        }
+    });
+
+    baseRequirements.heroLevels.map(heroLevels => {
+        if(heroLevels.townHallLevel == checkingBaseDetails.townHallLevel) {
+            if(heroLevels.heroLevels > checkingBaseDetails.heroLevels) {
+                msg.channel.send(`❌ Hero Levels : ${checkingBaseDetails.heroLevels}\n`);
+                flag = 0;
+            }
+        }
+    });
+
+    baseRequirements.warStars.map(warStars => {
+        if(warStars.townHallLevel == checkingBaseDetails.townHallLevel) {
+            if(warStars.warStars > checkingBaseDetails.warStars) {
+                msg.channel.send(`❌ War Stars : ${checkingBaseDetails.warStars}\n`);
+                flag = 0;
+            }
+        }
+    });
+
+    if(flag == 1) { msg.channel.send('🔥 Base Checks Out')}
+}
+
 module.exports = {
     getBaseCommandDetails: getBaseCommandDetails,
     getClanCommandDetails: getClanCommandDetails,
@@ -1103,5 +1197,7 @@ module.exports = {
     startSearchingCommandDetails: startSearchingCommandDetails,
     deleteRequirementsCommandDetails: deleteRequiremetnsCommandDetails,
     updateCommandDetails: updateCommandDetails,
-    updateAllClanDetailsCommandDetails: updateAllClanDetailsCommandDetails
+    updateAllClanDetailsCommandDetails: updateAllClanDetailsCommandDetails,
+    showRequirementsCommandDetails: showRequirementsCommandDetails,
+    checkBaseCommandDetails: checkBaseCommandDetails
 }

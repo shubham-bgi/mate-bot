@@ -4,7 +4,7 @@ const Olf = require('./oneLineFunctions')
 function clanEmbed(clanMetrics, botMsgChannel, embed) {
     if(!botMsgChannel) { return; }
     embed.setColor('#FF00FF');
-    embed.setTitle(`${clanMetrics.allClanData.name} - Level ${clanMetrics.allClanData.clanLevel} - ${clanMetrics.allClanData.members}/50`);
+    embed.setTitle(`${clanMetrics.allClanData.name} - Level ${clanMetrics.allClanData.clanLevel} - ${clanMetrics.allClanData.members}/50 (${clanMetrics.allClanData.tag})`);
     embed.setThumbnail(clanMetrics.allClanData.badgeUrls.medium);
     embed.addField('Description', clanMetrics.allClanData.description,true);
     if(clanMetrics.rushedMetrics.clanRushPoints >= 9.5) {
@@ -46,7 +46,7 @@ function clanEmbed(clanMetrics, botMsgChannel, embed) {
 function baseEmbed(baseMetrics, baseDetails, botMsgChannel, embed) {
     if(!botMsgChannel) { return; }
     embed.setColor('#FF00FF');
-    embed.setTitle(`**${baseDetails.name}**`);
+    embed.setTitle(`**${baseDetails.name}** (${baseDetails.tag})`);
     if(baseDetails.townHallLevel > 11) {
         let townHall = constants.urlTownHall[baseDetails.townHallLevel];
         embed.setThumbnail(townHall[baseDetails.townHallWeaponLevel]);
@@ -86,7 +86,64 @@ function baseEmbed(baseMetrics, baseDetails, botMsgChannel, embed) {
     botMsgChannel.send(embed);
 }
 
+function requirementsEmbed(baseRequirements, clanDetails, botMsgChannel,embed) {
+
+    let heroLevelsString = '';
+    let sumOfHeroesString = '';
+    let warStarsString = '';
+    embed.setColor('#FF00FF');
+    embed.setTitle(`Requirements of ${clanDetails.clanName} (${clanDetails.clanTag})`);
+    if(baseRequirements.onlyTownHall == 0)
+    {
+        embed.addField('Minimum Townhall', baseRequirements.minimumTownHallLevel, true);
+    }
+    else {
+        embed.addField('Only Townhall', baseRequirements.onlyTownHall, true);
+    }
+    embed.addField('Non Rush Points', baseRequirements.nonRushPoints, true);
+    embed.addField('Max Points', baseRequirements.maxPoints, true);
+    embed.addField('Activity Points', baseRequirements.activityPoints, true);
+    embed.addField('Home Trophies', baseRequirements.trophies, true);
+    embed.addField('Builder Base Trophies', baseRequirements.versusTrophies, true);
+
+    if(baseRequirements.heroLevels[0].heroLevels[0] != -1) {
+        if(baseRequirements.onlyTownHall == 0) {
+            
+            for(let i = 0; i < baseRequirements.heroLevels.length ; i++)
+                heroLevelsString = heroLevelsString.concat(String(baseRequirements.heroLevels[i].townHallLevel + '-' + baseRequirements.heroLevels[i].heroLevels.join('/') + '\n'));
+        } else {
+            heroLevelsString = String(baseRequirements.heroLevels[0].townHallLevel + '-' + baseRequirements.heroLevels[0].heroLevels.join('/'))
+        }
+    }
+    
+    if(baseRequirements.sumOfHeroes[0].sumOfHeroes != -1) {
+        if(baseRequirements.onlyTownHall == 0) {
+            
+            for(let i = 0; i < baseRequirements.sumOfHeroes.length ; i++)
+                sumOfHeroesString = sumOfHeroesString.concat(String(baseRequirements.sumOfHeroes[i].townHallLevel + '-' + baseRequirements.sumOfHeroes[i].sumOfHeroes + '\n'));
+        } else {
+            sumOfHeroesString = String(baseRequirements.sumOfHeroes[0].townHallLevel + '-' + baseRequirements.sumOfHeroes[0].sumOfHeroes + '\n')
+        }
+    }
+
+    if(baseRequirements.warStars[0].warStars != -1) {
+        if(baseRequirements.onlyTownHall == 0) {
+            for(let i = 0; i < baseRequirements.warStars.length ; i++)
+                warStarsString = warStarsString.concat(String(baseRequirements.warStars[i].townHallLevel + '-' + baseRequirements.warStars[i].warStars + '\n'));
+        } else {
+            warStarsString = String(baseRequirements.warStars[0].townHallLevel + '-' + baseRequirements.warStars[0].warStars + '\n')
+        }
+    }
+
+    if(heroLevelsString != '') { embed.addField('Hero Levels', heroLevelsString, true); }
+    if(sumOfHeroesString != '') { embed.addField('Sum of heroes', sumOfHeroesString, true);}
+    if(warStarsString != '') { embed.addField('War Stars', warStarsString, true); }
+    embed.addField('Players Found', baseRequirements.totalPlayersFound, true);
+
+    botMsgChannel.send(embed);
+}
 module.exports = {
     clanEmbed: clanEmbed,
-    baseEmbed: baseEmbed
+    baseEmbed: baseEmbed,
+    requirementsEmbed: requirementsEmbed
 }
