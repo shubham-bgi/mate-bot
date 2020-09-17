@@ -14,7 +14,8 @@ const clanByTagUrl = '/clans/';
 const playersByClanTagUrl = '/members';
 const playerByTagUrl = '/players/';
 const warLogByTagUrl = '/warlog';
-const playmateDiscordInvite = 'https://discord.gg/ZwYxkqu';
+const playmateDiscordInvite = "https://discord.gg/ASvgsA5";
+const playmateInvite = "https://discord.com/oauth2/authorize?client_id=704996785499799582&scope=bot&permissions=8";
 const TOWNHALL_MAX = 13;
 const LAB_MAX = TOWNHALL_MAX - 2;
 const TOP_CLAN_TAG = '#2JGYRJVL';//mega empire
@@ -54,5 +55,5 @@ const urlTownHall = {
 }
 
 module.exports = { 
-                 cocUrl, clanByTagUrl, playerByTagUrl, warLogByTagUrl, playersByClanTagUrl, axios, TOP_CLAN_TAG, urlTownHall, playmateDiscordInvite
+                 cocUrl, clanByTagUrl, playerByTagUrl, warLogByTagUrl, playersByClanTagUrl, axios, TOP_CLAN_TAG, urlTownHall, playmateDiscordInvite, playmateInvite
                 };

@@ -9,7 +9,7 @@ module.exports = {
         App.iNeedAClanCommandDetails(args[0], msg, embed, msgCollector, bot, embed2, embed3, talkedRecently);
       }
       else {
-        msg.channel.send('Please specify the clan tag.');
+        msg.channel.send('Please specify the base tag.');
       }
     },
 };

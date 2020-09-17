@@ -44,10 +44,12 @@ bot.on('message',async msg => {
     let embed = new Discord.RichEmbed();
     let embed2 = new Discord.RichEmbed();
     let embed3 = new Discord.RichEmbed();
+    let embed4 = new Discord.RichEmbed();
+    let embed5 = new Discord.RichEmbed();
     let msgCollector = new Discord.MessageCollector(msg.channel, m => m.author.id === msg.author.id, { time: 300000 });//maxMatches:1,
     let msgCollector2 = new Discord.MessageCollector(msg.channel, m => m.author.id === msg.author.id, { time: 20000 });//maxMatches:1,
     //console.log(msgCollector);
-    bot.commands.get(command).execute(msg, args, embed, msgCollector, bot, embed2, embed3, talkedRecently);
+    bot.commands.get(command).execute(msg, args, embed, msgCollector, bot, embed2, embed3, talkedRecently, embed4, embed5);
   } catch (error) {
     console.error(error.stack);
     msg.reply('There was an error trying to execute that command!');

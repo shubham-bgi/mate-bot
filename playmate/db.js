@@ -60,7 +60,7 @@ class db {
         }
     }
 
-    static async pullOldBaseByBaseName(discordId, baseNameToBeRemoved) {
+    /* static async pullOldBaseByBaseName(discordId, baseNameToBeRemoved) {
         try {
             const numberOfDocumentsModified = await Base.updateOne(
                 { discordId: discordId },
@@ -71,21 +71,28 @@ class db {
         catch (error) {
             console.log(error);
         }
-    }
+    } */
     
     //-------------------CLANS COLLECTION DATABASE QUERRIES-------------------//
 
     static async getClansByDiscordId(discordId) {
-        const base = await Clan.findOne({ discordID: discordId });
-        if (clan) { return clan; }
+        try {
+            const clan = await Clan.findOne({ discordID: discordId });
+            return clan;
+        }
+        catch (error) {
+            console.log(error);
+            console.log(`************Got an error for ${discordId}************`);
+        } 
         
     }
     
     static async updateClansByDiscordId(discordId, clanToBeAdded) {
         try {
-            const numberOfDocumentsModified = await Base.updateOne(
-                { discordId: discordId },
-                { $push: { clans: clanToBeAdded } });
+            const numberOfDocumentsModified = await Clan.updateOne(
+                { discordID: discordId },
+                { $push: { clans: clanToBeAdded } 
+            });
             return numberOfDocumentsModified;
         }
         catch (error) {
@@ -93,18 +100,30 @@ class db {
         }
     }
 
-    static pushNewClan(clanToBePushed) {
-        const newClanToBePushed = new model.Base(clanToBePushed)
+    static async pushNewClan(clanToBePushed) {
+        const newClanToBePushed = new model.Clan(clanToBePushed)
         try {
-            newClanToBePushed.save();
-            return 'success';
+            await newClanToBePushed.save();
+            return true;
         }
         catch (error) {
             console.log(error.status);
-            return 'failed';
+            return false;
         }
     }
 
+    static async pullOldClanByClanTag(discordId, clanTag) {
+        try {
+            const numberOfDocumentsModified = await Clan.updateOne(
+                { discordID: discordId },
+                { $pull: { clans: { tag: clanTag} } 
+            });
+            return numberOfDocumentsModified;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
     //-------------------REGISTERED CLANS COLLECTION DATABASE QUERRIES-------------------//
 
     static async pushNewBaseRequirements(BaseRequirementsToBeAdded) {
@@ -386,7 +405,8 @@ module.exports = {
     updateBasesByDiscordId: db.updateBasesByDiscordId,
     pushNewBase: db.pushNewBase,
     pullOldBaseByBaseTag: db.pullOldBaseByBaseTag,
-    pullOldBaseByBaseName: db.pullOldBaseByBaseName,
+    /* pullOldBaseByBaseName: db.pullOldBaseByBaseName, */
+    pullOldClanByClanTag: db.pullOldClanByClanTag,
     getClansByDiscordId: db.getClansByDiscordId,
     updateClansByDiscordId: db.updateClansByDiscordId,
     pushNewClan: db.pushNewClan,

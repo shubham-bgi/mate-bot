@@ -37,11 +37,15 @@ function sum(arr, prop){//Add values of a single property in array of objects
         return a + b[prop];
     }, 0);
 };
+function emoji (bot, id) {
+    return bot.emojis.get(id).toString();
+}
 module.exports = {
     numberWithCommas: numberWithCommas,
     capitalizeFirstLetter: capitalizeFirstLetter,
     checkFWA: checkFWA,
     fixTag: fixTag,
     removeByProperty: removeByProperty,
-    sum: sum
+    sum: sum,
+    emoji: emoji
 }

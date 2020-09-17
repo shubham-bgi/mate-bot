@@ -8,7 +8,8 @@ module.exports = {
       console.log(args);
       if(args.length > 0) {
         App.getActivityCommandDetails(args[0], msg.channel);
+      } else {
+        msg.channel.send('Please specify clan tag.');
       }
-      console.log('it\'s working');
     },
   };

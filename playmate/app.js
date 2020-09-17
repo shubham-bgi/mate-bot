@@ -40,6 +40,8 @@ const { pushNewRegClan } = require('./db');
 const commands = require('../bot/commands');
 const baseRegister = require('./json/baseRegister');
 const base = require('../bot/commands/base');
+const oneLineFunctions = require('./oneLineFunctions');
+const api = require('./api.js');
 
 
 
@@ -77,11 +79,44 @@ const base = require('../bot/commands/base');
 
 
 //--------Function that runs Base command-----------//
-async function getBaseCommandDetails(argument, botMsgChannel, embed, botUserDetails) {
+
+
+async function getBaseCommandDetails(baseTag, botMsgChannel, embed, botUserDetails, bot) {
+    if(!baseTag) {
+        /* botMsgChannel.send(`**hello**\n ${Olf.emoji(bot, "755152131178102814")}`) */
+        let flag = 0;
+        let botUserBases = await db.getBasesByDiscordId(botUserDetails.id);
+        if(!botUserBases || botUserBases.bases.length == 0) { botMsgChannel.send('No bases are currently linked with you. Use ``addbase`` command.'); return; }
+        else {
+            for(let i = 0;i < botUserBases.bases.length; i++) {
+                if(botUserBases.bases[i].type.toLowerCase() == 'main') { 
+                    Api.getPlayerDetails(botUserBases.bases[i].tag)
+                        .then( baseDetails => {
+                            const baseMetric = getMetricForBase(baseDetails);
+                            embedFunctions.baseEmbed(baseMetric, baseDetails, botMsgChannel, embed);    
+                    });
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 0) { botMsgChannel.send('No base with type main found.'); return; }
+        }
+    } else {
+        baseTag = Olf.fixTag(baseTag);
+        console.log(baseTag);
+        const baseDetails = await api.getPlayerDetails(baseTag);
+        if(!baseDetails) { botMsgChannel.send('Base Tag is incorrect bro.'); return;}
+        const baseMetric = getMetricForBase(baseDetails);
+        embedFunctions.baseEmbed(baseMetric, baseDetails, botMsgChannel, embed);
+    }
+}
+
+/* async function getBaseCommandDetails(argument, botMsgChannel, embed, botUserDetails) {
     if(argument.startsWith('#')) {       
         Api.getPlayerDetails(argument)
             .then( baseDetails => {
                 if(baseDetails) {
+                    console.log(baseDetails);
                     const baseMetric = getMetricForBase(baseDetails);
                     embedFunctions.baseEmbed(baseMetric, baseDetails, botMsgChannel, embed);
                 }
@@ -136,119 +171,244 @@ async function getBaseCommandDetails(argument, botMsgChannel, embed, botUserDeta
             }
         }
     }
+} */
+
+
+async function listBasesCommandDetails(type, msg, e1, e2, e3, e4, e5) {
+    let showBases;
+    let bases = await db.getBasesByDiscordId(msg.author.id);
+    if(!bases || bases.bases.length == 0) { msg.channel.send('No bases are linked with you. Use ``addbase`` command.'); return; }
+    if (!type) {
+        showBases = bases.bases;
+        embedFunctions.listBasesEmbed(showBases, msg.channel, e1, msg.author.username);
+    } else {
+        showBases = bases.bases.filter(base => { if (base.type == type.toLowerCase()) { return base; } });
+        if(!showBases[0]) { msg.channel.send('No bases with that type found.'); return; }
+        embedFunctions.listBasesEmbed(showBases, msg.channel, e1, msg.author.username);
+    }
+}
+
+async function listClansCommandDetails(type, msg, e1, e2, e3, e4, e5) {
+    let showClans;
+    let clans = await db.getClansByDiscordId(msg.author.id);
+    if(!clans || clans.clans.length == 0) { msg.channel.send('No clans are linked with you. Use ``addclan`` command.'); return; }
+    if (!type) {
+        showClans = clans.clans;
+        embedFunctions.listClansEmbed(showClans, msg.channel, e1, msg.author.username);
+    } else {
+        showClans = clans.clans.filter(clan => { if (clan.type == type.toLowerCase()) { return clan; } });
+        if(!showClans[0]) { msg.channel.send('No clans with that type found.'); return; }
+        embedFunctions.listClansEmbed(showClans, msg.channel, e1, msg.author.username);
+    }
 }
 
 
-
-
-
-
-
-
-
-async function getClanCommandDetails(clanTag, botMsgChannel, embed) {
+async function getClanCommandDetails(clanTag, botMsgChannel, embed, botUserDetails, bot) {
+    /* let flag = 0;
+    if(!clanTag) {
+        let clans = await db.getClansByDiscordId(botUserDetails.id);
+        if(!clans || clans.clans.length == 0) {
+            msg.channel.send('No clans are currently linked with you. Use ``addclan`` command.');
+            return;
+        }
+        clans.clans.
+    } */
     clanTag = Olf.fixTag(clanTag);
+    let clanMetrics;
     let clanData = await Api.getClanMembersDetails(clanTag);    
-    if(clanData){
+    if(!clanData){ botMsgChannel.send('Clan tag is incorrect bro'); return; } 
+        botMsgChannel.send('Getting clan info...');
         let allPlayersData = await Api.getAllPlayerDetails(clanData);
         let allClanData = await Api.getClanDetails(clanTag);
-        let warLog = await Api.getWarLog(clanTag);
-        const clanMetrics = getMetricsForAllPlayersOfClan(allPlayersData, allClanData, warLog.items);
-        embedFunctions.clanEmbed(clanMetrics, botMsgChannel, embed);
-    }
-    else {
-        botMsgChannel.send('Clan tag is incorrect bro');
-    }
-}
-
-
-
-
-
-
-
-
-
-
-function addBaseCallback(baseDetails, baseTag, msg, botMsgChannel, botUserDetails) {
-    let count = 0;
-    return async (message, msgCollector) => {
-        let  baseType;
-        if (message.content == 'main' || message.content == 'mini' || message.content == 'dono' || message.content == 'no') {
-            msgCollector.stop('got it');
-            baseType = message.content;
-        }
-        else if (count < 1){
-            botMsgChannel.send(`**${botUserDetails.username}**, that's not a valid option bruh,you must choose between \`\`main\`\`,\`\`mini\`\`,\`\`dono\`\` or \`\`no\`\`.`);
-            msg.reply('Do you wanna give it a type? ``main``, ``mini``, ``dono`` or ``no``? \n Type your choice.');
-            count ++;
-            return;
-        }
-        else {
-            botMsgChannel.send(`Again bruh? I have to stop this before you make me crazy.`);
-            msgCollector.stop('wrong response');
-            return;
-        }
-        const baseToBeadded = [{
-            name: baseDetails.name.toLowerCase(),
-            tag: baseTag,
-            type: baseType
-        }]
-        let numberOfDocsModified = await db.updateBasesByDiscordId(botUserDetails.id, baseToBeadded);
-        if(numberOfDocsModified.n > 0) {
-            botMsgChannel.send(`${baseDetails.name}(TH${baseDetails.townHallLevel}) added.`)
+        if(allClanData.isWarLogPublic) {
+            let warLog = await Api.getWarLog(clanTag);
+            clanMetrics = getMetricsForAllPlayersOfClan(allPlayersData, allClanData, warLog.items);
         } else {
-            const newBaseToBeAdded = {
-                discordId: botUserDetails.id,
-                bases: [{
-                    name: baseDetails.name.toLowerCase(),
-                    tag: baseTag,
-                    type: baseType
-                }]
-            }
-            if(db.pushNewBase(newBaseToBeAdded)) {
-                botMsgChannel.send(`${baseDetails.name}(TH${baseDetails.townHallLevel}) added.`)
-            }
+            clanMetrics = getMetricsForAllPlayersOfClan(allPlayersData, allClanData);
         }
-    }
+        embedFunctions.clanEmbed(clanMetrics, botMsgChannel, embed);
 }
+
+
+
+function inviteCommandDetails(msg) {
+    msg.author.send(`**Add bot to your server**  : ${constants.playmateInvite}`);
+    msg.author.send(`**Join our Discord Server**  : ${constants.playmateDiscordInvite}`);
+}
+
 
 async function pushAddBaseCommandDetails(baseTag, botMsgChannel, botUserDetails, msgCollector, msg) {
     baseTag = Olf.fixTag(baseTag);
     const baseDetails = await Api.getPlayerDetails(baseTag);
     let flag = 0;
-    if (baseDetails) {
-        let bases = await db.getBasesByDiscordId(botUserDetails.id);
-        if(bases) {
-            bases.bases.map( base => {
-                if(base.tag == baseTag) {
-                    botMsgChannel.send(`${baseTag} is already linked.`)
-                    flag = 1;
-                }
-            })
-        }
-        if (flag == 0) {
-            msg.reply('Do you wanna give it a type? ``main``, ``mini``, ``dono`` or ``no``? \n Type your choice.')
-            question.askQuestion(msg.author, msgCollector, addBaseCallback(baseDetails, baseTag, msg, botMsgChannel, botUserDetails));
-        }
+    let main = false;
+    if (!baseDetails) { botMsgChannel.send('Base tag is incorrect bro.'); return; }
+    let bases = await db.getBasesByDiscordId(botUserDetails.id);
+    if(bases) {
+        bases.bases.map( base => {
+            if(base.tag == baseTag) {
+                botMsgChannel.send(`${baseDetails.name} is already linked.`);
+                flag = 1;
+            }
+            if(base.type.toLowerCase() == 'main') { main = true; }
+        })
     }
-    else {
-        botMsgChannel.send('Base tag is incorrect bro.')
+    if (flag == 0 && main) {
+        msg.reply('Do you wanna give it a type? ``mini``, ``dono``, ``frnds`` or ``no``? \n Type your choice.')
+        question.askQuestion(msg.author, msgCollector, addBaseCallback(baseDetails, baseTag, msg, botMsgChannel, botUserDetails, main));
+    } else if (flag == 0) {
+        msg.reply('Do you wanna give it a type? ``main``, ``mini``, ``dono``, ``frnds`` or ``no``? \n Type your choice.')
+        question.askQuestion(msg.author, msgCollector, addBaseCallback(baseDetails, baseTag, msg, botMsgChannel, botUserDetails, main));
+    }
+}
+
+async function pushAddClanCommandDetails(clanTag, botMsgChannel, botUserDetails, msgCollector, msg) {
+    clanTag = Olf.fixTag(clanTag);
+    const clanDetails = await Api.getClanDetails(clanTag);
+    let flag = 0;
+    let main = false;
+    if (!clanDetails) { botMsgChannel.send('Clan tag is incorrect bro.'); return; }
+    let clans = await db.getClansByDiscordId(botUserDetails.id);
+    if(clans) {
+        clans.clans.map( clan => {
+            if(clan.tag == clanTag) {
+                botMsgChannel.send(`${clanDetails.name} is already linked.`);
+                flag = 1;
+            }
+            if(clan.type.toLowerCase() == 'main') { main = true; }
+        })
+    }
+    if (flag == 0 && main) {
+        msg.reply('Do you wanna give it a type? ``mini``, ``feeder``, ``frnds``, ``alanz``, ``sister`` or ``no``? \n Type your choice.');
+        question.askQuestion(msg.author, msgCollector, addClanCallback(clanDetails, clanTag, msg, botMsgChannel, botUserDetails, main));
+    } else if (flag == 0) {
+        msg.reply('Do you wanna give it a type? ``main``, ``mini``, ``feeder``, ``frnds``, ``alanz``, ``sister`` or ``no``? \n Type your choice.');
+        question.askQuestion(msg.author, msgCollector, addClanCallback(clanDetails, clanTag, msg, botMsgChannel, botUserDetails, main));
     }
 }
 
 
 
-async function pullRemoveBaseCommandDetails(argument, botMsgChannel, botUserDetails) {
-    if(argument.startsWith('#')) {
-        baseTag = argument.replace('0', 'o').toLowerCase();
-        let numberOfDocsModified = await db.pullOldBaseByBaseTag(botUserDetails.id, baseTag);
-        if (numberOfDocsModified.n > 0) {
-            botMsgChannel.send('Successfully removed');
+function addBaseCallback(baseDetails, baseTag, msg, botMsgChannel, botUserDetails, main) {
+    let count = 0;
+    return async (message, msgCollector) => {
+        let  baseType;
+        if (message.content.toLowerCase() == 'main' && !main ) {
+            msgCollector.stop('got it');
+            baseType = message.content.toLowerCase();
+        } else if (message.content.toLowerCase() == 'mini' || message.content.toLowerCase() == 'dono' || message.content.toLowerCase() == 'no' || message.content.toLowerCase() == 'frnds') {
+            msgCollector.stop('got it');
+            baseType = message.content.toLowerCase();
+        } else if (count < 1 && main){
+            botMsgChannel.send(`**${botUserDetails.username}**, that's not a valid option bruh,you must choose between \`\`mini\`\`,\`\`dono\`\`, \`\`frnds\`\` or \`\`no\`\`.`);
+            msg.reply('Do you wanna give it a type? ``mini``, ``dono``, ``frnds`` or ``no``? \n Type your choice.');
+            count ++;
+            return;
+        } else if (count < 1) {
+            botMsgChannel.send(`**${botUserDetails.username}**, that's not a valid option bruh,you must choose between \`\`main\`\`, \`\`mini\`\`,\`\`dono\`\`, \`\`frnds\`\` or \`\`no\`\`.`);
+            msg.reply('Do you wanna give it a type? ``main``, ``mini``, ``dono``. \`\`frnds\`\` or ``no``? \n Type your choice.');
+            count ++;
+            return;
         } else {
-            botMsgChannel.send('No base with that tag is linked :/')
+            botMsgChannel.send(`Again bruh? I have to stop this before you make me crazy.`);
+            msgCollector.stop('wrong response');
+            return;
         }
+        
+        const baseToBeadded = [{
+            name: baseDetails.name,
+            townHallLevel: baseDetails.townHallLevel,
+            tag: baseTag,
+            type: baseType
+        }]
+        let numberOfDocsModified = await db.updateBasesByDiscordId(botUserDetails.id, baseToBeadded);
+        if(numberOfDocsModified.n > 0) {
+            botMsgChannel.send(`${baseDetails.name} (TH${baseDetails.townHallLevel}) added.`)
+        } else {
+            const newBaseToBeAdded = {
+                discordID: botUserDetails.id,
+                bases: [{
+                    name: baseDetails.name,
+                    townHallLevel: baseDetails.townHallLevel,
+                    tag: baseTag,
+                    type: baseType
+                }]
+            }
+            if(await db.pushNewBase(newBaseToBeAdded)) {
+                botMsgChannel.send(`${baseDetails.name} (TH${baseDetails.townHallLevel}) added.`);
+            } else {
+                botMsgChannel.send(`Something went wrong.`);
+            }
+        }
+    }
+}
+
+
+
+function addClanCallback(clanDetails, clanTag, msg, botMsgChannel, botUserDetails, main) {
+    let count = 0;
+    return async (message, msgCollector) => {
+        let  clanType;
+        if (message.content.toLowerCase() == 'main' && !main ) {
+            msgCollector.stop('got it');
+            clanType = message.content.toLowerCase();
+        } else if (message.content.toLowerCase() == 'mini' || message.content.toLowerCase() == 'feeder' || message.content.toLowerCase() == 'frnds' || message.content.toLowerCase() == 'alanz' || message.content.toLowerCase() == 'sister' || message.content.toLowerCase() == 'no') {
+            msgCollector.stop('got it');
+            clanType = message.content.toLowerCase();
+        } else if (count < 1 && main){
+            botMsgChannel.send(`**${botUserDetails.username}**, that's not a valid option bruh,you must choose between \`\`mini\`\`,\`\`feeder\`\`, \`\`frnds\`\`, \`\`alanz\`\`, \`\`sister\`\` or \`\`no\`\`.`);
+            msg.reply('Do you wanna give it a type? ``mini``, ``feeder``, ``frnds``, ``alanz``, ``sister`` or ``no``? \n Type your choice.');
+            count ++;
+            return;
+        } else if (count < 1) {
+            botMsgChannel.send(`**${botUserDetails.username}**, that's not a valid option bruh,you must choose between \`\`main\`\`, \`\`mini\`\`,\`\`feeder\`\`, \`\`frnds\`\`, \`\`alanz\`\`, \`\`sister\`\` or \`\`no\`\`.`);
+            msg.reply('Do you wanna give it a type? ``main``, ``mini``, ``feeder``, ``frnds``, ``alanz``, ``sister`` or ``no``? \n Type your choice.');
+            count ++;
+            return;
+        } else {
+            botMsgChannel.send(`Again bruh? I have to stop this before you make me crazy.`);
+            msgCollector.stop('wrong response');
+            return;
+        }
+        const clanToBeadded = [{
+            name: clanDetails.name,
+            level: clanDetails.clanLevel,
+            tag: clanTag,
+            type: clanType
+        }]
+        let numberOfDocsModified = await db.updateClansByDiscordId(botUserDetails.id, clanToBeadded);
+        console.log(numberOfDocsModified);
+        if(numberOfDocsModified.n > 0) {
+            botMsgChannel.send(`${clanDetails.name} added.`)
+        } else {
+            const newClanToBeAdded = {
+                discordID: botUserDetails.id,
+                clans: [{
+                    name: clanDetails.name,
+                    level: clanDetails.clanLevel,
+                    tag: clanTag,
+                    type: clanType
+                }]
+            }
+            if(await db.pushNewClan(newClanToBeAdded)) {
+                botMsgChannel.send(`${clanDetails.name} added.`);
+            } else {
+                botMsgChannel.send(`Something went wrong.`);
+            }
+        }
+    }
+}
+
+
+async function pullRemoveBaseCommandDetails(baseTag, botMsgChannel, botUserDetails) {
+    baseTag = Olf.fixTag(baseTag);
+    let numberOfDocsModified = await db.pullOldBaseByBaseTag(botUserDetails.id, baseTag);
+    if (numberOfDocsModified.nModified > 0) {
+        botMsgChannel.send('Successfully removed.');
     } else {
+        botMsgChannel.send('No base found with that tag.')
+    }
+     /* else {
         argument = argument.toLowerCase();
         let numberOfDocsModified = await db.pullOldBaseByBaseName(botUserDetails.id, argument);
         if (numberOfDocsModified.n > 0) {
@@ -256,10 +416,18 @@ async function pullRemoveBaseCommandDetails(argument, botMsgChannel, botUserDeta
         } else {
             botMsgChannel.send('No base with that name is linked :/')
         }
-    }
+    } */
 }
 
-
+async function pullRemoveClanCommandDetails(clanTag, botMsgChannel, botUserDetails) {
+    clanTag = Olf.fixTag(clanTag);
+    let numberOfDocsModified = await db.pullOldClanByClanTag(botUserDetails.id, clanTag);
+    if (numberOfDocsModified.nModified > 0) {
+        botMsgChannel.send('Successfully removed.');
+    } else {
+        botMsgChannel.send('No clan found with that tag.')
+    }
+}
 
 
 
@@ -342,6 +510,19 @@ async function lookingForClanMatesCommandDetails(clanTag, msg, embed, msgCollect
                     let allPlayersData = await Api.getAllPlayerDetails(clanData);
                     let warLog = await Api.getWarLog(clanTag);
                     let clanMetrics = getMetricsForAllPlayersOfClan(allPlayersData, allClanData, warLog.items);
+                    if(allClanData.members < 5) {
+                        msg.channel.send('Since, you have less than 5 players in your clan, requirements will be auto set to the lowest possible.');
+                        let registeredClanDetails = {};
+                        registeredClanDetails.sumOfHeroes = clanRegister.quiz[9].default;
+                        registeredClanDetails.heroLevels = clanRegister.quiz[10].default;
+                        registeredClanDetails.warStars = clanRegister.quiz[12].default;
+                        let clanDetails = {};
+                        clanDetails = getClanDetailsDocument(clanMetrics, msg.author.id);
+                        registeredClanDetails.clanTag = Olf.fixTag(clanMetrics.allClanData.tag);
+                        registeredClanDetails.discordID = msg.author.id;
+                        pushClanRegisterationToDB(registeredClanDetails, clanDetails)
+                        return;
+                    }
                     msg.channel.send('You can cancel this anytime by typing ``cancel``.');
                     if( Olf.checkFWA(clanMetrics.allClanData.description) ) {
                         msg.reply(clanRegister.quiz[0].question);
@@ -369,7 +550,7 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     baseTag = Olf.fixTag(baseTag);
     const baseDetails = await Api.getPlayerDetails(baseTag);
     if(!baseDetails) { msg.channel.send('Base Tag is incorrect bro.'); return; }
-    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Wait 1 hrs before trying this command again, **" + msg.author.username + '**'); return; }
+    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Wait 1 hour before trying this command again, **" + msg.author.username + '**.'); return; }
     talkedRecently.add(msg.author.id);
     setTimeout(() => { talkedRecently.delete(msg.author.id); }, 3600000)
     const baseMetrics = getMetricForBase(baseDetails);
@@ -1199,5 +1380,10 @@ module.exports = {
     updateCommandDetails: updateCommandDetails,
     updateAllClanDetailsCommandDetails: updateAllClanDetailsCommandDetails,
     showRequirementsCommandDetails: showRequirementsCommandDetails,
-    checkBaseCommandDetails: checkBaseCommandDetails
+    checkBaseCommandDetails: checkBaseCommandDetails,
+    inviteCommandDetails: inviteCommandDetails,
+    listBasesCommandDetails: listBasesCommandDetails,
+    pushAddClanCommandDetails: pushAddClanCommandDetails,
+    pullRemoveClanCommandDetails: pullRemoveClanCommandDetails,
+    listClansCommandDetails: listClansCommandDetails
 }

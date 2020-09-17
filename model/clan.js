@@ -6,6 +6,14 @@ let ClanSchema = new mongoose.Schema({
         required : true
     },
     clans : [{
+        name: {
+            type: String,
+            required: true
+        },
+        level: {
+            type: Number,
+            required: true
+        },
         tag : {
             type : String,
             required : true
@@ -13,7 +21,7 @@ let ClanSchema = new mongoose.Schema({
         type : {
             type : String
         },
-        date: {
+        dateAdded: {
             type: Date,
             default: Date.now
         }

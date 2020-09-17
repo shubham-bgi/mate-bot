@@ -100,8 +100,11 @@ function requirementsEmbed(baseRequirements, clanDetails, botMsgChannel,embed) {
     else {
         embed.addField('Only Townhall', baseRequirements.onlyTownHall, true);
     }
-    embed.addField('Non Rush Points', baseRequirements.nonRushPoints, true);
+    if(baseRequirements.nonRushPoints != -1) {
+        embed.addField('Non Rush Points', baseRequirements.nonRushPoints, true);
+    } else {
     embed.addField('Max Points', baseRequirements.maxPoints, true);
+    }
     embed.addField('Activity Points', baseRequirements.activityPoints, true);
     embed.addField('Home Trophies', baseRequirements.trophies, true);
     embed.addField('Builder Base Trophies', baseRequirements.versusTrophies, true);
@@ -138,12 +141,32 @@ function requirementsEmbed(baseRequirements, clanDetails, botMsgChannel,embed) {
     if(heroLevelsString != '') { embed.addField('Hero Levels', heroLevelsString, true); }
     if(sumOfHeroesString != '') { embed.addField('Sum of heroes', sumOfHeroesString, true);}
     if(warStarsString != '') { embed.addField('War Stars', warStarsString, true); }
-    embed.addField('Players Found', baseRequirements.totalPlayersFound, true);
-
+    embed.addField('Total Players Found', baseRequirements.totalPlayersFound, true);
     botMsgChannel.send(embed);
 }
+
+function listBasesEmbed(bases, botMsgChannel, embed, username) {
+    embed.setTitle(username);
+    embed.setColor('#FF00FF');
+    for (let i = 0; i < bases.length; i++ ) {
+        embed.addField(`${bases[i].name}`, `TH${bases[i].townHallLevel}, ${bases[i].tag}, ${bases[i].type}`);
+    }
+    botMsgChannel.send(embed);
+}
+
+function listClansEmbed(clans, botMsgChannel, embed, username) {
+    embed.setTitle(username);
+    embed.setColor('#FF00FF');
+    for (let i = 0; i < clans.length; i++ ) {
+        embed.addField(`${clans[i].name}`, `Lvl${clans[i].level}, ${clans[i].tag}, ${clans[i].type}`);
+    }
+    botMsgChannel.send(embed);
+}
+
 module.exports = {
     clanEmbed: clanEmbed,
     baseEmbed: baseEmbed,
-    requirementsEmbed: requirementsEmbed
+    requirementsEmbed: requirementsEmbed,
+    listBasesEmbed: listBasesEmbed,
+    listClansEmbed: listClansEmbed
 }

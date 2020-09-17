@@ -10,6 +10,10 @@ let BaseSchema = new mongoose.Schema({
             type: String,
             required: true
         },
+        townHallLevel: {
+            type: Number,
+            required: true
+        },
         tag: {
             type: String,
             required: true
@@ -18,7 +22,7 @@ let BaseSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        date: {
+        dateAdded: {
             type: Date,
             default: Date.now
         }

@@ -43,23 +43,23 @@ const BaseRequirementsSchema = new mongoose.Schema({
     },
     nonRushPoints: {
         type : Number,
-        default: 0
+        default: -1
     },
     maxPoints:{
         type : Number,
-        default: 0
+        default: -1
     },
     activityPoints:{
         type: Number,
-        default: 0
+        default: -1
     },
     trophies: {
         type : Number,
-        default: 0
+        default: -1
     },
     versusTrophies: {
         type : Number,
-        default: 0
+        default: -1
     },
     onlyTownHall: {
         type : Number,
