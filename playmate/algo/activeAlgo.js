@@ -112,6 +112,7 @@ class ActiveAlgo {
             
         let activityFeel = Math.round(activePoints * this.playersCount / 5) / 10;
         return {
+            attackWinsPoints: Math.round(attackWinsPoints*100)/10,
             activityPoints: activePoints,
             activityFeel: activityFeel,
             status: status
@@ -142,6 +143,7 @@ class ActiveAlgo {
             status = 'Very Low Activity';
 
         return {
+            attackWinsPoints: Math.round(attackWinsPoints*100)/10,
             activityPoints: activePoints,
             status: status
         }

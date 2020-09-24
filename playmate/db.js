@@ -161,8 +161,8 @@ class db {
     }
 
     static async getDetailsOfAvailableClans(baseDetails) {
-        let now = new Date();
-        now = new Date(now.setHours(now.getHours()-3))
+        /* let now = new Date();
+        now = new Date(now.setHours(now.getHours()-3)); */
         try {
             const clans = await BaseRequirements.find ({
                 $or: [{ 
@@ -172,7 +172,8 @@ class db {
                 }], 
                 nonRushPoints: { $lte: baseDetails.nonRushPoints },
                 maxPoints: { $lte: baseDetails.maxPoints },
-                activityPoints: { $lte: baseDetails.activityPoints },
+                /* activityPoints: { $lte: baseDetails.activityPoints }, */
+                attackWinsPoints: { $lte: baseDetails.attackWinsPoints},
                 trophies: { $lte: baseDetails.trophies },
                 versusTrophies: { $lte: baseDetails.versusTrophies },
                 sumOfHeroes: { 
@@ -209,7 +210,7 @@ class db {
                 searching: true,
                 searchingByAdmin: true,
                 searchingByUpdate: true,
-                lastSearchDate: {$lte: now}
+                /* lastSearchDate: {$lte: now} */
             })
             return clans;
         }

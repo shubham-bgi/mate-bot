@@ -39,7 +39,7 @@ const BaseRequirementsSchema = new mongoose.Schema({
     },
     minimumTownHallLevel: {
         type : Number,
-        default: 1
+        default: 20
     },
     nonRushPoints: {
         type : Number,
@@ -50,6 +50,10 @@ const BaseRequirementsSchema = new mongoose.Schema({
         default: -1
     },
     activityPoints:{
+        type: Number,
+        default: -1
+    },
+    attackWinsPoints: {
         type: Number,
         default: -1
     },

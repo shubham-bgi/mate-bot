@@ -1,7 +1,7 @@
 const App = require('../../playmate/app.js');
 
 module.exports = {
-    name: 'stopsearching',
+    name: 'stopsearch',
     description: 'Stop searching players for a clan.',
     execute(msg, args, embed, msgCollector) {
       console.log(args);

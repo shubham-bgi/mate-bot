@@ -37,9 +37,17 @@ function sum(arr, prop){//Add values of a single property in array of objects
         return a + b[prop];
     }, 0);
 };
-function emoji (bot, id) {
+function fetchEmoji (bot, id) {
     return bot.emojis.get(id).toString();
 }
+/* function convertPercentageToLowToMaxBar(number, ) {
+    let low1 = 'a';
+    let low2 = 'b';
+    let mid = 'c';
+    let high1 = 'd';
+    let high2 = 'e';
+    let 
+} */
 module.exports = {
     numberWithCommas: numberWithCommas,
     capitalizeFirstLetter: capitalizeFirstLetter,
@@ -47,5 +55,5 @@ module.exports = {
     fixTag: fixTag,
     removeByProperty: removeByProperty,
     sum: sum,
-    emoji: emoji
+    fetchEmoji: fetchEmoji
 }

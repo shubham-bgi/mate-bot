@@ -29,6 +29,7 @@ bot.on('message',async msg => {
  /*  msg.guild.members.forEach((member) => {
     console.log(` - ${member.user.username} ${member.nickname} ${member.id}`);
   })  */
+  
   if (msg.author.bot || msg.channel.type === 'dm' || !msg.content.startsWith(botsettings.prefix)) return;  //returns if the message is from a 1 bot or 2 is a direct message or 3  does not start with bot prefix
   const message = removePrefix(msg.content);
   console.log(message);
@@ -39,7 +40,6 @@ bot.on('message',async msg => {
     //msg.reply(`There is not such command. Please try ${botsettings.prefix}help for more info.`);
     return;
   }
-
   try {
     let embed = new Discord.RichEmbed();
     let embed2 = new Discord.RichEmbed();
@@ -59,7 +59,6 @@ bot.on('message',async msg => {
 function removePrefix(messageWithPrefix) {
   return(messageWithPrefix.substr(1)) 
 }
-
 /* function getUserNameFromID(discordID){
   console.log('here');
   bot.fetchUser(discordID)

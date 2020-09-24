@@ -4,17 +4,17 @@ module.exports = {
         {//0
             "question": "In your clan description there is mention of farm war alliance, are you guys in FWA?\nType ``yes`` or ``no``",
             "answer": ["yes","no"],
-            "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``"
+            "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
         },
         {//1
             "question": "I see your clan have only single Townhall level only, Are you guys looking for that TH level only?\nType ``yes`` or ``no``\nTownhall level: ",
             "answer": ["yes", "no"],
-            "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``"
+            "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
         },
         {//2
             "question": "What is the minimum townhall level are you guys accepting?\nType any number from Th``1`` to Th``13``.\nSuggested Townhall: Th",
             "answer": ["1","2","3","4","5","6","7","8","9","10","11","12","13"],
-            "onWrongReply": "Wrong awnser Bruh, Type a number to choose any townhall level between ``1`` to ``13``"
+            "onWrongReply": "Wrong awnser Bruh, Type a number to choose any townhall level between ``1`` to ``13``."
         },
         {//3
             "info": "On a scale of 0 to 10, 0 being totally rushed & 10 being non rushed.",
@@ -39,10 +39,10 @@ module.exports = {
             "onWrongReply": "Wrong awnser bruh, Type a number between ``0`` to ``5500``."
         },
         {//7
-            "info": "On a scale of 0 to 10, 0 being inactive & 10 being ridiculously active.",
-            "question": "how active do you want your player to be?\nEnter a value between ``0`` and ``10``.\nCurrent clan Average: ",
-            "answer": ["0","10"],
-            "onWrongReply":"Wrong awnser bruh, Type a value between ``0`` and ``10``."
+            "info": "Activeness is average number of attacks won in a clan.",
+            "question": "Do you want player to be as active as your clan average?\nType ``yes`` or ``no``.",
+            "answer": ["yes", "no"],
+            "onWrongReply":"Wrong awnser bruh, Type either ``yes`` or ``no``."
         },
         {//8
             "question": "Do you wanna filter by hero levels for each townhall level?\nType from any of these options: ``sum of heroes``, ``hero levels``or ``no``.",
@@ -181,5 +181,5 @@ module.exports = {
         }
     ],
     "autoCancel": "Due to back to back invalid awnsers, i\'ma stop this.",
-    "endText": "Thank you for answering all the questions, I will start searching players for you and ping you once I find some."
+    "endText": "Thank you for answering all the questions, I will start searching players for you. You can now also use ``-checkbase`` command anyone who fits the requirements."
 }

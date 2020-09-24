@@ -149,7 +149,7 @@ function listBasesEmbed(bases, botMsgChannel, embed, username) {
     embed.setTitle(username);
     embed.setColor('#FF00FF');
     for (let i = 0; i < bases.length; i++ ) {
-        embed.addField(`${bases[i].name}`, `TH${bases[i].townHallLevel}, ${bases[i].tag}, ${bases[i].type}`);
+        embed.addField(`${i+1}. ${bases[i].name}`, `TH${bases[i].townHallLevel}, ${bases[i].tag}, ${bases[i].type}`);
     }
     botMsgChannel.send(embed);
 }
@@ -158,7 +158,7 @@ function listClansEmbed(clans, botMsgChannel, embed, username) {
     embed.setTitle(username);
     embed.setColor('#FF00FF');
     for (let i = 0; i < clans.length; i++ ) {
-        embed.addField(`${clans[i].name}`, `Lvl${clans[i].level}, ${clans[i].tag}, ${clans[i].type}`);
+        embed.addField(`${i+1}. ${clans[i].name}`, `Lvl${clans[i].level}, ${clans[i].tag}, ${clans[i].type}`);
     }
     botMsgChannel.send(embed);
 }

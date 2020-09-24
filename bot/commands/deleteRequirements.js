@@ -1,7 +1,7 @@
 const App = require('../../playmate/app.js');
 
 module.exports = {
-    name: 'deleterequirements',
+    name: 'delreq',
     description: 'Deletes your base requirements details',
     execute(msg, args, embed, msgCollector, bot) {
       console.log(args);

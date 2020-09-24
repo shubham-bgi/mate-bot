@@ -1,14 +1,11 @@
-const App = require('./../../playmate/app.js');
+const App = require('../../playmate/app.js');
 
 module.exports = {
   name: 'clan',
-  description: 'Clan info details',
-  execute(msg, args, embed) {
+  description: 'Base info details, shows linked bases.',
+  execute(msg, args, embed, msgCollector, bot) {
     console.log(msg.content);
     console.log(args);
-    if(args.length > 0) {
-      App.getClanCommandDetails(args[0], msg.channel,embed);
-    }
-    //msg.channel.send('Get the clan details');
-  }                     
+    App.getClanCommandDetails(args[0], msg.channel, embed, msg.author, bot);
+  },
 };

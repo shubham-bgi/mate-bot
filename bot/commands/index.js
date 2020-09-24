@@ -1,7 +1,7 @@
 module.exports = {
   Ping: require('./ping'),
   Base: require('./base'),
-  Clan: require('./clan'),
+  Clan: require('./clan1'),
   AddBase: require('./addbase'),
   RemoveBase: require('./removebase'),
   AddClan: require('./addclan'),

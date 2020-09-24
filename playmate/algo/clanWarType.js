@@ -21,7 +21,7 @@ class warType {
         } else if (warWinRate > 50 && clanRushPoints > 5) {
             type = 'Casual War clan';
         } else {
-            type = 'Not a war clan';
+            type = 'Noobs in war';
         }
 
         return {
@@ -33,6 +33,7 @@ class warType {
 
     getWarWinRate(clanDetails){
         let totalWars = clanDetails.warWins + clanDetails.warLosses + clanDetails.warTies;
+        if(totalWars == 0) { return 0; }
         return Math.round(clanDetails.warWins/totalWars * 100);
     }
 
