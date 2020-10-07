@@ -5,11 +5,10 @@ function getLastMonthLastMonday() {
     do { // Roll the days backwards until Monday.
       d.setDate(d.getDate() - 1);
     } while (d.getDay() !== 1);
-    return d;
   }
 
 function calculateTimeDifference () {
-    let lastMonthMonday = new Date(2020,7,31,0,0,0,0)//months are 0-11
+    let lastMonthMonday = new Date(2020,8,28,0,0,0,0)//months are 0-11
     let d = new Date();
     let differnce = (d.getTime() - lastMonthMonday.getTime())/(1000*60*60*24);
     return differnce;
@@ -27,4 +26,4 @@ function intializeActivtyParameters() {
 
 module.exports = {
     initializeActivityParameters: intializeActivtyParameters
-}
+} 

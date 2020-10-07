@@ -4,6 +4,14 @@ function numberWithCommas(number) {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+function removeFirstLetter(string) {
+    return string.substring(1);
+}
+function attachIsImage(msgAttach) {
+    var url = msgAttach.url;
+    //True if this url is a png image.
+    return url.indexOf("png", url.length - "png".length /*or 3*/) !== -1 || url.indexOf("jpg", url.length - "jpg".length /*or 3*/) !== -1;
+}
 function checkFWA(clanDescription) {
     let x = clanDescription.search(/fwa/i);
     let x1 = clanDescription.search(/farming war alliance/i);
@@ -25,9 +33,7 @@ function removeByProperty(arr, prop, value){//remove a item if property matches 
        if( arr[i] 
            && arr[i].hasOwnProperty(prop) 
            && (arguments.length > 2 && arr[i][prop] === value ) ){ 
-
            arr.splice(i,1);
-
        }
     }
     return arr;
@@ -40,6 +46,14 @@ function sum(arr, prop){//Add values of a single property in array of objects
 function fetchEmoji (bot, id) {
     return bot.emojis.get(id).toString();
 }
+function removeElement(arrayName,arrayElement)
+ {
+    for(var i=0; i<arrayName.length;i++ )
+     { 
+        if(arrayName[i]==arrayElement)
+            arrayName.splice(i,1); 
+      } 
+  }
 /* function convertPercentageToLowToMaxBar(number, ) {
     let low1 = 'a';
     let low2 = 'b';
@@ -55,5 +69,8 @@ module.exports = {
     fixTag: fixTag,
     removeByProperty: removeByProperty,
     sum: sum,
-    fetchEmoji: fetchEmoji
+    fetchEmoji: fetchEmoji,
+    removeFirstLetter: removeFirstLetter,
+    attachIsImage: attachIsImage,
+    removeElement: removeElement
 }

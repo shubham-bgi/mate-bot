@@ -10,6 +10,16 @@ class db {
 
     //-------------------BASES COLLECTION DATABASE QUERRIES-------------------//
 
+    static async getAllBases() {
+        try {
+            const all = await Base.find();
+            return all;
+        } 
+        catch (error) {
+            console.error(error);
+        }
+    }
+
     static async getBasesByDiscordId(discordId) {
         try {
             const base = await Base.findOne({ discordID: discordId });
@@ -75,6 +85,16 @@ class db {
     
     //-------------------CLANS COLLECTION DATABASE QUERRIES-------------------//
 
+    static async getAllClans() {
+        try {
+            const all = await Clan.find();
+            return all;
+        } 
+        catch (error) {
+            console.error(error);
+        }
+    }
+    
     static async getClansByDiscordId(discordId) {
         try {
             const clan = await Clan.findOne({ discordID: discordId });
@@ -219,6 +239,23 @@ class db {
         } 
     } 
 
+    static async getUserChoiceClan(availableClanTags, userOptions) {
+        console.log(userOptions);
+        try {
+            const clan = await ClanDetails.aggregate(
+                [
+                    { $match: { clanTag: { $in: availableClanTags } } },
+                    { $project:{ clanTag: "$clanTag", discordID: "$discordID",total: { $add: userOptions}}},
+                    {$sort: {total: -1}}
+                ]
+            )
+            return clan;
+        } 
+        catch (error) {
+            console.error(error);
+        }
+    }
+
     static async setSearchingByDiscordID(discordId, setToThis){
         try{
             const docsModified = await BaseRequirements.updateOne({
@@ -323,7 +360,7 @@ class db {
 
     static async getBestClan(availableClanTags) {
         try {
-            const clan = await ClanDetails.find().where('clanTag').in(availableClanTags).sort({"points.overall": -1}).limit(2).exec();
+            const clan = await ClanDetails.find().where('clanTag').in(availableClanTags).sort({"points.overall": -1})/* .limit(2) */.exec();
             return clan;
         }
         catch (error) {
@@ -402,6 +439,8 @@ class db {
    
    
 module.exports = {
+    getAllBases: db.getAllBases,
+    getAllClans: db.getAllClans,
     getBasesByDiscordId: db.getBasesByDiscordId,
     updateBasesByDiscordId: db.updateBasesByDiscordId,
     pushNewBase: db.pushNewBase,
@@ -427,4 +466,5 @@ module.exports = {
     getClanDetailsToUpdate: db.getClanDetailsToUpdate,
     setSearchingByUpdate: db.setSearchingByUpdateByDiscordId,
     foundPlayer: db.foundPlayer,
+    getUserChoiceClan: db.getUserChoiceClan,
 }

@@ -48,7 +48,7 @@ module.exports = {
 
       embed.setColor('#ff00ff');
       embed.setTitle('Link Commands');
-      embed.setDescription(`Bookmark bases or clans with your id and get info.\n${Olf.fetchEmoji(bot, "758604706498347019")}`);
+      embed.setDescription(`Bookmark bases or clans with your id and get info on them.\n${Olf.fetchEmoji(bot, "758604706498347019")}`);
       /* embed.addField('-activity', 'Shows most to least active players in your clan'); */
       embed.addField('-addbase/-removebase/-addclan/-removeclan', 'Links and unlinks base or clan with your discord id.');
       embed.addField('-base', 'Shows main base\'s info unless you provide a base tag.');

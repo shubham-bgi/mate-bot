@@ -5,6 +5,7 @@ function clanEmbed(clanMetrics, botMsgChannel, embed) {
     if(!botMsgChannel) { return; }
     embed.setColor('#FF00FF');
     embed.setTitle(`${clanMetrics.allClanData.name} - Level ${clanMetrics.allClanData.clanLevel} - ${clanMetrics.allClanData.members}/50 (${clanMetrics.allClanData.tag})`);
+    embed.setURL(`${constants.clanInfoUrl}${Olf.removeFirstLetter(clanMetrics.allClanData.tag)}`);
     embed.setThumbnail(clanMetrics.allClanData.badgeUrls.medium);
     embed.addField('Description', clanMetrics.allClanData.description,true);
     if(clanMetrics.rushedMetrics.clanRushPoints >= 9.5) {
@@ -15,10 +16,10 @@ function clanEmbed(clanMetrics, botMsgChannel, embed) {
 
     embed.addField('In Game Labels',`1)${clanMetrics.allClanData.labels[0].name}\n2)${clanMetrics.allClanData.labels[1].name}\n3)${clanMetrics.allClanData.labels[2].name}`,true);
     if(clanMetrics.allClanData.isWarLogPublic) {
-        embed.addField('OverAll Points', `${clanMetrics.points.overall}/50⭐`,true)
+        embed.addField('Playmate Rating', `${clanMetrics.points.overall}/50⭐`,true);
     }
-    embed.addField('Avg Player Activity', `${clanMetrics.activeMetrics.activityPoints}/10⭐`,true);
-    embed.addField('Activity Feel', `${clanMetrics.activeMetrics.activityFeel}/10⭐`,true);
+    /* embed.addField('Avg Player Activity', `${clanMetrics.activeMetrics.activityPoints}/10⭐`,true); */
+    embed.addField('Activity Points', `${clanMetrics.activeMetrics.activityFeel}/10⭐`,true);
     embed.addField('Non Rush Points', `${clanMetrics.rushedMetrics.clanRushPoints}/10⭐`,true);
 
     if(clanMetrics.rushedMetrics.clanRushPoints >= 9.5) {
@@ -27,7 +28,7 @@ function clanEmbed(clanMetrics, botMsgChannel, embed) {
 
     embed.addField('Clan War League', clanMetrics.allClanData.warLeague.name,true);
     embed.addField('Predominant TH',`Townhall ${clanMetrics.townHallStatus.predominantTownHall}s`,true);
-    embed.addField('No of Siege Donors', clanMetrics.numberOfSiegeDonors,true);
+    embed.addField('No of Siege Donors', clanMetrics.siegeDonors.total,true);
 
     if(clanMetrics.allClanData.isWarLogPublic) {
     embed.addField('War Win Rate', `${clanMetrics.war.winRate}%`,true);
@@ -39,7 +40,6 @@ function clanEmbed(clanMetrics, botMsgChannel, embed) {
     embed.addField('Clan Versus Points',Olf.numberWithCommas(clanMetrics.allClanData.clanVersusPoints)+'🏆',true);
     embed.addField('Required Trophies', Olf.numberWithCommas(clanMetrics.allClanData.requiredTrophies)+'🏆',true);
     embed.addField('Status',Olf.capitalizeFirstLetter(clanMetrics.allClanData.type),true);
-    
     botMsgChannel.send(embed);
 }
 
@@ -47,6 +47,7 @@ function baseEmbed(baseMetrics, baseDetails, botMsgChannel, embed) {
     if(!botMsgChannel) { return; }
     embed.setColor('#FF00FF');
     embed.setTitle(`**${baseDetails.name}** (${baseDetails.tag})`);
+    embed.setURL(`${constants.baseInfoUrl}${Olf.removeFirstLetter(baseDetails.tag)}`)
     if(baseDetails.townHallLevel > 11) {
         let townHall = constants.urlTownHall[baseDetails.townHallLevel];
         embed.setThumbnail(townHall[baseDetails.townHallWeaponLevel]);
@@ -65,7 +66,7 @@ function baseEmbed(baseMetrics, baseDetails, botMsgChannel, embed) {
     }
 
     if (baseDetails.labels[0] && baseDetails.labels[1] && baseDetails.labels[2]) {
-    embed.addField('Labels',`1)${baseDetails.labels[0].name}\n2)${baseDetails.labels[1].name}\n3)${baseDetails.labels[2].name}`,true);
+    embed.addField('In Game Labels',`1)${baseDetails.labels[0].name}\n2)${baseDetails.labels[1].name}\n3)${baseDetails.labels[2].name}`,true);
     }
     
     embed.addField('Activity Points', baseMetrics.playerActivity.activityPoints+'/10⭐',true);
@@ -73,16 +74,20 @@ function baseEmbed(baseMetrics, baseDetails, botMsgChannel, embed) {
     if (baseMetrics.result.playerRushPoints >= 9.5) {
         embed.addField('Max Out Points', baseMetrics.result.playerMaxPoints+'/10⭐',true);
     }
-    if (baseDetails.clan) { embed.addField('Clan Info', `${baseDetails.clan.name} - *${baseDetails.clan.tag}*`,true); }
-    else { embed.addField('Clan Info', 'Not in any clan', true);}
+    if (baseDetails.clan) { embed.addField('Clan Info', `[${baseDetails.clan.name} (${baseDetails.clan.tag})](${constants.clanInfoUrl}${Olf.removeFirstLetter(baseDetails.clan.tag)})`,true); }
+    else { embed.addField('Clan Info', 'No clan', true);}
     embed.addField('Trophies', Olf.numberWithCommas(baseDetails.trophies)+'🏆',true);
-    embed.addField('League',baseDetails.league.name,true);
+    if (baseDetails.league) {
+        embed.addField('League',baseDetails.league.name,true);
+    } else {
+        embed.addField('League','Unranked',true);
+    }
+
     embed.addField('War Stars', Olf.numberWithCommas(baseDetails.warStars),true);
     embed.addField('Troops Donated',Olf.numberWithCommas(baseDetails.donations),true);
     embed.addField('Troops Recieved',Olf.numberWithCommas(baseDetails.donationsReceived), true);
     embed.addField('Lifetime Donations', Olf.numberWithCommas(baseMetrics.playerAchievements[14].value),true);
     embed.addField('War Armies', baseMetrics.result2,true);
-
     botMsgChannel.send(embed);
 }
 
@@ -105,7 +110,12 @@ function requirementsEmbed(baseRequirements, clanDetails, botMsgChannel,embed) {
     } else {
     embed.addField('Max Points', baseRequirements.maxPoints, true);
     }
-    embed.addField('Activity Points', baseRequirements.activityPoints, true);
+    /* embed.addField('Activity Points', baseRequirements.activityPoints, true); */
+    if(baseRequirements.attackWinsPoints != -1) {
+        embed.addField('Activity Check', 'yes', true);
+    } else {
+        embed.addField('Activity Check', 'no', true);
+    }
     embed.addField('Home Trophies', baseRequirements.trophies, true);
     embed.addField('Builder Base Trophies', baseRequirements.versusTrophies, true);
 
@@ -149,7 +159,7 @@ function listBasesEmbed(bases, botMsgChannel, embed, username) {
     embed.setTitle(username);
     embed.setColor('#FF00FF');
     for (let i = 0; i < bases.length; i++ ) {
-        embed.addField(`${i+1}. ${bases[i].name}`, `TH${bases[i].townHallLevel}, ${bases[i].tag}, ${bases[i].type}`);
+        embed.addField(`${i+1}. ${bases[i].name}`, `TH${bases[i].townHallLevel}, ${bases[i].tag}, ${bases[i].type}, [link](${constants.baseInfoUrl}${Olf.removeFirstLetter(bases[i].tag)})`);
     }
     botMsgChannel.send(embed);
 }
@@ -158,7 +168,7 @@ function listClansEmbed(clans, botMsgChannel, embed, username) {
     embed.setTitle(username);
     embed.setColor('#FF00FF');
     for (let i = 0; i < clans.length; i++ ) {
-        embed.addField(`${i+1}. ${clans[i].name}`, `Lvl${clans[i].level}, ${clans[i].tag}, ${clans[i].type}`);
+        embed.addField(`${i+1}. ${clans[i].name}`, `Lvl${clans[i].level}, ${clans[i].tag}, ${clans[i].type}, [link](${constants.clanInfoUrl}${Olf.removeFirstLetter(clans[i].tag)})`);
     }
     botMsgChannel.send(embed);
 }

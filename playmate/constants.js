@@ -20,7 +20,8 @@ const TOWNHALL_MAX = 13;
 const LAB_MAX = TOWNHALL_MAX - 2;
 const TOP_CLAN_TAG = '#2JGYRJVL';//mega empire
 //const TOP_CLAN_TAG = '#lvjvj2ql';//savage skulls
-
+const clanInfoUrl = 'https://link.clashofclans.com/en?action=OpenClanProfile&tag=';
+const baseInfoUrl = 'https://link.clashofclans.com/en?action=OpenPlayerProfile&tag=';
 
 const axios = require('axios');
 axios.defaults.headers.common['Authorization'] = token;
@@ -55,5 +56,16 @@ const urlTownHall = {
 }
 
 module.exports = { 
-                 cocUrl, clanByTagUrl, playerByTagUrl, warLogByTagUrl, playersByClanTagUrl, axios, TOP_CLAN_TAG, urlTownHall, playmateDiscordInvite, playmateInvite
+                 cocUrl, 
+                 clanByTagUrl, 
+                 playerByTagUrl, 
+                 warLogByTagUrl, 
+                 playersByClanTagUrl, 
+                 axios, 
+                 TOP_CLAN_TAG, 
+                 urlTownHall, 
+                 playmateDiscordInvite, 
+                 playmateInvite,
+                 clanInfoUrl,
+                 baseInfoUrl
                 };

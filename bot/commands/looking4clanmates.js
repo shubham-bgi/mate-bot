@@ -9,7 +9,7 @@ module.exports = {
         App.lookingForClanMatesCommandDetails(args[0], msg, embed, msgCollector, bot);
       }
       else {
-        msg.channel.send('Please specify the clan tag.');
+        msg.channel.send('I don\'t see any clan tags with it.');
       }
     },
 };

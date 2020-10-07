@@ -1,4 +1,4 @@
-const cwl = require('./cwl')
+const keyMap = require('./keyMap');
 module.exports = {
     "wrongAnswerCount" : 1,
     "quiz" : [
@@ -14,11 +14,11 @@ module.exports = {
             "answer": ["yes", "no"],
             "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
         },
-        {   
+        {//2
             "info": "Type numbers with comma between them, Suppose you care about clan wars and activity. Type ``2,3``.",
-            "question": "What do you care about the most in a clan?\nType the corresponding number.Any three only!\n1.Clan War League\n2.Activity\n3.Clan Wars\n4.Clan level\n5.Home base trophies\n6.Builder base trophies\n7.Non rushed clan players.\n8.Cancel",
-            "answer": ["1", "2", "3", "4", "5", "6", "7", "8"],
-            "onWrongReply": "Wrong answer bruh. Only 3 numbers accepted."
+            "question": "What do you care about most in a clan?\nType the corresponding numbers.Sepearate them with a comma (,).\n1.Clan War League\n2.Activity\n3.Clan Wars\n4.Clan level\n5.Home base trophies\n6.Builder base trophies\n7.Non rushed clan players.",
+            "answer": ["1", "2", "3", "4", "5", "6", "7"],
+            "onWrongReply": "Invalid answer bruh."
         }
         /* {//1
             "question": "Do you want to fill out your preferences for a clan?\nType either ``yes`` or ``no``.",

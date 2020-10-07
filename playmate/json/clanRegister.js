@@ -39,8 +39,8 @@ module.exports = {
             "onWrongReply": "Wrong awnser bruh, Type a number between ``0`` to ``5500``."
         },
         {//7
-            "info": "Activeness is average number of attacks won in a clan.",
-            "question": "Do you want player to be as active as your clan average?\nType ``yes`` or ``no``.",
+            "info": "",
+            "question": "Do you want players's attacks won to be equal to your clan's average?\nType ``yes`` or ``no``.",
             "answer": ["yes", "no"],
             "onWrongReply":"Wrong awnser bruh, Type either ``yes`` or ``no``."
         },
@@ -181,5 +181,5 @@ module.exports = {
         }
     ],
     "autoCancel": "Due to back to back invalid awnsers, i\'ma stop this.",
-    "endText": "Thank you for answering all the questions, I will start searching players for you. You can now also use ``-checkbase`` command anyone who fits the requirements."
+    "endText": "Thank you for answering, Will let you know if someone is interested."
 }

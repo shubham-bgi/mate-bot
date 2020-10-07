@@ -51,7 +51,7 @@ class Api {
 
     static  getAllPlayerDetails(clanData) {
         let playerRequests = [];
-        let players = clanData.items;
+        let players = clanData.memberList;
         players.map((player) => {
             playerRequests.push(Api.createPlayerRequest(encodeURIComponent(player.tag)));
         })
