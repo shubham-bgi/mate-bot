@@ -8,6 +8,7 @@ const TrophyPushForPlayer = Algo.TrophyPushForPlayer;
 const TrophyPushForClan = Algo.TrophyPushForClan;
 const TownHallStatus = Algo.ClanTownHallLevel;
 const CheckSiege = Algo.CheckSiege;
+const MaxDonationPoints = Algo.CalculateMaxDonationPoints;
 const PlayerWarTag = Algo.GetPlayerWarTag;
 const OverAllPoints = Algo.overallPoints;
 let rushedAlgo = new RushedAlgo();
@@ -513,7 +514,9 @@ function getMetricsForAllPlayersOfClan(allPlayersData, allClanData, warLog) {
     const townHallStatus = TownHallStatus(allPlayersData);
     const siegeDonors = CheckSiege(allPlayersData);
     const war = warTypeAlgo.checkClanWarType(allClanData, rushedMetrics.clanRushPoints, warLog);
-    const overallPoints = OverAllPoints(allClanData, activeMetrics.activityFeel, rushedMetrics.clanRushPoints, war.lastFifteenWinRate, war.winRate)
+    const maxDonation = MaxDonationPoints(allPlayersData, allClanData.clanLevel)
+    const overallPoints = OverAllPoints(allClanData, activeMetrics.activityFeel, rushedMetrics.clanRushPoints, war.lastFifteenWinRate, war.winRate, siegeDonors.points, maxDonation.points);
+    //console.log(overallPoints);
     return {
         points: overallPoints,
         war: war,
@@ -522,6 +525,7 @@ function getMetricsForAllPlayersOfClan(allPlayersData, allClanData, warLog) {
         pushMetrics: pushMetrics,
         townHallStatus: townHallStatus,
         siegeDonors: siegeDonors,
+        maxDonation: maxDonation,
         allClanData: allClanData
     }
 }
@@ -559,7 +563,7 @@ async function lookingForClanMatesCommandDetails(clanTag, msg, embed, msgCollect
         }
     } else {
         baseRequirements = await db.getBaseRequirementsByDiscordID(msg.author.id);
-        //if (baseRequirements) { msg.channel.send('You can only register one clan right now.'); return; }
+        if (baseRequirements && !adminConfig.discordId.includes(msg.author.id)) { msg.channel.send('You can only register one clan right now.'); return; }
         let allClanData = await Api.getClanDetails(clanTag);
         if (!allClanData) { msg.channel.send('Wrong clan tag bro.'); return; }
         if (!allClanData.isWarLogPublic) { msg.channel.send('Sorry war log is not public, after making it public wait 2 mins.'); return; }
@@ -630,7 +634,7 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     const bestClanDetails = await db.getBestClan(availableClanTags);
     msg.channel.send('Finding the best clan...');
     getClanCommandDetails(bestClanDetails[0].clanTag, msg.channel, embed);
-    setTimeout(() => { msg.reply(baseRegister.quiz[0].question) }, 7000);
+    setTimeout(() => { msg.reply(baseRegister.quiz[0].question) }, 5000);
     question.askQuestion(msg, msgCollector, baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,embed2, embed3, bestClanDetails, bot, 0, availableClanTags, embed4, embed5))
 }
 
@@ -653,7 +657,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                     msg.channel.send('**' + msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
                     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
                     embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 7000);
+                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 5000);
                     let x = await db.foundPlayer(bestClanDetails[0].discordID);
                     msgCollector.stop('finished');
                     return;
@@ -663,10 +667,10 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                         questionNumber = 1;
                         msg.channel.send(baseRegister.quiz[1].info);
                         getClanCommandDetails(bestClanDetails[1].clanTag, msg.channel, embed3);
-                        setTimeout(()=> { msg.reply(baseRegister.quiz[1].question)}, 7000);
+                        setTimeout(()=> { msg.reply(baseRegister.quiz[1].question)}, 5000);
                         return;
                     } else {
-                        msg.channel.send('Sorry, Currently we don\'t have anymore clans for you.');
+                        msg.channel.send('Currently I don\'t have anymore clans for you. Try again later.');
                         msgCollector.stop('finished');
                         return;
                     }
@@ -688,7 +692,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                     msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
                     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
                     embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 7000);
+                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 5000);
                     let y = await db.foundPlayer(bestClanDetails[0].discordID);
                     msgCollector.stop('finished');
                     return;
@@ -723,7 +727,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                     userChoiceClans = await db.getUserChoiceClan(availableClanTags, userOptions);
                     getClanCommandDetails(userChoiceClans[0].clanTag, msg.channel, embed4);
                     questionNumber = 3;
-                    setTimeout(()=> { msg.reply(baseRegister.quiz[0].question)}, 7000);;
+                    setTimeout(()=> { msg.reply(baseRegister.quiz[0].question)}, 5000);;
                     return;
                 } else if(count < baseRegister.wrongAnswerCount) {
                     count ++;
@@ -742,7 +746,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                     msg.channel.send('**' + msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
                     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
                     embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 7000);
+                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 5000);
                     x = await db.foundPlayer(userChoiceClans[0].discordID);
                     msgCollector.stop('finished');
                     return;
@@ -752,7 +756,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                         questionNumber = 4;
                         msg.channel.send(baseRegister.quiz[1].info);
                         getClanCommandDetails(userChoiceClans[1].clanTag, msg.channel, embed5);
-                        setTimeout(()=> { msg.reply(baseRegister.quiz[1].question)}, 7000);
+                        setTimeout(()=> { msg.reply(baseRegister.quiz[1].question)}, 5000);
                         return;
                     } else {
                         msg.channel.send('Sorry, Currently we don\'t have anymore clans for you.');
@@ -777,13 +781,13 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
                     msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
                     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
                     embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 7000);
+                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 5000);
                     y = await db.foundPlayer(userChoiceClans[0].discordID);
                     msgCollector.stop('finished');
                     return;
                 } else if (message.content.toLowerCase() == baseRegister.quiz[1].answer[1]) {
                     count = 0;
-                    msg.channel.send("Sorry, I don't have anymore good clans for you right now, try again later.");
+                    msg.channel.send("Sorry mate, don't have anymore good clans for you right now, please come back later.");
                     msgCollector.stop('finished');
                     return;
                 } else if(count < baseRegister.wrongAnswerCount) {
@@ -1154,7 +1158,7 @@ function clanRegisterQuestionaire(msg, clanMetrics, questionNumber) {
                 }
 
             case 11:
-                if (message.content == clanRegister.quiz[11].answer[0]) {
+                if (message.content.toLowerCase() == clanRegister.quiz[11].answer[0]) {
                     count = 0;
                     if ( registeredClanDetails.onlyTownHall ) {
                         questionNumber = 12;
@@ -1169,7 +1173,7 @@ function clanRegisterQuestionaire(msg, clanMetrics, questionNumber) {
                         msg.reply( clanRegister.quiz[12].question + registeredClanDetails.minimumTownHallLevel + "?" );
                         return;
                     }
-                } else if (message.content == clanRegister.quiz[11].answer[1]) {
+                } else if (message.content.toLowerCase() == clanRegister.quiz[11].answer[1]) {
                     msg.channel.send(clanRegister.endText);
                     msgCollector.stop('Finished');
                     registeredClanDetails.warStars = clanRegister.quiz[12].default;
@@ -1256,7 +1260,7 @@ async function stopSearchingCommandDetails(argument, msg) {
     } else {
         let numberOfDocsModified = await db.setSearchingByDiscordID(msg.author.id, false);
         if(numberOfDocsModified.n > 0) {
-            msg.channel.send('Stopped searching. Use ``startsearch`` whenever you wanna restart back.');
+            msg.channel.send('Stopped searching. Use ``startsearch`` whenever you wanna restart.');
         } else {
             msg.channel.send(`First set a clan bro. :/`);
         }
@@ -1277,10 +1281,10 @@ async function startSearchingCommandDetails(argument, msg) {
         let baseRequirements = await db.getBaseRequirementsByDiscordID(msg.author.id);
         if(!baseRequirements) { msg.channel.send('First set a clan for search bro.Use command ``-looking4clanmates``'); return; }
         if(!baseRequirements.searchingByUpdate) { msg.channel.send('Your clan stats aren\'t with us. Please make clan war log visible and after 5 mins. Use ``update`` command.')}
-        if(!baseRequirements.searchingByAdmin) { msg.channel.send('Your search have been stopped by the mods. Contact support on our server (' + constants.playmateDiscordInvite +')'); return; }
+        if(!baseRequirements.searchingByAdmin) { msg.channel.send(`Your search have been stopped by the mods. Contact support server.`); return; }
         let numberOfDocsModified = await db.setSearchingByDiscordID(msg.author.id, true);
         if(numberOfDocsModified.n > 0) {
-            msg.channel.send(`Your clan search has restarted.`);
+            msg.channel.send(`Search started.`);
         } else {
             msg.channel.send(`First set a clan for search bro.`);
         }
@@ -1366,7 +1370,7 @@ async function updateAllClanDetailsCommandDetails(msg, bot) {
         }
         if(!allClanData.isWarLogPublic) {
             const user = await bot.fetchUser(clanDetailsToBeUpdated[i].discordID);
-            user.send('I tried updating your clan details, but your war long in invisble.\nPlease make it visble, and use ``update`` command in any servers I am in to continue searching.');
+            user.send('I tried updating your clan details, but your war log is invisble.\nPlease make it visble, and use ``-update`` command in any servers I am in, so as I can continue searching.');
             let docsModified = db.setSearchingByUpdate(clanDetailsToBeUpdated[i].discordID, false);
             if(docsModified == 0) {console.log('Failed to set searching by update');}
             stopped++;
@@ -1406,7 +1410,6 @@ function getClanDetailsDocument(clanMetrics, discordId) {
         clanLevel : clanMetrics.allClanData.clanLevel,
         clanName : clanMetrics.allClanData.name,
         members : clanMetrics.allClanData.members,
-        siegeDonors : clanMetrics.siegeDonors,
         clanWarLeague : clanMetrics.allClanData.warLeague.name,
         activityPoints : clanMetrics.activeMetrics.activityPoints,
         points : clanMetrics.points,

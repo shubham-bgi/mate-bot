@@ -7,16 +7,20 @@ function clanEmbed(clanMetrics, botMsgChannel, embed) {
     embed.setTitle(`${clanMetrics.allClanData.name} - Level ${clanMetrics.allClanData.clanLevel} - ${clanMetrics.allClanData.members}/50 (${clanMetrics.allClanData.tag})`);
     embed.setURL(`${constants.clanInfoUrl}${Olf.removeFirstLetter(clanMetrics.allClanData.tag)}`);
     embed.setThumbnail(clanMetrics.allClanData.badgeUrls.medium);
-    embed.addField('Description', clanMetrics.allClanData.description,true);
+    if(clanMetrics.allClanData.description){
+        embed.setDescription(clanMetrics.allClanData.description);
+    }
     if(clanMetrics.rushedMetrics.clanRushPoints >= 9.5) {
         embed.addField('Tags', `1)${clanMetrics.pushMetrics}\n2)${clanMetrics.war.type}\n3)${clanMetrics.allClanData.location.name}\n4)${clanMetrics.townHallStatus.level}\n5)${clanMetrics.rushedMetrics.rushStatus}\n6)${clanMetrics.activeMetrics.status}\n7)${clanMetrics.rushedMetrics.maxStatus}`, true);
     } else {
         embed.addField('Tags', `1)${clanMetrics.pushMetrics}\n2)${clanMetrics.war.type}\n3)${clanMetrics.allClanData.location.name}\n4)${clanMetrics.townHallStatus.level}\n5)${clanMetrics.rushedMetrics.rushStatus}\n6)${clanMetrics.activeMetrics.status}`, true);
     }
 
+    if (clanMetrics.allClanData.labels[0] && clanMetrics.allClanData.labels[1] && clanMetrics.allClanData.labels[2])
     embed.addField('In Game Labels',`1)${clanMetrics.allClanData.labels[0].name}\n2)${clanMetrics.allClanData.labels[1].name}\n3)${clanMetrics.allClanData.labels[2].name}`,true);
+    
     if(clanMetrics.allClanData.isWarLogPublic) {
-        embed.addField('Playmate Rating', `${clanMetrics.points.overall}/50⭐`,true);
+        embed.addField('Playmate Score', `${clanMetrics.points.overall}/10⭐`,true);
     }
     /* embed.addField('Avg Player Activity', `${clanMetrics.activeMetrics.activityPoints}/10⭐`,true); */
     embed.addField('Activity Points', `${clanMetrics.activeMetrics.activityFeel}/10⭐`,true);
@@ -159,7 +163,7 @@ function listBasesEmbed(bases, botMsgChannel, embed, username) {
     embed.setTitle(username);
     embed.setColor('#FF00FF');
     for (let i = 0; i < bases.length; i++ ) {
-        embed.addField(`${i+1}. ${bases[i].name}`, `TH${bases[i].townHallLevel}, ${bases[i].tag}, ${bases[i].type}, [link](${constants.baseInfoUrl}${Olf.removeFirstLetter(bases[i].tag)})`);
+        embed.addField(`${i+1}. ${bases[i].name}`, `TH${bases[i].townHallLevel}, [${bases[i].tag}](${constants.baseInfoUrl}${Olf.removeFirstLetter(bases[i].tag)}), ${bases[i].type}`);
     }
     botMsgChannel.send(embed);
 }
@@ -168,7 +172,7 @@ function listClansEmbed(clans, botMsgChannel, embed, username) {
     embed.setTitle(username);
     embed.setColor('#FF00FF');
     for (let i = 0; i < clans.length; i++ ) {
-        embed.addField(`${i+1}. ${clans[i].name}`, `Lvl${clans[i].level}, ${clans[i].tag}, ${clans[i].type}, [link](${constants.clanInfoUrl}${Olf.removeFirstLetter(clans[i].tag)})`);
+        embed.addField(`${i+1}. ${clans[i].name}`, `Lvl${clans[i].level}, [${clans[i].tag}](${constants.clanInfoUrl}${Olf.removeFirstLetter(clans[i].tag)}), ${clans[i].type}`);
     }
     botMsgChannel.send(embed);
 }

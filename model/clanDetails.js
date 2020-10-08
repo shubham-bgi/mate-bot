@@ -21,10 +21,6 @@ let ClanDetailsSchema = new mongoose.Schema({
         type : Number,
         required : "Required"
     },
-    numberOfSiegeDonors: {
-        type : Number,
-        required : "Required"
-    },
     clanWarLeague : {
         type : String,
         required : "Required"

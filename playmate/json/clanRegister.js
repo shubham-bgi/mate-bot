@@ -40,7 +40,7 @@ module.exports = {
         },
         {//7
             "info": "",
-            "question": "Do you want players's attacks won to be equal to your clan's average?\nType ``yes`` or ``no``.",
+            "question": "Do you want player's attacks won to be greater or equal than your clan's average?\nType ``yes`` or ``no``.",
             "answer": ["yes", "no"],
             "onWrongReply":"Wrong awnser bruh, Type either ``yes`` or ``no``."
         },
@@ -181,5 +181,5 @@ module.exports = {
         }
     ],
     "autoCancel": "Due to back to back invalid awnsers, i\'ma stop this.",
-    "endText": "Thank you for answering, Will let you know if someone is interested."
+    "endText": "Thank you for answering, will let you know if someone is interested."
 }

@@ -50,10 +50,9 @@ module.exports = {
       embed.setTitle('Link Commands');
       embed.setDescription(`Bookmark bases or clans with your id and get info on them.\n${Olf.fetchEmoji(bot, "758604706498347019")}`);
       /* embed.addField('-activity', 'Shows most to least active players in your clan'); */
-      embed.addField('-addbase/-removebase/-addclan/-removeclan', 'Links and unlinks base or clan with your discord id.');
-      embed.addField('-base', 'Shows main base\'s info unless you provide a base tag.');
-      embed.addField('-listbases/-listclans', 'Lists all of your bases or clans linked with you,\n unless you specify the type.')
-      embed.addField('-clan', 'Shows main clan\'s info unless you provide a clan tag.');
+      embed.addField('-addbase/-removebase/-addclan/-removeclan <tag>', 'Links and unlinks base or clan with your discord id.');
+      embed.addField('-base/-clan <tag>', 'Shows main base\'s or clan\'s info unless you provide a base/clan tag.');
+      embed.addField('-listbases/-listclans <type>', 'Lists all of your bases or clans linked with you, unless you specify the type.');
       embed.addField('-invite', 'Get invite links.');
       
       embed2.setColor('#ff00ff');
@@ -68,5 +67,5 @@ module.exports = {
       embed2.addField('-checkbase', 'Check any base if it passes your clan requirements.');
       msg.channel.send(embed);
       msg.channel.send(embed2);
-    }
+    } 
 }

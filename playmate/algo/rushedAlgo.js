@@ -16,7 +16,7 @@ class RushedAlgo {
         let percentagePerPlayer = 100/allPlayersRushAndMaxPoints.length; //percentage each person signifies in the clan
         let clanRushPoints = 0;
         let clanMaxPoints = 0;
-        
+
         for (let i = 0;i < allPlayersRushAndMaxPoints.length;i++){ 
             clanRushPoints += percentagePerPlayer*allPlayersRushAndMaxPoints[i].playerRushPoints/100;
             clanMaxPoints += percentagePerPlayer*allPlayersRushAndMaxPoints[i].playerMaxPoints/100;

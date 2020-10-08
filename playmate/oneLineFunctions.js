@@ -46,14 +46,15 @@ function sum(arr, prop){//Add values of a single property in array of objects
 function fetchEmoji (bot, id) {
     return bot.emojis.get(id).toString();
 }
-function removeElement(arrayName,arrayElement)
- {
-    for(var i=0; i<arrayName.length;i++ )
-     { 
-        if(arrayName[i]==arrayElement)
-            arrayName.splice(i,1); 
-      } 
-  }
+function removeElement(arrayName,arrayElement) {
+    for(var i=0; i<arrayName.length;i++ ) { 
+        if(arrayName[i]==arrayElement) {
+            arrayName.splice(i,1);
+            i--;
+        }
+    }
+    return arrayName;
+}
 /* function convertPercentageToLowToMaxBar(number, ) {
     let low1 = 'a';
     let low2 = 'b';

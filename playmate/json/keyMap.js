@@ -5,11 +5,11 @@ module.exports = {
     },
     "2": {
         "discord": "Activity",
-        "mongo": "$points.activityFeel"
+        "mongo": "$points.activity"
     }, 
     "3": {
         "discord": "Clan Wars",
-        "mongo": "$points.warWin"
+        "mongo": "$points.war"
     },
     "4": {
         "discord": "Clan Level",
@@ -33,6 +33,6 @@ module.exports = {
     },
     "9": {
         "discord": "Sieges",
-        "mongo": "$points.sieges"
+        "mongo": "$points.siege"
     }
 }

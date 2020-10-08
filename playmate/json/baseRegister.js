@@ -16,8 +16,8 @@ module.exports = {
         },
         {//2
             "info": "Type numbers with comma between them, Suppose you care about clan wars and activity. Type ``2,3``.",
-            "question": "What do you care about most in a clan?\nType the corresponding numbers.Sepearate them with a comma (,).\n1.Clan War League\n2.Activity\n3.Clan Wars\n4.Clan level\n5.Home base trophies\n6.Builder base trophies\n7.Non rushed clan players.",
-            "answer": ["1", "2", "3", "4", "5", "6", "7"],
+            "question": "What do you care about the most in a clan?\nType the corresponding numbers. Sepearate them with commas, Example ``2,3,6``.\n1.Clan War League\n2.Activity\n3.Clan Wars\n4.Clan level\n5.Home village trophies\n6.Builder base trophies\n7.Non rushed clanmates\n8.Max Donations\n9.Siege Donations",
+            "answer": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
             "onWrongReply": "Invalid answer bruh."
         }
         /* {//1
