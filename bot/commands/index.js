@@ -18,7 +18,8 @@ module.exports = {
   UpdateAll: require('./updateAll'),
   showRequirements: require('./showRequirements'),
   CheckBase: require('./checkBase'),
-  Invite: require('./invite')
+  Invite: require('./invite'),
+  /* NeedFWA: require('./needFWA') */
 };
 
   /* Activity: require('./activity'), */

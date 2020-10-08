@@ -253,7 +253,7 @@ async function getClanCommandDetails(clanTag, botMsgChannel, embed, botUserDetai
     if(!clanTag) {
         let botUserClans = await db.getClansByDiscordId(botUserDetails.id);
         if(!botUserClans || botUserClans.clans.length == 0) {
-            msg.channel.send('No clans are currently linked with you. Use ``-addclan`` command.');
+            botMsgChannel.send('No clans are currently linked with you. Use ``-addclan`` command.');
             return;
         }
         else {

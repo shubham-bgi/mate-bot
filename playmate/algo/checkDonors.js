@@ -13,7 +13,7 @@ function checkSiege(allPlayersDetails){
         return countPoints;
     })
     siegePoints = Olf.removeElement(siegePoints, 0);
-    if(siegePoints.lenght > 0)
+    if(siegePoints.length > 0)
     {
         totalPoints = siegePoints.reduce((a,b) => a+b) * Math.max(...siegePoints);
     }
