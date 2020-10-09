@@ -14,7 +14,7 @@ const clanByTagUrl = '/clans/';
 const playersByClanTagUrl = '/members';
 const playerByTagUrl = '/players/';
 const warLogByTagUrl = '/warlog';
-const playmateDiscordInvite = "https://discord.gg/ybgTK7K";
+const playmateDiscordInvite = "https://discord.gg/Zh29Kjk";
 const playmateInvite = "https://discord.com/oauth2/authorize?client_id=704996785499799582&scope=bot&permissions=8";
 const TOWNHALL_MAX = 13;
 const LAB_MAX = TOWNHALL_MAX - 2;
