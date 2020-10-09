@@ -44,6 +44,10 @@ function sum(arr, prop){//Add values of a single property in array of objects
     }, 0);
 };
 function fetchEmoji (bot, id) {
+    const keymap = {
+        "gap": "758604706498347019"
+    }
+    id = keymap[id];
     return bot.emojis.get(id).toString();
 }
 function removeElement(arrayName,arrayElement) {

@@ -19,7 +19,8 @@ module.exports = {
   showRequirements: require('./showRequirements'),
   CheckBase: require('./checkBase'),
   Invite: require('./invite'),
-  /* NeedFWA: require('./needFWA') */
+  NeedFWA: require('./needFWA'),
+  TopFive: require('./topFive')
 };
 
   /* Activity: require('./activity'), */

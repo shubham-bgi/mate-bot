@@ -47,11 +47,42 @@ function clanEmbed(clanMetrics, botMsgChannel, embed) {
     botMsgChannel.send(embed);
 }
 
+function quickClanEmbed(allClanData, botMsgChannel, embed) {
+    if(!botMsgChannel) { return; }
+    embed.setColor('#FF00FF');
+    embed.setTitle(`${allClanData.name}(${allClanData.tag})`);
+    embed.setURL(`${constants.clanInfoUrl}${Olf.removeFirstLetter(allClanData.tag)}`);
+    embed.setThumbnail(allClanData.badgeUrls.medium);
+    if(allClanData.description)
+    embed.setDescription(allClanData.description);
+    if (allClanData.labels[0] && allClanData.labels[1] && allClanData.labels[2])
+    embed.addField('In Game Labels',`1)${allClanData.labels[0].name}\n2)${allClanData.labels[1].name}\n3)${allClanData.labels[2].name}`,true);
+    embed.addField('Level',  allClanData.clanLevel, true);
+    embed.addField('Members', allClanData.members, true)
+    embed.addField('Clan War League', allClanData.warLeague.name,true);
+
+    if(allClanData.isWarLogPublic) {
+        embed.addField('War Wins', allClanData.warWins,true);
+        embed.addField('War Losses', allClanData.warLosses,true);
+        embed.addField('War Ties', allClanData.warTies,true);
+    }
+    if(allClanData.warFrequency)
+    embed.addField('War Frequency', allClanData.warFrequency, true);
+    if(allClanData.location.name)
+    embed.addField('Location', allClanData.location.name, true);
+    embed.addField('War Win Streak', allClanData.warWinStreak,true);
+    embed.addField('Clan Points', Olf.numberWithCommas(allClanData.clanPoints)+'🏆',true);
+    embed.addField('Clan Versus Points',Olf.numberWithCommas(allClanData.clanVersusPoints)+'🏆',true);
+    embed.addField('Required Trophies', Olf.numberWithCommas(allClanData.requiredTrophies)+'🏆',true);
+    embed.addField('Status',Olf.capitalizeFirstLetter(allClanData.type),true);
+    botMsgChannel.send(embed);
+}
+
 function baseEmbed(baseMetrics, baseDetails, botMsgChannel, embed) {
     if(!botMsgChannel) { return; }
     embed.setColor('#FF00FF');
     embed.setTitle(`**${baseDetails.name}** (${baseDetails.tag})`);
-    embed.setURL(`${constants.baseInfoUrl}${Olf.removeFirstLetter(baseDetails.tag)}`)
+    embed.setURL(`${constants.baseInfoUrl}${Olf.removeFirstLetter(baseDetails.tag)}`);
     if(baseDetails.townHallLevel > 11) {
         let townHall = constants.urlTownHall[baseDetails.townHallLevel];
         embed.setThumbnail(townHall[baseDetails.townHallWeaponLevel]);
@@ -177,10 +208,22 @@ function listClansEmbed(clans, botMsgChannel, embed, username) {
     botMsgChannel.send(embed);
 }
 
+function topFiveEmbed(clans, msg, embed, baseDetails, baseMetrics, bot) {
+    embed.setTitle(`Top clans for ${baseDetails.name}`);
+    embed.setURL(constants.baseInfoUrl + Olf.removeFirstLetter(baseDetails.tag));
+    embed.setColor('#FF00FF');
+    for (let i = 0; i < clans.length && i < 5; i++ ) {
+        embed.addField(`${i+1}. ${clans[i].clanName}`, `Lvl${clans[i].clanLevel}, [${clans[i].clanTag}](${constants.clanInfoUrl}${Olf.removeFirstLetter(clans[i].clanTag)}), PM Score - ${clans[i].points.overall}`);
+    }
+    msg.channel.send(embed);
+}
+
 module.exports = {
     clanEmbed: clanEmbed,
     baseEmbed: baseEmbed,
+    quickClanEmbed: quickClanEmbed,
     requirementsEmbed: requirementsEmbed,
     listBasesEmbed: listBasesEmbed,
-    listClansEmbed: listClansEmbed
+    listClansEmbed: listClansEmbed,
+    topFiveEmbed: topFiveEmbed
 }
