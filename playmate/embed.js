@@ -147,9 +147,9 @@ function requirementsEmbed(baseRequirements, clanDetails, botMsgChannel,embed) {
     }
     /* embed.addField('Activity Points', baseRequirements.activityPoints, true); */
     if(baseRequirements.attackWinsPoints != -1) {
-        embed.addField('Activity Check', 'yes', true);
+        embed.addField('Attack wins Check', 'yes', true);
     } else {
-        embed.addField('Activity Check', 'no', true);
+        embed.addField('Attack wins Check', 'no', true);
     }
     embed.addField('Home Trophies', baseRequirements.trophies, true);
     embed.addField('Builder Base Trophies', baseRequirements.versusTrophies, true);

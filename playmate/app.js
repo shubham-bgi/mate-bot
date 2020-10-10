@@ -516,7 +516,7 @@ function getMetricsForAllPlayersOfClan(allPlayersData, allClanData, warLog) {
     const war = warTypeAlgo.checkClanWarType(allClanData, rushedMetrics.clanRushPoints, warLog);
     const maxDonation = MaxDonationPoints(allPlayersData, allClanData.clanLevel)
     const overallPoints = OverAllPoints(allClanData, activeMetrics.activityFeel, rushedMetrics.clanRushPoints, war.lastFifteenWinRate, war.winRate, siegeDonors.points, maxDonation.points);
-    //console.log(overallPoints);
+    console.log(overallPoints);
     return {
         points: overallPoints,
         war: war,
@@ -639,9 +639,9 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     baseTag = Olf.fixTag(baseTag);
     const baseDetails = await Api.getPlayerDetails(baseTag);
     if(!baseDetails) { msg.channel.send('Base Tag is incorrect bro.'); return; }
-    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Hol up, wait about 15 minutes before using this command again, **" + msg.author.username + '**.'); return; }
+    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Hol up, wait 6 hours before using this command again, **" + msg.author.username + '**.'); return; }
     talkedRecently.add(msg.author.id);
-    setTimeout(() => { talkedRecently.delete(msg.author.id); }, 900000)
+    setTimeout(() => { talkedRecently.delete(msg.author.id); }, 21600000);
     const baseMetrics = getMetricForBase(baseDetails);
     let heroes = baseDetails.heroes;
     let checkingBaseDetails = {};
