@@ -1,7 +1,7 @@
 const Constants = require('../constants.js');
 const Utils =  require('../utils.js');
 const player = require('../../bot/commands/base.js');
-const initializeActivityParameters = require('F:/playmate/playmate/initializeActivityParameters.js')
+const initializeActivityParameters = require('../initializeActivityParameters')
 
 const getUrl = Utils.getUrl;
 const playerByTagUrl = Constants.playerByTagUrl;

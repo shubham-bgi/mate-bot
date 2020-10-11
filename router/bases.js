@@ -1,5 +1,5 @@
 const express = require('express');
-const model = require('F:/playmate/model');
+const model = require('../model');
 const router = express.Router()
 
 router.get('/', async(req,res) => {

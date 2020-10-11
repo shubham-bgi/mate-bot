@@ -39,7 +39,7 @@ bot.on('message',async msg => {
           request.head(uri, function(err, res, body){
             console.log('content-type:', res.headers['content-type']);
             console.log('content-length:', res.headers['content-length']);
-            request(uri).pipe(fs.createWriteStream(`F:/playmate/${filename}`)).on('close', callback);
+            request(uri).pipe(fs.createWriteStream(`./playmate/${filename}`)).on('close', callback);
           });
         };
         download(a.url, a.filename, function(){
