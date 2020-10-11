@@ -50,7 +50,8 @@ function calculateMaxDonationPoints(allPlayerDetails, clanLevel) {
         'Wall Wrecker', 
         'Stone Slammer', 
         'Battle Blimp', 
-        'Siege Barracks'
+        'Siege Barracks',
+        'Super Minion'
     ]
     let donationLevelUpgrade = 0;
     if(clanLevel >= 10) 

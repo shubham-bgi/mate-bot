@@ -4,7 +4,7 @@ module.exports = {
   Clan: require('./clan1'),
   AddBase: require('./addbase'),
   RemoveBase: require('./removebase'),
-  AddClan: require('./addclan'),
+  AddClan: require('./addClan'),
   RemoveClan: require('./removeclan'),
   ListBases: require('./listBases'),
   ListClans: require('./listClans'),
@@ -23,4 +23,4 @@ module.exports = {
   TopFive: require('./topFive')
 };
 
-  /* Activity: require('./activity'), */
+  /* Activity: require('./activity'), */ 
