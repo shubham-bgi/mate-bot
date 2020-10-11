@@ -1,4 +1,3 @@
-require('dotenv').config();
 const Discord = require('discord.js');
 const { messageCollectorOn } = require('../playmate/questions');
 const botsettings = require('./botsettings.json') //contains token and prefix of the bot
