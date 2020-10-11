@@ -5,7 +5,7 @@ module.exports = {
   AddBase: require('./addbase'),
   RemoveBase: require('./removebase'),
   AddClan: require('./addClan'),
-  RemoveClan: require('./removeclan'),
+  RemoveClan: require('./removeClan'),
   ListBases: require('./listBases'),
   ListClans: require('./listClans'),
   Looking4ClanMates: require('./looking4clanmates'),
@@ -20,7 +20,8 @@ module.exports = {
   CheckBase: require('./checkBase'),
   Invite: require('./invite'),
   NeedFWA: require('./needFWA'),
-  TopFive: require('./topFive')
+  TopFive: require('./topFive'),
+  TopFiveFWA: require('./topfivefwa')
 };
 
   /* Activity: require('./activity'), */ 
