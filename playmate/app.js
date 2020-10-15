@@ -640,8 +640,6 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     const baseDetails = await Api.getPlayerDetails(baseTag);
     if(!baseDetails) { msg.channel.send('Base Tag is incorrect bro.'); return; }
     if (talkedRecently.has(msg.author.id)) { msg.channel.send("Hol up, wait 6 hours before using this command again, **" + msg.author.username + '**.'); return; }
-    talkedRecently.add(msg.author.id);
-    setTimeout(() => { talkedRecently.delete(msg.author.id); }, 21600000);
     const baseMetrics = getMetricForBase(baseDetails);
     let heroes = baseDetails.heroes;
     let checkingBaseDetails = {};
@@ -672,10 +670,10 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     msg.channel.send('Finding the best clan...');
     getQuickClanDetails(bestClanDetails[0].clanTag, msg.channel, embed);
     setTimeout(() => { msg.reply(baseRegister.quiz[0].question) }, 1000);
-    question.askQuestion(msg, msgCollector, baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,embed2, embed3, bestClanDetails, bot, 0, availableClanTags, embed4, embed5))
+    question.askQuestion(msg, msgCollector, baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,embed2, embed3, bestClanDetails, bot, 0, availableClanTags, embed4, embed5, talkedRecently))
 }
 
-function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans, embed2, embed3, bestClanDetails, bot, questionNumber, availableClanTags, embed4, embed5) {
+function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans, embed2, embed3, bestClanDetails, bot, questionNumber, availableClanTags, embed4, embed5, talkedRecently) {
 
     let count = 0;
     let userChoiceClans;
@@ -690,17 +688,11 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
             
             case 0:
                 if (message.content.toLowerCase() == baseRegister.quiz[0].answer[0]) {
-                    const user = await bot.fetchUser(bestClanDetails[0].discordID);
-                    msg.channel.send('**' + msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
-                    user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
-                    embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 1000);
-                    let x = await db.foundPlayer(bestClanDetails[0].discordID);
-                    msgCollector.stop('finished');
+                    onMatch(bestClanDetails[0].discordID, msg, msgCollector, bot, talkedRecently, baseMetrics, baseDetails, embed2);
                     return;
                 } else if (message.content.toLowerCase() == baseRegister.quiz[0].answer[1]) {
-                    count = 0;
                     if (bestClanDetails[1]) {
+                        count = 0;
                         questionNumber = 1;
                         msg.channel.send(baseRegister.quiz[1].info);
                         getQuickClanDetails(bestClanDetails[1].clanTag, msg.channel, embed3);
@@ -724,14 +716,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
 
             case 1:
                 if (message.content.toLowerCase() == baseRegister.quiz[1].answer[0]) {
-                    count = 0;
-                    const user = await bot.fetchUser(bestClanDetails[1].discordID);
-                    msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
-                    user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
-                    embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 1000);
-                    let y = await db.foundPlayer(bestClanDetails[0].discordID);
-                    msgCollector.stop('finished');
+                    onMatch(bestClanDetails[1].discordID, msg, msgCollector, bot, talkedRecently,  baseMetrics, baseDetails, embed2);
                     return;
                 } else if (message.content.toLowerCase() == baseRegister.quiz[1].answer[1]) {
                     count = 0;
@@ -779,17 +764,11 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
 
             case 3:
                 if (message.content.toLowerCase() == baseRegister.quiz[0].answer[0]) {
-                    user = await bot.fetchUser(userChoiceClans[0].discordID);
-                    msg.channel.send('**' + msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
-                    user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
-                    embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 1000);
-                    x = await db.foundPlayer(userChoiceClans[0].discordID);
-                    msgCollector.stop('finished');
+                    onMatch(userChoiceClans[0].discordID, msg, msgCollector, bot, talkedRecently, baseMetrics, baseDetails, embed2);
                     return;
                 } else if (message.content.toLowerCase() == baseRegister.quiz[0].answer[1]) {
-                    count = 0;
                     if (userChoiceClans[1]) {
+                        count = 0;
                         questionNumber = 4;
                         msg.channel.send(baseRegister.quiz[1].info);
                         getQuickClanDetails(userChoiceClans[1].clanTag, msg.channel, embed5);
@@ -813,17 +792,9 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
 
             case 4: 
                 if (message.content.toLowerCase() == baseRegister.quiz[1].answer[0]) {
-                    count = 0;
-                    user = await bot.fetchUser(userChoiceClans[1].discordID);
-                    msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
-                    user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
-                    embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed2);
-                    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 1000);
-                    y = await db.foundPlayer(userChoiceClans[0].discordID);
-                    msgCollector.stop('finished');
+                    onMatch(userChoiceClans[1].discordID, msg, msgCollector, bot, talkedRecently, baseMetrics, baseDetails, embed2);
                     return;
                 } else if (message.content.toLowerCase() == baseRegister.quiz[1].answer[1]) {
-                    count = 0;
                     msg.channel.send("Sorry mate, don't have anymore good clans for you right now, please come back later.");
                     msgCollector.stop('finished');
                     return;
@@ -841,6 +812,17 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
     }
 }
 
+async function onMatch(discordId, msg, msgCollector, bot, talkedRecently, baseMetrics, baseDetails, embed) {
+    const user = await bot.fetchUser(discordId);
+    talkedRecently.add(msg.author.id);
+    setTimeout(() => { talkedRecently.delete(msg.author.id); }, 21600000);
+    msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
+    user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
+    embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed);
+    setTimeout(()=>{ user.send('If you wish to stop these pings, you can use the command ``stopsearch`` in any server I am in.') }, 1000);
+    let y = await db.foundPlayer(discordId);
+    msgCollector.stop('finished');
+}
 function clanRegisterQuestionaire(msg, clanMetrics, questionNumber) {
 
     let count = 0;
