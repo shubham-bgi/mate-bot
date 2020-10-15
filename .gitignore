@@ -1,4 +1,5 @@
 node_modules
 aws
-bot
+bot/botsettings.json
 data
+dump

@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"Coc.clandetails"}],"uuid":"2e1380b33ec841c3900b304f6eae222d"}
