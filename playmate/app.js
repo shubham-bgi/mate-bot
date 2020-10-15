@@ -566,7 +566,7 @@ async function lookingForClanMatesCommandDetails(clanTag, msg, embed, msgCollect
         if (baseRequirements && !adminConfig.discordId.includes(msg.author.id)) { msg.channel.send('You can only register one clan right now.'); return; }
         let allClanData = await Api.getClanDetails(clanTag);
         if (!allClanData) { msg.channel.send('Wrong clan tag bro.'); return; }
-        if (!allClanData.isWarLogPublic) { msg.channel.send('Sorry war log is not public, after making it public wait 2 mins.'); return; }
+        if (!allClanData.isWarLogPublic) { msg.channel.send('Sorry war log is not public, after making it public try again.'); return; }
         msg.channel.send('Getting clan info...');
         let warLog = await Api.getWarLog(clanTag);
         let allPlayersData = await Api.getAllPlayerDetails(allClanData);

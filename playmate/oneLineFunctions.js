@@ -12,6 +12,12 @@ function attachIsImage(msgAttach) {
     //True if this url is a png image.
     return url.indexOf("png", url.length - "png".length /*or 3*/) !== -1 || url.indexOf("jpg", url.length - "jpg".length /*or 3*/) !== -1;
 }
+function generateRandomNumber(fromNumber, toNumber) {
+    if(typeof fromNumber === "undefined") {
+    return Math.floor(1000 + Math.random() * 9000);
+    }
+    return Math.floor(fromNumber + Math.random() * (toNumber-fromNumber));
+}
 function checkFWA(clanDescription) {
     let x = clanDescription.search(/fwa/i);
     let x1 = clanDescription.search(/farming war alliance/i);
