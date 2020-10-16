@@ -233,7 +233,7 @@ function listClanQuestion(msg, showClans, embed) {
             return;
         }
         else if(message.content >= 1 && message.content <= showClans.length + 1 && Number.isInteger(Number(message.content))) {
-            getClanCommandDetails(showClans[message.content-1].tag, msg.channel, embed, msg.channel);
+            getClanCommandDetails(showClans[message.content-1].tag, msg.channel, embed);
             msgCollector.stop('Finished');
             return;
         } else if (count < 1) {
@@ -516,7 +516,7 @@ function getMetricsForAllPlayersOfClan(allPlayersData, allClanData, warLog) {
     const war = warTypeAlgo.checkClanWarType(allClanData, rushedMetrics.clanRushPoints, warLog);
     const maxDonation = MaxDonationPoints(allPlayersData, allClanData.clanLevel)
     const overallPoints = OverAllPoints(allClanData, activeMetrics.activityFeel, rushedMetrics.clanRushPoints, war.lastFifteenWinRate, war.winRate, siegeDonors.points, maxDonation.points);
-    console.log(overallPoints);
+    //console.log(overallPoints);
     return {
         points: overallPoints,
         war: war,
@@ -639,7 +639,7 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     baseTag = Olf.fixTag(baseTag);
     const baseDetails = await Api.getPlayerDetails(baseTag);
     if(!baseDetails) { msg.channel.send('Base Tag is incorrect bro.'); return; }
-    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Hol up, wait 12 hours before using this command again, **" + msg.author.username + '**.'); return; }
+    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Hol up, wait 24 hours before using this command again, **" + msg.author.username + '**.'); return; }
     const baseMetrics = getMetricForBase(baseDetails);
     let heroes = baseDetails.heroes;
     let checkingBaseDetails = {};
@@ -815,7 +815,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
 async function onMatch(discordId, msg, msgCollector, bot, talkedRecently, baseMetrics, baseDetails, embed) {
     const user = await bot.fetchUser(discordId);
     talkedRecently.add(msg.author.id);
-    setTimeout(() => { talkedRecently.delete(msg.author.id); }, 43200000);
+    setTimeout(() => { talkedRecently.delete(msg.author.id); }, 86400000);
     msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
     embedFunctions.baseEmbed(baseMetrics, baseDetails, user, embed);

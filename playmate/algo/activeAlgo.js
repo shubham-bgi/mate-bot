@@ -59,7 +59,7 @@ class ActiveAlgo {
         this.clanAttackWins = 0;
         this.playersCount = playerDetails.length;
         playerDetails.forEach( playerDetail => {
-            playerDetail = playerDetail.data || playerDetail;
+            playerDetail = playerDetail.data;
             this.clanDonations += playerDetail.donations + playerDetail.donationsReceived;
             this.clanAttackWins += playerDetail.attackWins;
         });
