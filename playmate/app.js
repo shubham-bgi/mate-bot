@@ -639,7 +639,7 @@ async function iNeedAClanCommandDetails(baseTag, msg, embed, msgCollector, bot, 
     baseTag = Olf.fixTag(baseTag);
     const baseDetails = await Api.getPlayerDetails(baseTag);
     if(!baseDetails) { msg.channel.send('Base Tag is incorrect bro.'); return; }
-    if (talkedRecently.has(msg.author.id)) { msg.channel.send("Hol up, wait 24 hours before using this command again, **" + msg.author.username + '**.'); return; }
+    if (talkedRecently.has(baseTag)) { msg.channel.send("Hol up, wait 24 hours before seaching with this base tag again, **" + msg.author.username + '**.'); return; }
     const baseMetrics = getMetricForBase(baseDetails);
     let heroes = baseDetails.heroes;
     let checkingBaseDetails = {};
@@ -814,7 +814,7 @@ function baseRegisterQuestionaire(msg, baseMetrics, baseDetails, availableClans,
 
 async function onMatch(discordId, msg, msgCollector, bot, talkedRecently, baseMetrics, baseDetails, embed) {
     const user = await bot.fetchUser(discordId);
-    talkedRecently.add(msg.author.id);
+    talkedRecently.add(baseDetails.tag);
     setTimeout(() => { talkedRecently.delete(msg.author.id); }, 86400000);
     msg.channel.send('**'+msg.author.username + '**, I have contacted the clan recruiter, discord name is ' + user.username + '#' + user.discriminator + '.');
     user.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
