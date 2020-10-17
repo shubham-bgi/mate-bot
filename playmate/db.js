@@ -401,7 +401,7 @@ class db {
 
     static async getClanDetailsToUpdate(now) {
         try {
-            const clanDetailsToBeUpdated = await ClanDetails.find({date: {$lte: now}, searchingByUpdate: true, searching: true, searchingByAdmin: true})
+            const clanDetailsToBeUpdated = await ClanDetails.find({createdDate: {$lte: now}, searchingByUpdate: true, searching: true, searchingByAdmin: true})
             return clanDetailsToBeUpdated;
         } catch (error){
             console.error(error);
