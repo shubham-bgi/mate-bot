@@ -1418,7 +1418,6 @@ async function updateAllClanDetailsCommandDetails(msg, bot) {
             }
   
     } */
-
 }
 
 function getClanDetailsDocument(clanMetrics, discordId) {
@@ -1534,6 +1533,9 @@ async function checkBaseCommandDetails(baseTag, msg, embed) {
     if(flag == 1) { msg.channel.send('🔥 Base Checks Out')}
 }
 
+/* function forwardCommandDetails(baseTag, msg, embed, msgCollector, bot, embed2, embed3, talkedRecently, embed4, embed5, needFWA) {
+    
+} */
 module.exports = {
     getBaseCommandDetails: getBaseCommandDetails,
     getClanCommandDetails: getClanCommandDetails,

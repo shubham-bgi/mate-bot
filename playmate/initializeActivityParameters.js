@@ -8,7 +8,7 @@ function getLastMonthLastMonday() {
   }
 
 function calculateTimeDifference () {
-    let lastMonthMonday = new Date(2020,8,28,0,0,0,0)//months are 0-11
+    let lastMonthMonday = new Date(2020,9,26,0,0,0,0)//months are 0-11
     let d = new Date();
     let differnce = (d.getTime() - lastMonthMonday.getTime())/(1000*60*60*24);
     return differnce;
