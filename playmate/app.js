@@ -55,8 +55,11 @@ const clan = require('../bot/commands/clan');
 
 //-------Runs To Initialize activity parametrs--------//
 (function init() {
+    "use strict";
     activeAlgo.initializeTopClanActiveParameters();
-})();
+    console.log('Updated activity parameters...');
+    setTimeout(init, 900000)
+}());
 
 
 

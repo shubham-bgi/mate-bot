@@ -19,11 +19,11 @@ bot.on('ready', () => {
   bot.user.setActivity("-help")// set bots activity as this
   bot.guilds.forEach((guild) => {
     console.log('--'+guild.name+'--')//logs the name of the server bot is in
-    guild.fetchInvites().then(invites => {
+    /* guild.fetchInvites().then(invites => {
       for (invite of invites) { 
         console.log(' -'+invite);
       }
-    })
+    }) */
     /* guild.channels.forEach((channel) => {
       console.log(` - ${channel.name} ${channel.type} ${channel.id}`)//logs all the channel name in the server
     }) */
