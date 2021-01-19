@@ -289,6 +289,7 @@ class SetRequirements {
                 case 8://do you wanna set hero levels for each town hall?
                     if (clanRegister.quiz[8].positiveAnswer1.includes(message.content.toLowerCase()) ) { 
                         count = 0;
+                        registeredClanDetails.baseRequirements.sumOfHeroes = [];
                         if ( registeredClanDetails.baseRequirements.onlyTownHall ) {
                             townhallCount = registeredClanDetails.baseRequirements.onlyTownHall;
                             questionNumber = 9;
@@ -307,6 +308,7 @@ class SetRequirements {
                         }
                     } else if (clanRegister.quiz[8].positiveAnswer2.includes(message.content.toLowerCase()) ) {
                         count = 0;
+                        registeredClanDetails.baseRequirements.heroLevels = [];
                         if ( registeredClanDetails.baseRequirements.onlyTownHall ) {
                             townhallCount = registeredClanDetails.baseRequirements.onlyTownHall;
                             questionNumber = 10;
@@ -416,6 +418,7 @@ class SetRequirements {
                 case 11://do you wanna set war stars for each town hall?
                     if (clanRegister.quiz[11].positiveAnswer(message.content)) {
                         count = 0;
+                        registeredClanDetails.baseRequirements.warStars = [];
                         if ( registeredClanDetails.baseRequirements.onlyTownHall ) {
                             questionNumber = 12;
                             townhallCount = registeredClanDetails.baseRequirements.onlyTownHall;

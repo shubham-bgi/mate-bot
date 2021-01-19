@@ -147,66 +147,66 @@ function baseEmbed(baseMetrics, baseDetails, embed, bot) {
     return embed;
 }
 
-function requirementsEmbed(baseRequirements, clanDetails, embed) {
+function requirementsEmbed(regClanDetails, embed) {
 
     let heroLevelsString = '';
     let sumOfHeroesString = '';
     let warStarsString = '';
     embed.setColor('#2f3136');
-    embed.setTitle(`Requirements of ${clanDetails.clanName} (${clanDetails.clanTag})`);
-    if(baseRequirements.onlyTownHall == 0)
+    embed.setTitle(`${regClanDetails.clanDetails.name} Requirements`);
+    if(regClanDetails.baseRequirements.onlyTownHall == 0)
     {
-        embed.addField('Minimum Townhall', baseRequirements.minimumTownHallLevel, true);
+        embed.addField('Minimum Townhall', regClanDetails.baseRequirements.townHallLevel);
     }
     else {
-        embed.addField('Only Townhall', baseRequirements.onlyTownHall, true);
+        embed.addField('Only Townhall', regClanDetails.baseRequirements.onlyTownHall);
     }
-    if(baseRequirements.nonRushPoints != -1) {
-        embed.addField('Non Rush Points', baseRequirements.nonRushPoints, true);
+    if(regClanDetails.baseRequirements.nonRushPoints != -1) {
+        embed.addField('Non Rush Points', regClanDetails.baseRequirements.nonRushPoints);
     } else {
-    embed.addField('Max Points', baseRequirements.maxPoints, true);
+    embed.addField('Max Points', regClanDetails.baseRequirements.maxPoints);
     }
-    if(baseRequirements.attackWinsPoints != -1) {
-        embed.addField('Attack wins Check', 'yes', true);
+    if(regClanDetails.baseRequirements.attackWinsPoints != -1) {
+        embed.addField('Attack wins Check', 'yes');
     } else {
-        embed.addField('Attack wins Check', 'no', true);
+        embed.addField('Attack wins Check', 'no');
     }
-    embed.addField('Home Trophies', baseRequirements.trophies, true);
-    embed.addField('Builder Base Trophies', baseRequirements.versusTrophies, true);
+    embed.addField('Home Trophies', regClanDetails.baseRequirements.trophies);
+    embed.addField('Builder Base Trophies', regClanDetails.baseRequirements.versusTrophies);
 
-    if(baseRequirements.heroLevels[0].heroLevels[0] != -1) {
-        if(baseRequirements.onlyTownHall == 0) {
+    if(regClanDetails.baseRequirements.heroLevels[0].heroLevels[0] != -1) {
+        if(regClanDetails.baseRequirements.onlyTownHall == 0) {
             
-            for(let i = 0; i < baseRequirements.heroLevels.length ; i++)
-                heroLevelsString = heroLevelsString.concat(String(baseRequirements.heroLevels[i].townHallLevel + '-' + baseRequirements.heroLevels[i].heroLevels.join('/') + '\n'));
+            for(let i = 0; i < regClanDetails.baseRequirements.heroLevels.length ; i++)
+                heroLevelsString = heroLevelsString.concat(String('TH' + regClanDetails.baseRequirements.heroLevels[i].townHallLevel + ' - ' + regClanDetails.baseRequirements.heroLevels[i].heroLevels.join('/') + '\n'));
         } else {
-            heroLevelsString = String(baseRequirements.heroLevels[0].townHallLevel + '-' + baseRequirements.heroLevels[0].heroLevels.join('/'))
+            heroLevelsString = String('TH' + regClanDetails.baseRequirements.heroLevels[0].townHallLevel + ' - ' + regClanDetails.baseRequirements.heroLevels[0].heroLevels.join('/'))
         }
     }
     
-    if(baseRequirements.sumOfHeroes[0].sumOfHeroes != -1) {
-        if(baseRequirements.onlyTownHall == 0) {
+    if(regClanDetails.baseRequirements.sumOfHeroes[0].sumOfHeroes != -1) {
+        if(regClanDetails.baseRequirements.onlyTownHall == 0) {
             
-            for(let i = 0; i < baseRequirements.sumOfHeroes.length ; i++)
-                sumOfHeroesString = sumOfHeroesString.concat(String(baseRequirements.sumOfHeroes[i].townHallLevel + '-' + baseRequirements.sumOfHeroes[i].sumOfHeroes + '\n'));
+            for(let i = 0; i < regClanDetails.baseRequirements.sumOfHeroes.length ; i++)
+                sumOfHeroesString = sumOfHeroesString.concat('TH' + String(regClanDetails.baseRequirements.sumOfHeroes[i].townHallLevel + ' - ' + regClanDetails.baseRequirements.sumOfHeroes[i].sumOfHeroes + '\n'));
         } else {
-            sumOfHeroesString = String(baseRequirements.sumOfHeroes[0].townHallLevel + '-' + baseRequirements.sumOfHeroes[0].sumOfHeroes + '\n')
+            sumOfHeroesString = String('TH' + regClanDetails.baseRequirements.sumOfHeroes[0].townHallLevel + ' - ' + regClanDetails.baseRequirements.sumOfHeroes[0].sumOfHeroes + '\n')
         }
     }
 
-    if(baseRequirements.warStars[0].warStars != -1) {
-        if(baseRequirements.onlyTownHall == 0) {
-            for(let i = 0; i < baseRequirements.warStars.length ; i++)
-                warStarsString = warStarsString.concat(String(baseRequirements.warStars[i].townHallLevel + '-' + baseRequirements.warStars[i].warStars + '\n'));
+    if(regClanDetails.baseRequirements.warStars[0].warStars != -1) {
+        if(regClanDetails.baseRequirements.onlyTownHall == 0) {
+            for(let i = 0; i < regClanDetails.baseRequirements.warStars.length ; i++)
+                warStarsString = warStarsString.concat(String('TH' + regClanDetails.baseRequirements.warStars[i].townHallLevel + ' - ' + regClanDetails.baseRequirements.warStars[i].warStars + '\n'));
         } else {
-            warStarsString = String(baseRequirements.warStars[0].townHallLevel + '-' + baseRequirements.warStars[0].warStars + '\n')
+            warStarsString = String('TH' + regClanDetails.baseRequirements.warStars[0].townHallLevel + ' - ' + regClanDetails.baseRequirements.warStars[0].warStars + '\n')
         }
     }
 
-    if(heroLevelsString != '') { embed.addField('Hero Levels', heroLevelsString, true); }
-    if(sumOfHeroesString != '') { embed.addField('Sum of heroes', sumOfHeroesString, true);}
-    if(warStarsString != '') { embed.addField('War Stars', warStarsString, true); }
-    embed.addField('Total Players Found', baseRequirements.totalPlayersFound, true);
+    if(heroLevelsString != '') { embed.addField('Hero Levels', heroLevelsString); }
+    if(sumOfHeroesString != '') { embed.addField('Sum of heroes', sumOfHeroesString);}
+    if(warStarsString != '') { embed.addField('War Stars', warStarsString); }
+    embed.addField('Total Players Found', regClanDetails.totalPlayersFound);
     return embed;
 }
 

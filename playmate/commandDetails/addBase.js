@@ -11,17 +11,24 @@ class AddBase {
         const botMsgChannel = msg.channel;
         const botUserDetails = msg.author;
         const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 30000 });
+        let flag = false;
         baseTag = fixTag(baseTag);
         const baseDetails = await Api.getPlayerDetails(baseTag);
-        if (!baseDetails) { botMsgChannel.send('Base tag is incorrect bro.'); return; }
+        if (!baseDetails) { 
+            botMsgChannel.send('Base tag is incorrect bro.'); 
+            return; 
+        }
         let bases = await baseCollection.getBasesByDiscordId(botUserDetails.id);
         if(bases) {
             bases.bases.map( base => {
                 if(base.tag == baseTag) {
                     botMsgChannel.send(`${baseDetails.name} is already linked.`);
-                    return;
+                    flag = true;
                 }
             })
+        }
+        if(flag) {
+            return;
         }
         msg.reply('Do you wanna give it a type? '+ baseTypeStr +'? \n Type your choice.');
         askQuestion(msg, msgCollector, this.addBaseCallback(baseDetails, baseTag, msg, botMsgChannel, botUserDetails));

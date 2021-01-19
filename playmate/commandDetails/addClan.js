@@ -9,7 +9,7 @@ class AddClan {
 
     async pushAddClanCommandDetails(clanTag, msg) {
         const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 20000 });
-        let flag = 0;
+        let flag = false;
         clanTag = fixTag(clanTag);
         const clanDetails = await Api.getClanDetails(clanTag);
         if (!clanDetails) { msg.channel.send('Clan tag is incorrect bro.'); return; }
@@ -18,11 +18,11 @@ class AddClan {
             clans.clans.map( clan => {
                 if(clan.tag == clanTag) {
                     msg.channel.send(`${clanDetails.name} is already linked.`);
-                    flag = 1;
+                    flag = true;
                 }
             })
         }
-        if(flag == 1) {
+        if(flag) {
             return;
         }
         msg.reply('Do you wanna give it a type? ' + clanTypeStr +'? \n Type your choice.');
