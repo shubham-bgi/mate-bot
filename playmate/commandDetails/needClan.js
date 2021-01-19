@@ -46,9 +46,11 @@ class NeedClan{
         this.availableClanTags = this.topClans.map(clan => clan.clanDetails.tag);
         msg.channel.send('**TOP CLANS FOR ' + this.baseDetails.name.toUpperCase() + '**')
         msg.channel.send(this.generateEmbed(0)).then( message =>{
-            if(this.topClans.length > 1) message.react('▶️');
+            if(this.topClans.length > 1) {
+                message.react('▶️'); 
+                message.react('🛠️');
+            }
             if(!recentUser.has(this.baseDetails.tag)) message.react('🆗');
-            message.react('🛠️');
             const reactCollector = message.createReactionCollector(
                 (reaction, user) => ['◀️', '▶️', '🆗', '🛠️'].includes(reaction.emoji.name) && user.id === msg.author.id, 
                 { time: 600000 }
