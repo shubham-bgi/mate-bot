@@ -232,20 +232,21 @@ function settingsEmbed(embed) {
     embed.setTitle('What do you want in Clan?');
     embed.setColor('#2f3136');
     embed.setDescription(`
-    First react with what you want.
+    First react with, what 
+    you care about in a clan 
     & then react with ☑️
 
-    0️⃣ - High No. of Memebers
-    1️⃣ - High Clan War League
-    2️⃣ - Good in Clan Wars
-    3️⃣ - High Level Clan
-    4️⃣ - High Home Village Trophies
-    5️⃣ - High Builder Base Trophies
+    0️⃣ - Number of members
+    1️⃣ - Clan War League
+    2️⃣ - Clan Wars
+    3️⃣ - Clan Level
+    4️⃣ - Home Village Trophies
+    5️⃣ - Builder Base Trophies
     6️⃣ - High Avg Attack Wins
     7️⃣ - Non Rushed Clan Mates
     8️⃣ - Max Donations
     9️⃣ - Siege Donations
-    🔟 - High No. of Donation
+    🔟 - Donation Ration
     `)
     embed.setFooter(`Once reacted, it can't be undone.`)
     return embed;
