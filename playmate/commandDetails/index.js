@@ -13,6 +13,5 @@ module.exports = {
     Update: require('./update').Update,
     UpdateAll: require('./updateAll').UpdateAll,
     invite: require('./invite').inviteCommandDetails,
-    checkBaseCommandDetails: require('./checkBase').checkBaseCommandDetails,
-    topFiveCommandDetails: require('../../miscCode/topFiveCommandDetails').topFiveCommandDetails
+    checkBaseCommandDetails: require('./checkBase').checkBaseCommandDetails
 }
