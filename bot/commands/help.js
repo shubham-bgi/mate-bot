@@ -11,7 +11,7 @@ module.exports = {
        embed.addField('🔗 Link','``-help link``');
        embed.addField('🏹 Recruiting','``-help recruit``');
        embed.addField('👩🏼‍🤝‍🧑🏿 Searching', '``-help search``');
-        msg.channel.send(embed1);
+        msg.channel.send(embed);
       }
       else if(args[0].toLowerCase() == 'link') {
        embed.setColor('#ff00ff');
@@ -21,7 +21,7 @@ module.exports = {
        embed.addField('-addclan/-removeclan [ADMIN ONLY]', 'Links/unlinks clan with server.');
        embed.addField('-base/-clan', 'Shows all linked clan or base.');
        embed.addField('-invite', 'Get invite links.');
-        msg.channel.send(embed1);
+        msg.channel.send(embed);
       }
       else if(args[0].toLowerCase() == 'recruit') {
        embed.setColor('#ff00ff');
@@ -33,14 +33,14 @@ module.exports = {
        embed.addField('-delreq [ADMIN ONLY]', 'Delete your clan requirements.');
        embed.addField('-update', 'Updates your clan details with us.');
         //embed1.addField('-checkbase', 'Check any base if it passes your clan requirements.');
-        msg.channel.send(embed1);
+        msg.channel.send(embed);
       }
       else if(args[0] == 'search') {
        embed.setColor('#ff00ff');
        embed.setTitle('👩🏼‍🤝‍🧑🏿 Searching clan Commands');
        embed.setDescription(`Find best clans from all over discord.`);
        embed.addField('-needclan', 'Find best clan for you in one command.');
-        msg.channel.send(embed1);
+        msg.channel.send(embed);
       }
     } 
 }
