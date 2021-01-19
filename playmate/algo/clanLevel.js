@@ -1,6 +1,6 @@
 let playerTownHallLevels;
 let townHallCount;
-let level;
+let type;
 let predominantTownHallLevel;
 
 function countNumberOfEachTownHall(){
@@ -16,25 +16,25 @@ function countNumberOfEachTownHall(){
     }
 }
 
-function getAllPlayerTownHallLevelArray(allPlayerDetails) {
+function getAllPlayerTownHallLevelArray(memberDetails) {
     playerTownHallLevels = [];
-    allPlayerDetails.map(playerDetails => {
+    memberDetails.map(playerDetails => {
         playerDetails = playerDetails.data;
         playerTownHallLevels.push(playerDetails.townHallLevel);
     })
 }
 
-function getTownHallStatus(allPlayerDetails) {
+function getTownHallStatus(memberDetails) {
     let high = 0;
     let mid = 0;
     let low = 0;
     let flag = 0;
 
-    getAllPlayerTownHallLevelArray(allPlayerDetails);
+    getAllPlayerTownHallLevelArray(memberDetails);
     countNumberOfEachTownHall();
     for (townHall=1;townHall<=13;townHall++){
         if(townHallCount[townHall] == playerTownHallLevels.length){
-            level = 'Only Town hall ' + townHall+'s';
+            type = 'Only ' + townHall+'s';
             predominantTownHallLevel = townHall;
             flag = 1;
         }
@@ -56,18 +56,7 @@ function getTownHallStatus(allPlayerDetails) {
                 low += townHallCount[townHall];
         }
 
-        if(high>0 && mid==0 && low==0)
-            level = 'High level THs';
-        if(high==0 && mid>0 && low==0)
-            level = 'Mid level THs';
-        if(high==0 && mid==0 && low>0)
-            level = 'Low level THs';
-        if(high>0 && mid>0 && low==0)
-            level = 'Mid to high level THs';
-        if(high==0 && mid>0 && low>0)
-            level = 'Low to mid level THs';
-        if(high>0 && low>0)
-            level = 'All level THs';
+        
 
         let townHalls = Object.keys(townHallCount);
         predominantTownHallLevel = townHalls[0];
@@ -76,10 +65,25 @@ function getTownHallStatus(allPlayerDetails) {
                 predominantTownHallLevel = townHalls[x];
             }
         }
+
+        if(high>0 && mid==0 && low==0)
+            type = 'High Level';
+        if(high==0 && mid>0 && low==0)
+            type = 'Mid Level';
+        if(high==0 && mid==0 && low>0)
+            type = 'Low Level';
+        if(high>0 && mid>0 && low==0)
+            type = 'Mid - High Level';
+        if(high==0 && mid>0 && low>0)
+            type = 'Low - Mid Level';
+        if(high>0 && low>0)
+            type = 'All Level';
+        
+        type = type + ', Mostly ' + predominantTownHallLevel + 's'
     }
 
     return {
-        level: level,
+        type: type,
         predominantTownHall: predominantTownHallLevel,
         high: high,
         mid: mid,

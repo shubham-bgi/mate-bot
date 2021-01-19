@@ -1,10 +1,11 @@
-const Olf = require('../oneLineFunctions');
-const { readJson } = require('../utils');
-const siegeNames = ['Wall Wrecker', 'Stone Slammer', 'Battle Blimp', 'Siege Barracks'] 
-function checkSiege(allPlayersDetails){
+const Olf = require('../multipleUse/oneLineFunctions');
+const {siegeNames, notToInclude, troopNames, spellNames} = require('../standardData/checkDonors.json');
+//const memberDetails = require('./testDataAllPlayersDetails.json');
+//calculateMaxDonationPoints(memberDetails, 10);
+function checkSiege(memberDetails){
     let countPoints;
     let totalPoints = 0;
-    let siegePoints = allPlayersDetails.map((playerDetails) => {
+    let siegePoints = memberDetails.map((playerDetails) => {
         playerDetails = playerDetails.data;
         countPoints = 0
         playerDetails.troops.map((troop) => {
@@ -18,90 +19,76 @@ function checkSiege(allPlayersDetails){
         totalPoints = siegePoints.reduce((a,b) => a+b) * Math.max(...siegePoints);
     }
     return {
-        total: siegePoints.length,
+        count: siegePoints.length,
         points: Math.round(totalPoints/0.5)/10
     } 
 }
 
-function calculateMaxDonationPoints(allPlayerDetails, clanLevel) {
-
-    /* let maxTroopsLevel = readJson('json/troops.json');
-    siegeNames.map(name => delete maxTroopsLevel[name]);
-    for(troop in maxTroopsLevel) {
-        maxTroopsLevel[troop] = maxTroopsLevel[troop]["11"];
-    }
-
-    let maxSpellsLevel = readJson('json/spells.json');
-    delete maxSpellsLevel["Clone Spell"];
-    for(spell in maxSpellsLevel) {
-        maxSpellsLevel[spell] = maxSpellsLevel[spell]["11"];
-    }
-    maxAttackUnitsLevel = {...maxTroopsLevel, ...maxSpellsLevel}; */
-    const notToIncludeThese = [
-        "Super Barbarian", 
-        "Super Archer", 
-        "Super Wall Breaker", 
-        "Super Giant", 
-        "Sneaky Goblin", 
-        "Clone Spell", 
-        "Super Valkyrie", 
-        "Inferno Dragon", 
-        "Super Witch", 
-        'Wall Wrecker', 
-        'Stone Slammer', 
-        'Battle Blimp', 
-        'Siege Barracks',
-        'Super Minion'
-    ]
+function calculateMaxDonationPoints(memberDetails, clanLevel) {
     let donationLevelUpgrade = 0;
     if(clanLevel >= 10) 
     donationLevelUpgrade = 2;
     else if(clanLevel >= 5) 
     donationLevelUpgrade = 1;
-
     let maxUnitsClanCanDonate = [];
-    let maxDonationPoints = allPlayerDetails.map(playerDetails => {
+    let troopCount = 0;
+    let siegeCount = 0;
+    let spellCount = 0;
+    let totalUnitsCount = siegeNames.length + troopNames.length + spellNames.length;
+    let maxDonationPoints = memberDetails.map(playerDetails => {
         playerDetails = playerDetails.data;
         let count = 0;
         let donationLevel;
         for(i = 0; i < playerDetails.troops.length; i++) {
             donationLevel = playerDetails.troops[i].level + donationLevelUpgrade;
-            if (playerDetails.troops[i].village === 'home' && !notToIncludeThese.includes(playerDetails.troops[i].name) && donationLevel >= playerDetails.troops[i].maxLevel) {
-                count++;
-                if(maxUnitsClanCanDonate.indexOf(playerDetails.troops[i].name) === -1) {
-                    maxUnitsClanCanDonate.push(playerDetails.troops[i].name);
+            if (playerDetails.troops[i].village === 'home' && !notToInclude.includes(playerDetails.troops[i].name)) {
+                if (donationLevel >= playerDetails.troops[i].maxLevel) {
+                    count++;
+                    if(maxUnitsClanCanDonate.indexOf(playerDetails.troops[i].name) === -1) {
+                        maxUnitsClanCanDonate.push(playerDetails.troops[i].name);
+                    }
                 }
             }
         }
         for(j = 0; j < playerDetails.spells.length; j++) {
-            
             donationLevel = playerDetails.spells[j].level + donationLevelUpgrade;
-            if (playerDetails.spells[j].village === 'home' && !notToIncludeThese.includes(playerDetails.spells[j].name) && donationLevel >= playerDetails.spells[j].maxLevel) {
-                count++;
-                if(maxUnitsClanCanDonate.indexOf(playerDetails.spells[j].name) === -1) {
-                    maxUnitsClanCanDonate.push(playerDetails.spells[j].name);
-                }
-            } 
-        }
-        /* let playerAttackUnits = {...playerDetails.troops,...playerDetails.spells}
-        console.log(playerAttackUnits);
-        let count = 0;
-        for(unit in playerAttackUnits) {
-            donationLevel = unit.level + donationLevelUpgrade;
-            if (!siegeNames.includes(unit.name) && unit.name != "Clone Spell" && donationLevel >= maxAttackUnitsLevel[unit.name]) {
-                count++;
-                if(maxUnitsClanCanDonate.indexOf(unit.name) === -1) {
-                    maxUnitsClanCanDonate.push(unit.name);
+            if (playerDetails.spells[j].village === 'home' && !notToInclude.includes(playerDetails.spells[j].name)) {
+                if(donationLevel >= playerDetails.spells[j].maxLevel) {
+                    count++;
+                    if(maxUnitsClanCanDonate.indexOf(playerDetails.spells[j].name) === -1) {
+                        maxUnitsClanCanDonate.push(playerDetails.spells[j].name);
+                    }
                 }
             }
-        } */
-        return count/33;
+        }
+
+        return count/totalUnitsCount;
     });
+
+    maxUnitsClanCanDonate.map(unit => {
+        if(troopNames.includes(unit)) {
+            troopCount++;
+        }
+        if(siegeNames.includes(unit)) {
+            siegeCount++;
+        }
+        if(spellNames.includes(unit)) {
+            spellCount++;
+        }
+    })
     
-    let totalMaxDonationPoitns = (Math.round(maxDonationPoints.reduce((a,b) => a+b)/0.5*maxUnitsClanCanDonate.length/33)/10);
+    let troopStatus = troopCount.toString() + '/' + troopNames.length.toString();
+    let siegeStatus = siegeCount.toString() + '/' + siegeNames.length.toString();
+    let spellStatus = spellCount.toString() + '/' + spellNames.length.toString();
+    //console.log(troopStatus,siegeStatus, spellStatus);
+    //console.log(maxUnitsClanCanDonate);
+    let totalMaxDonationPoitns = (Math.round(maxDonationPoints.reduce((a,b) => a+b)/0.5*maxUnitsClanCanDonate.length/totalUnitsCount)/10);//totalpoints and then multipllying it with the percentage of different type of units whole clan can donate
     return {
         units: maxUnitsClanCanDonate,
-        points: totalMaxDonationPoitns
+        points: totalMaxDonationPoitns,
+        troopStatus: troopStatus,
+        siegeStatus: siegeStatus,
+        spellStatus: spellStatus
     }
 }
 

@@ -1,14 +1,14 @@
-const App = require('../../playmate/app.js');
+const checkBaseCommandDetails = require('../../playmate/commandDetails').checkBaseCommandDetails;
 
 module.exports = {
     name: 'checkbase',
     description: 'Check base whether it fit requirements or not.',
-    execute(msg, args, embed, msgCollector) {
+    execute(bot, msg, args, Discord, recentUser) {
       console.log(args);
       if(args.length > 0) {
-        App.checkBaseCommandDetails(args[0], msg, embed);
+        checkBaseCommandDetails(args[0], msg);
       } else {
-          msg.channel.send('Please specify a base tag.');
+          msg.channel.send('Specify the base tag.');
       }
-    },
+    }
 };

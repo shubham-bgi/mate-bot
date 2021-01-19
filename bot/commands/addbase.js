@@ -1,14 +1,14 @@
-const App = require('../../playmate/app.js');
-
+const AddBase = require('../../playmate/commandDetails').AddBase;
+const addBase = new AddBase();
 module.exports = {
   name: 'addbase',
-  description: 'Links base to the database, with your discord Id.',
-  execute(msg, args, embed, msgCollector) {
-    console.log(args);
+  description: 'Links base to the user.',
+  execute(bot, msg, args, Discord, recentUser) {
     if(args.length > 0) {
-      App.pushAddBaseCommandDetails(args[0], msg.channel,msg.author, msgCollector, msg);
+      console.log(args[0]);
+      addBase.pushAddBaseCommandDetails(args[0], msg);
     } else {
-      msg.channel.send('Which base to add bruh? I don\'t see any tags with it or am i blind?')
+      msg.channel.send('Which base to add bruh? Specify the base tag.')
     }
   }
 }

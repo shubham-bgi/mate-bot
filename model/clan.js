@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 let ClanSchema = new mongoose.Schema({
     discordID : {
-        type : String,
-        required : true
-    },
-    clans : [{
+            type : String,
+            required: "Required"
+        },
+    clans: [{
         name: {
             type: String,
             required: true
@@ -14,16 +14,17 @@ let ClanSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
-        tag : {
-            type : String,
-            required : true
+        tag: {
+            type: String,
+            required: true
         },
-        type : {
-            type : String
+        type: {
+            type: String,
+            required: "Required"
         },
-        dateAdded: {
+        dateAdded:{
             type: Date,
-            default: Date.now
+            dafault: Date.now
         }
     }]
 });

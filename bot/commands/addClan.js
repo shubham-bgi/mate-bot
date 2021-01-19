@@ -1,14 +1,18 @@
-const App = require('../../playmate/app.js');
-
+const AddClan = require('../../playmate/commandDetails').AddClan;
+const addClan = new AddClan();
 module.exports = {
   name: 'addclan',
-  description: 'Links clan to the database, with your discord Id.',
-  execute(msg, args, embed, msgCollector) {
-    console.log(args);
+  description: 'Links clan to the discord server.',
+  execute(bot, msg, args, Discord, recentUser) {
+    if (!msg.member.hasPermission("ADMINISTRATOR")){
+      msg.channel.send('Admin only');
+      return;
+    }
     if(args.length > 0) {
-      App.pushAddClanCommandDetails(args[0], msg.channel, msg.author, msgCollector, msg);
+      console.log(args[0]);
+      addClan.pushAddClanCommandDetails(args[0], msg);
     } else {
-      msg.channel.send('Which clan to add bruh? I don\'t see any tags with it?')
+      msg.channel.send('Which clan to add bruh? Specify the clan tag.')
     }
   }
 }

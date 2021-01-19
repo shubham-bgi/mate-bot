@@ -1,14 +1,15 @@
-const App = require('../../playmate/app.js');
-
+const RemoveClan = require('../../playmate/commandDetails').RemoveClan;
+const removeClan = new RemoveClan();
 module.exports = {
   name: 'removeclan',
   description: 'Removes base from the database, from your discord Id.',
-  execute(msg, args, embed, msgCollector) {
-    console.log(args);
-    if(args.length > 0) {
-      App.pullRemoveClanCommandDetails(args[0], msg.channel,msg.author);
-    } else {
-      msg.channel.send('Specify the clan tag you wanna remove.')
-    }
+  execute(bot, msg, args, Discord, recentUser) {
+  if (!msg.member.hasPermission("ADMINISTRATOR")){
+    msg.channel.send('Admin only.');
+    return;
+  }
+  console.log(args);
+  const embed = new Discord.RichEmbed();
+  removeClan.pullRemoveClanCommandDetails(args[0], msg, embed);
   }
 }

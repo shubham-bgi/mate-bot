@@ -1,0 +1,4 @@
+{
+    "baseTypes": ["main", "dono", "mini", "frnds", "no"],
+    "clanTypes": ["main", "mini", "frnds", "feed", "sis", "allies", "no"]
+}

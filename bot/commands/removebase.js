@@ -1,14 +1,12 @@
-const App = require('../../playmate/app.js');
-
+const RemoveBase = require('../../playmate/commandDetails').RemoveBase;
+const removeBase = new RemoveBase();
 module.exports = {
   name: 'removebase',
   description: 'Removes base from the database, from your discord Id.',
-  execute(msg, args, embed, msgCollector) {
+  execute(bot, msg, args, Discord, recentUser) {
     console.log(args);
-    if(args.length > 0) {
-      App.pullRemoveBaseCommandDetails(args[0], msg.channel, msg.author);
-    } else {
-      msg.channel.send('Specify the base tag you wanna remove.')
-    }
+    const embed = new Discord.RichEmbed();
+    removeBase.pullRemoveBaseCommandDetails(args[0], msg, embed);
+    
   }
 }

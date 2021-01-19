@@ -1,10 +1,14 @@
-const App = require('../../playmate/app.js');
-
+const DeleteRequirements = require('../../playmate/commandDetails').DeleteRequirements;
+const deleteRequirements = new DeleteRequirements();
 module.exports = {
     name: 'delreq',
-    description: 'Deletes your base requirements details',
-    execute(msg, args, embed, msgCollector, bot) {
+    description: 'Deletes your base requirements',
+    execute(bot, msg, args, Discord, recentUser) {
+      if (!msg.member.hasPermission("ADMINISTRATOR")){
+        msg.channel.send('Admin only command.');
+        return;
+      }
       console.log(args);
-        App.deleteRequirementsCommandDetails(args[0], msg, embed, msgCollector, bot);
+      deleteRequirements.deleteRequiremetnsCommandDetails(msg);
     },
 };

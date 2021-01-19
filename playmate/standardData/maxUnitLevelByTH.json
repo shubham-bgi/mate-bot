@@ -1,0 +1,1086 @@
+{
+    "1": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "1"
+        },
+        {
+          "name": "Archer",
+          "level": "1"
+        }
+      ]
+    },
+    "2": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "1"
+        },
+        {
+          "name": "Archer",
+          "level": "1"
+        },
+        {
+          "name": "Giant",
+          "level": "1"
+        },
+        {
+          "name": "Goblin",
+          "level": "1"
+        }
+      ]
+    },
+    "3": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "2"
+        },
+        {
+          "name": "Archer",
+          "level": "2"
+        },
+        {
+          "name": "Giant",
+          "level": "1"
+        },
+        {
+          "name": "Goblin",
+          "level": "2"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "1"
+        }
+      ]
+    },
+    "4": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "2"
+        },
+        {
+          "name": "Archer",
+          "level": "2"
+        },
+        {
+          "name": "Giant",
+          "level": "2"
+        },
+        {
+          "name": "Goblin",
+          "level": "2"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "2"
+        },
+        {
+          "name": "Balloon",
+          "level": "2"
+        }
+      ]
+    },
+    "5": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "3"
+        },
+        {
+          "name": "Archer",
+          "level": "3"
+        },
+        {
+          "name": "Giant",
+          "level": "2"
+        },
+        {
+          "name": "Goblin",
+          "level": "3"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "2"
+        },
+        {
+          "name": "Balloon",
+          "level": "2"
+        },
+        {
+          "name": "Wizard",
+          "level": "2"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "4"
+        }
+      ]
+    },
+    "6": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "3"
+        },
+        {
+          "name": "Archer",
+          "level": "3"
+        },
+        {
+          "name": "Giant",
+          "level": "3"
+        },
+        {
+          "name": "Goblin",
+          "level": "3"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "3"
+        },
+        {
+          "name": "Balloon",
+          "level": "3"
+        },
+        {
+          "name": "Wizard",
+          "level": "3"
+        },
+        {
+          "name": "Healer",
+          "level": "1"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "4"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "3"
+        }
+      ]
+    },
+    "7": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "4"
+        },
+        {
+          "name": "Archer",
+          "level": "4"
+        },
+        {
+          "name": "Giant",
+          "level": "4"
+        },
+        {
+          "name": "Goblin",
+          "level": "4"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "4"
+        },
+        {
+          "name": "Balloon",
+          "level": "4"
+        },
+        {
+          "name": "Wizard",
+          "level": "4"
+        },
+        {
+          "name": "Healer",
+          "level": "2"
+        },
+        {
+          "name": "Dragon",
+          "level": "2"
+        },
+        {
+          "name": "Minion",
+          "level": "2"
+        },
+        {
+          "name": "Hog Rider",
+          "level": "2"
+        }
+      ],
+      "heroes": [
+        {
+          "name": "Barbarian King",
+          "level": "5"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "4"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "4"
+        },
+        {
+          "name": "Rage Spell",
+          "level": "4"
+        }
+      ]
+    },
+    "8": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "5"
+        },
+        {
+          "name": "Archer",
+          "level": "5"
+        },
+        {
+          "name": "Giant",
+          "level": "5"
+        },
+        {
+          "name": "Goblin",
+          "level": "5"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "5"
+        },
+        {
+          "name": "Balloon",
+          "level": "5"
+        },
+        {
+          "name": "Wizard",
+          "level": "5"
+        },
+        {
+          "name": "Healer",
+          "level": "3"
+        },
+        {
+          "name": "Dragon",
+          "level": "3"
+        },
+        {
+          "name": "P.E.K.K.A",
+          "level": "3"
+        },
+        {
+          "name": "Minion",
+          "level": "4"
+        },
+        {
+          "name": "Hog Rider",
+          "level": "4"
+        },
+        {
+          "name": "Valkyrie",
+          "level": "2"
+        },
+        {
+          "name": "Golem",
+          "level": "2"
+        }
+      ],
+      "heroes": [
+        {
+          "name": "Barbarian King",
+          "level": "10"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "5"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "5"
+        },
+        {
+          "name": "Rage Spell",
+          "level": "5"
+        },
+        {
+          "name": "Poison Spell",
+          "level": "2"
+        },
+        {
+          "name": "Earthquake Spell",
+          "level": "2"
+        }
+      ]
+    },
+    "9": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "6"
+        },
+        {
+          "name": "Archer",
+          "level": "6"
+        },
+        {
+          "name": "Giant",
+          "level": "6"
+        },
+        {
+          "name": "Goblin",
+          "level": "6"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "5"
+        },
+        {
+          "name": "Balloon",
+          "level": "6"
+        },
+        {
+          "name": "Wizard",
+          "level": "6"
+        },
+        {
+          "name": "Healer",
+          "level": "4"
+        },
+        {
+          "name": "Dragon",
+          "level": "4"
+        },
+        {
+          "name": "P.E.K.K.A",
+          "level": "4"
+        },
+        {
+          "name": "Baby Dragon",
+          "level": "2"
+        },
+        {
+          "name": "Minion",
+          "level": "5"
+        },
+        {
+          "name": "Hog Rider",
+          "level": "5"
+        },
+        {
+          "name": "Valkyrie",
+          "level": "4"
+        },
+        {
+          "name": "Golem",
+          "level": "4"
+        },
+        {
+          "name": "Witch",
+          "level": "2"
+        },
+        {
+          "name": "Lava Hound",
+          "level": "2"
+        }
+      ],
+      "heroes": [
+        {
+          "name": "Barbarian King",
+          "level": "30"
+        },
+        {
+          "name": "Archer Queen",
+          "level": "30"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "6"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "6"
+        },
+        {
+          "name": "Rage Spell",
+          "level": "5"
+        },
+        {
+          "name": "Jump Spell",
+          "level": "2"
+        },
+        {
+          "name": "Freeze Spell",
+          "level": "2"
+        },
+        {
+          "name": "Poison Spell",
+          "level": "3"
+        },
+        {
+          "name": "Earthquake Spell",
+          "level": "3"
+        },
+        {
+          "name": "Haste Spell",
+          "level": "2"
+        },
+        {
+          "name": "Skeleton Spell",
+          "level": "1"
+        }
+      ]
+    },
+    "10": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "7"
+        },
+        {
+          "name": "Archer",
+          "level": "7"
+        },
+        {
+          "name": "Giant",
+          "level": "7"
+        },
+        {
+          "name": "Goblin",
+          "level": "7"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "6"
+        },
+        {
+          "name": "Balloon",
+          "level": "6"
+        },
+        {
+          "name": "Wizard",
+          "level": "7"
+        },
+        {
+          "name": "Healer",
+          "level": "4"
+        },
+        {
+          "name": "Dragon",
+          "level": "5"
+        },
+        {
+          "name": "P.E.K.K.A",
+          "level": "6"
+        },
+        {
+          "name": "Baby Dragon",
+          "level": "4"
+        },
+        {
+          "name": "Miner",
+          "level": "3"
+        },
+        {
+          "name": "Minion",
+          "level": "6"
+        },
+        {
+          "name": "Hog Rider",
+          "level": "6"
+        },
+        {
+          "name": "Valkyrie",
+          "level": "5"
+        },
+        {
+          "name": "Golem",
+          "level": "5"
+        },
+        {
+          "name": "Witch",
+          "level": "3"
+        },
+        {
+          "name": "Lava Hound",
+          "level": "3"
+        },
+        {
+          "name": "Bowler",
+          "level": "2"
+        }
+      ],
+      "heroes": [
+        {
+          "name": "Barbarian King",
+          "level": "40"
+        },
+        {
+          "name": "Archer Queen",
+          "level": "40"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "7"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "7"
+        },
+        {
+          "name": "Rage Spell",
+          "level": "5"
+        },
+        {
+          "name": "Jump Spell",
+          "level": "3"
+        },
+        {
+          "name": "Freeze Spell",
+          "level": "5"
+        },
+        {
+          "name": "Clone Spell",
+          "level": "3"
+        },
+        {
+          "name": "Poison Spell",
+          "level": "4"
+        },
+        {
+          "name": "Earthquake Spell",
+          "level": "4"
+        },
+        {
+          "name": "Haste Spell",
+          "level": "4"
+        },
+        {
+          "name": "Skeleton Spell",
+          "level": "3"
+        },
+        {
+          "name": "Bat Spell",
+          "level": "3"
+        }
+      ]
+    },
+    "11": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "8"
+        },
+        {
+          "name": "Archer",
+          "level": "8"
+        },
+        {
+          "name": "Giant",
+          "level": "8"
+        },
+        {
+          "name": "Goblin",
+          "level": "7"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "7"
+        },
+        {
+          "name": "Balloon",
+          "level": "7"
+        },
+        {
+          "name": "Wizard",
+          "level": "8"
+        },
+        {
+          "name": "Healer",
+          "level": "5"
+        },
+        {
+          "name": "Dragon",
+          "level": "6"
+        },
+        {
+          "name": "P.E.K.K.A",
+          "level": "7"
+        },
+        {
+          "name": "Baby Dragon",
+          "level": "5"
+        },
+        {
+          "name": "Miner",
+          "level": "5"
+        },
+        {
+          "name": "Electro Dragon",
+          "level": "2"
+        },
+        {
+          "name": "Minion",
+          "level": "7"
+        },
+        {
+          "name": "Hog Rider",
+          "level": "7"
+        },
+        {
+          "name": "Valkyrie",
+          "level": "6"
+        },
+        {
+          "name": "Golem",
+          "level": "7"
+        },
+        {
+          "name": "Witch",
+          "level": "4"
+        },
+        {
+          "name": "Lava Hound",
+          "level": "4"
+        },
+        {
+          "name": "Bowler",
+          "level": "3"
+        },
+        {
+          "name": "Ice Golem",
+          "level": "3"
+        }
+      ],
+      "heroes": [
+        {
+          "name": "Barbarian King",
+          "level": "50"
+        },
+        {
+          "name": "Archer Queen",
+          "level": "50"
+        },
+        {
+          "name": "Grand Warden",
+          "level": "20"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "8"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "7"
+        },
+        {
+          "name": "Rage Spell",
+          "level": "5"
+        },
+        {
+          "name": "Jump Spell",
+          "level": "3"
+        },
+        {
+          "name": "Freeze Spell",
+          "level": "6"
+        },
+        {
+          "name": "Clone Spell",
+          "level": "5"
+        },
+        {
+          "name": "Poison Spell",
+          "level": "5"
+        },
+        {
+          "name": "Earthquake Spell",
+          "level": "5"
+        },
+        {
+          "name": "Haste Spell",
+          "level": "5"
+        },
+        {
+          "name": "Skeleton Spell",
+          "level": "4"
+        },
+        {
+          "name": "Bat Spell",
+          "level": "4"
+        },
+        {
+          "name": "Invisibility Spell",
+          "level": "2"
+        }
+      ]
+    },
+    "12": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "9"
+        },
+        {
+          "name": "Archer",
+          "level": "9"
+        },
+        {
+          "name": "Giant",
+          "level": "9"
+        },
+        {
+          "name": "Goblin",
+          "level": "8"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "8"
+        },
+        {
+          "name": "Balloon",
+          "level": "8"
+        },
+        {
+          "name": "Wizard",
+          "level": "9"
+        },
+        {
+          "name": "Healer",
+          "level": "5"
+        },
+        {
+          "name": "Dragon",
+          "level": "7"
+        },
+        {
+          "name": "P.E.K.K.A",
+          "level": "8"
+        },
+        {
+          "name": "Baby Dragon",
+          "level": "6"
+        },
+        {
+          "name": "Miner",
+          "level": "6"
+        },
+        {
+          "name": "Electro Dragon",
+          "level": "3"
+        },
+        {
+          "name": "Yeti",
+          "level": "2"
+        },
+        {
+          "name": "Minion",
+          "level": "8"
+        },
+        {
+          "name": "Hog Rider",
+          "level": "9"
+        },
+        {
+          "name": "Valkyrie",
+          "level": "7"
+        },
+        {
+          "name": "Golem",
+          "level": "9"
+        },
+        {
+          "name": "Witch",
+          "level": "5"
+        },
+        {
+          "name": "Lava Hound",
+          "level": "5"
+        },
+        {
+          "name": "Bowler",
+          "level": "4"
+        },
+        {
+          "name": "Ice Golem",
+          "level": "5"
+        },
+        {
+          "name": "Headhunter",
+          "level": "2"
+        },
+        {
+          "name": "Wall Wrecker",
+          "level": "3"
+        },
+        {
+          "name": "Battle Blimp",
+          "level": "3"
+        },
+        {
+          "name": "Stone Slammer",
+          "level": "3"
+        }
+      ],
+      "heroes": [
+        {
+          "name": "Barbarian King",
+          "level": "65"
+        },
+        {
+          "name": "Archer Queen",
+          "level": "65"
+        },
+        {
+          "name": "Grand Warden",
+          "level": "40"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "9"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "7"
+        },
+        {
+          "name": "Rage Spell",
+          "level": "6"
+        },
+        {
+          "name": "Jump Spell",
+          "level": "3"
+        },
+        {
+          "name": "Freeze Spell",
+          "level": "7"
+        },
+        {
+          "name": "Clone Spell",
+          "level": "5"
+        },
+        {
+          "name": "Poison Spell",
+          "level": "6"
+        },
+        {
+          "name": "Earthquake Spell",
+          "level": "5"
+        },
+        {
+          "name": "Haste Spell",
+          "level": "5"
+        },
+        {
+          "name": "Skeleton Spell",
+          "level": "6"
+        },
+        {
+          "name": "Bat Spell",
+          "level": "5"
+        },
+        {
+          "name": "Invisibility Spell",
+          "level": "3"
+        }
+      ]
+    },
+    "13": {
+      "troops": [
+        {
+          "name": "Barbarian",
+          "level": "9"
+        },
+        {
+          "name": "Archer",
+          "level": "9"
+        },
+        {
+          "name": "Giant",
+          "level": "10"
+        },
+        {
+          "name": "Goblin",
+          "level": "8"
+        },
+        {
+          "name": "Wall Breaker",
+          "level": "9"
+        },
+        {
+          "name": "Balloon",
+          "level": "9"
+        },
+        {
+          "name": "Wizard",
+          "level": "10"
+        },
+        {
+          "name": "Healer",
+          "level": "6"
+        },
+        {
+          "name": "Dragon",
+          "level": "8"
+        },
+        {
+          "name": "P.E.K.K.A",
+          "level": "9"
+        },
+        {
+          "name": "Baby Dragon",
+          "level": "7"
+        },
+        {
+          "name": "Miner",
+          "level": "7"
+        },
+        {
+          "name": "Electro Dragon",
+          "level": "4"
+        },
+        {
+          "name": "Yeti",
+          "level": "3"
+        },
+        {
+          "name": "Minion",
+          "level": "9"
+        },
+        {
+          "name": "Hog Rider",
+          "level": "10"
+        },
+        {
+          "name": "Valkyrie",
+          "level": "8"
+        },
+        {
+          "name": "Golem",
+          "level": "10"
+        },
+        {
+          "name": "Witch",
+          "level": "5"
+        },
+        {
+          "name": "Lava Hound",
+          "level": "6"
+        },
+        {
+          "name": "Bowler",
+          "level": "5"
+        },
+        {
+          "name": "Ice Golem",
+          "level": "5"
+        },
+        {
+          "name": "Headhunter",
+          "level": "3"
+        },
+        {
+          "name": "Wall Wrecker",
+          "level": "4"
+        },
+        {
+          "name": "Battle Blimp",
+          "level": "4"
+        },
+        {
+          "name": "Stone Slammer",
+          "level": "4"
+        },
+        {
+          "name": "Siege Barracks",
+          "level": "4"
+        }
+      ],
+      "heroes": [
+        {
+          "name": "Barbarian King",
+          "level": "75"
+        },
+        {
+          "name": "Archer Queen",
+          "level": "75"
+        },
+        {
+          "name": "Grand Warden",
+          "level": "50"
+        },
+        {
+          "name": "Royal Champion",
+          "level": "20"
+        }
+      ],
+      "spells": [
+        {
+          "name": "Lightning Spell",
+          "level": "9"
+        },
+        {
+          "name": "Healing Spell",
+          "level": "8"
+        },
+        {
+          "name": "Rage Spell",
+          "level": "6"
+        },
+        {
+          "name": "Jump Spell",
+          "level": "4"
+        },
+        {
+          "name": "Freeze Spell",
+          "level": "7"
+        },
+        {
+          "name": "Clone Spell",
+          "level": "6"
+        },
+        {
+          "name": "Poison Spell",
+          "level": "7"
+        },
+        {
+          "name": "Earthquake Spell",
+          "level": "5"
+        },
+        {
+          "name": "Haste Spell",
+          "level": "5"
+        },
+        {
+          "name": "Skeleton Spell",
+          "level": "7"
+        },
+        {
+          "name": "Bat Spell",
+          "level": "5"
+        },
+        {
+          "name": "Invisibility Spell",
+          "level": "4"
+        }
+      ]
+    }
+  }

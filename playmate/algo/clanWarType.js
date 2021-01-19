@@ -1,16 +1,19 @@
-const olf = require('../oneLineFunctions');
+const {checkFWA} = require('../multipleUse/checkFWA');
 
 class warType {
     checkClanWarType(clanDetails, clanRushPoints, warLog){
         let type;
         if (!clanDetails.isWarLogPublic) { 
-            type  = 'War Log not visible';
             return {
-                type: type
+                type: 'Private War Log',
+                total: 'Private War Log',
+                winRate: 'Private War Log',
+                lastFifteenWarWinRate: 'Private War Log',
+                points: 0
             }
         }
-        if (olf.checkFWA(clanDetails.description)) { 
-            type = 'Farm War alliance'; 
+        if (checkFWA(clanDetails.description)) { 
+            type = 'War Farmers'; 
         }
 
         let warWinRate = this.getWarWinRate(clanDetails);
@@ -26,15 +29,17 @@ class warType {
 
         return {
             type: type,
+            total: this.totalWars,
             winRate: warWinRate,
-            lastFifteenWinRate: lastFifteenWarWinRate
+            lastFifteenWarWinRate: lastFifteenWarWinRate,
+            points: Math.round((lastFifteenWarWinRate + warWinRate)/2)/10
         }
     }
 
     getWarWinRate(clanDetails){
-        let totalWars = clanDetails.warWins + clanDetails.warLosses + clanDetails.warTies;
-        if(totalWars == 0) { return 0; }
-        return Math.round(clanDetails.warWins/totalWars * 100);
+        this.totalWars = clanDetails.warWins + clanDetails.warLosses + clanDetails.warTies;
+        if(this.totalWars == 0) { return 0; }
+        return Math.round(clanDetails.warWins/this.totalWars * 100);
     }
 
     getLastFifteenWarsWinRate(warLog){

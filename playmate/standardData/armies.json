@@ -1,0 +1,371 @@
+{   "3":[
+        {
+            "Barbarian": "2",
+            "Archer": "2",
+            "name":"Barch",
+            "youtubeLink":"https://www.youtube.com/watch?v=jrl-QxU4dWw&ab_channel=SauronGaming"
+        }
+    ],
+    "4":[
+        {
+            "Balloon":"3",
+            "name":"Balloon Parade",
+            "youtubeLink":"https://www.youtube.com/watch?v=HX83KAi3reU&ab_channel=JsmithGaming"
+        },
+        {
+            "Giant":"2",
+            "Healing Spell":"2",
+            "name":"GiBarch",
+            "youtubeLink":"https://youtu.be/KRZiBcJLIjc?t=138"
+        }
+    ],
+    "5":[
+        {
+            "Giant":"2",
+            "Wizard":"2",
+            "Healing Spell":"2",
+            "name":"GiWi",
+            "youtubeLink":"https://www.youtube.com/watch?v=0I5SzrZMN-g&ab_channel=KennyJo"
+        },
+        {
+            "Balloon":"2",
+            "Archer":"3",
+            "name":"Balloon Parade",
+            "youtubeLink":"https://youtu.be/DjV3pAXMhck?t=18"
+        }
+    ],
+    "6":[
+        {
+            "Giant":"3",
+            "Wizard":"3",
+            "name":"GiWi",
+            "Healing Spell":"https://youtu.be/UjbL6YtwzBA?t=174"
+        },
+        {
+            "Balloon":"3",
+            "Archer":"3",
+            "name":"Balloon Parade",
+            "youtubeLink":"https://youtu.be/UjbL6YtwzBA?t=63"
+        },
+        {
+            "Giant":"3",
+            "Wizard":"3",
+            "Balloon":"3",
+            "name":"GiWiLoon",
+            "youtubeLink":"https://youtu.be/UjbL6YtwzBA?t=252"
+        },
+        {
+            "Giant":"3",
+            "Wizard":"3",
+            "Healer":"1",
+            "name":"GiWiHe",
+            "youtubeLink":"https://youtu.be/UjbL6YtwzBA?t=344"
+        }
+    ],
+    "7":[
+        {
+            "Dragon":"1",
+            "Lightning Spell":"4",
+            "name":"Mass Dragons",
+            "youtubeLink":"https://youtu.be/wXF6MM1faRM?t=53"
+        },
+        {
+            "Hog Rider":"2",
+            "Healing Spell":"4",
+            "name":"Mass Hogs",
+            "youtubeLink":"https://www.youtube.com/watch?v=EcfcrZNwiRk&ab_channel=TriGs"
+        }
+    ],
+    "8":[
+        {
+            "Dragon":"2",
+            "Lightning Spell":"4",
+            "name": "Mass Dragons",
+            "youtubeLink": "https://www.youtube.com/watch?v=ojmcasGbYqQ&ab_channel=JsmithGaming"
+        },
+        {
+            "Golem":"1",
+            "Hog Rider":"4",
+            "Healing Spell":"5",
+            "name":"GoHo",
+            "youtubeLink": "https://www.youtube.com/watch?v=Pv0aDlF1zUY&ab_channel=JsmithGaming"
+        },
+        {
+            "Golem":"1",
+            "P.E.K.K.A":"3",
+            "Hog Rider":"4",
+            "Wizard":"5",
+            "name":"GoWiPe+Hogs",
+            "youtubeLink": "https://www.youtube.com/watch?v=t6aZXEVpJ_c&ab_channel=TheNightowl"
+        },
+        {
+            "Hog Rider": "4",
+            "Healing Spell": "5",
+            "Wizard": "5",
+            "name": "MassHogs",
+            "youtubeLink": "https://www.youtube.com/watch?v=ZtZdQ-U0MDA&ab_channel=KennyJo"
+        },
+        {
+            "Hog Rider": "4",
+            "Healiing Spell": "5",
+            "Valkyrie":"2",
+            "name":"GoVaHo",
+            "youtubeLink":"https://www.youtube.com/watch?v=R4rKsoiEJT4&ab_channel=KennyJo"
+        }
+    ],
+
+    "9":[
+        {
+            "Lava Hound":"2",
+            "Balloon":"6",
+            "Healer":"4",
+            "Archer Queen":"15",
+            "name":"Lavaloon",
+            "youtubeLink": "https://www.youtube.com/watch?v=QsOVlUIzIJQ&ab_channel=ClashwithEric-OneHive"
+        },
+        {
+            "Golem":"4",
+            "Witch":"2",
+            "Healer":"4",
+            "name":"Witch Slap",
+            "youtubeLink":"https://www.youtube.com/watch?v=F5YmBK1QOpo&ab_channel=ECHOGaming"
+        },
+        {
+            "Golem":"4",
+            "Hog Rider":"5",
+            "Healing Spell":"6",
+            "Archer Queen":"15",
+            "name":"GoHo",
+            "youtubeLink":"https://www.youtube.com/watch?v=jVs4fGjrB9Y&ab_channel=KennyJo"
+        },
+        {
+            "Hog Rider":"5",
+            "Healer":"4",
+            "Archer Queen":"30",
+            "name":"QW Hogs",
+            "youtubeLink":"https://www.youtube.com/watch?v=N4-1YuzB7rQ&ab_channel=KennyJo"
+        },
+        {
+            "Golem":"4",
+            "Hog Rider":"5",
+            "name":"GoHoBo",
+            "youtubeLink":"https://www.youtube.com/watch?v=uQJPSxhG-Mw&ab_channel=ClashwithEric-OneHive"
+        },
+        {
+            "Lava Hound":"2",
+            "Balloon":"6",
+            "name": "Queen Pop",
+            "youtubeLink":"https://www.youtube.com/watch?v=x8vTYNVJUUU&ab_channel=ClashwithEric-OneHive"
+        }
+    ],
+
+    "10":[
+        {
+            "Lava Hound":"3",
+            "Balloon":"6",
+            "Healer":"4",
+            "Archer Queen":"40",
+            "name":"QW/QC Lavaloon",
+            "youtubeLink":"https://youtu.be/JvQ_dxVG4-8?t=503"
+        },
+        {
+            "Golem":"5",
+            "Witch":"3",
+            "Bowler":"2",
+            "name":"Bowitch",
+            "youtubeLink":"https://www.youtube.com/watch?v=ir4sSTDlGfg&t=274s"
+        },
+        {
+            "Golem":"5",
+            "Bowler":"2",
+            "Hog Rider":"6",
+            "name":"GoBoHo",
+            "youtubeLink":"https://www.youtube.com/watch?v=y0SlhHsJBAQ"
+        },
+        {
+            "Hog Rider":"6",
+            "Healer":"4",
+            "Archer Queen":"40",
+            "name":"QW/QC Hogs",
+            "youtubeLink":"https://youtu.be/JvQ_dxVG4-8?t=37"
+        },
+        {
+            "Golem":"5",
+            "P.E.K.K.A":"6",
+            "Hog Rider":"6",
+            "name":"GoHoPe",
+            "youtubeLink":"https://www.youtube.com/watch?v=DtK6_Nice3U&ab_channel=KennyJo"
+        },
+        {
+            "Miner":"3",
+            "Healer":"4",
+            "Healing Spell":"7",
+            "Archer Queen":"40",
+            "name":"QW/QC Mass Miners",
+            "youtubeLink":"https://youtu.be/JvQ_dxVG4-8?t=287"
+        },
+        {
+            "P.E.K.K.A":"6",
+            "Bowler":"2",
+            "Bat Spell":"3",
+            "Freeze Spell":"5",
+            "name":"Pekka bobat",
+            "youtubeLink":"https://www.youtube.com/watch?v=ADTHtBXPF-k"
+        },
+        {
+            "Hog Rider":"6",
+            "Miner":"3",
+            "Healing Spell":"7",
+            "name":"Hybrid",
+            "youtubeLink":"https://www.youtube.com/watch?v=kZVerNZYrWk"
+        },
+        {
+            "Dragon":"5",
+            "Lightning Spell":"7",
+            "name":"Mass Dragon",
+            "youtubeLink":"https://www.youtube.com/watch?v=mK0dUgzl86E"
+        }
+    ],
+
+    "11":[
+        {
+            "Healer":"5",
+            "Hog Rider":"7",
+            "Archer Queen":"40",
+            "name":"QC/QW Hogs",
+            "youtubeLink":"https://www.youtube.com/watch?v=7FPN1FJ5ULw"
+        },
+        {
+            "P.E.K.K.A":"7",
+            "Bowler":"3",
+            "Bat Spell":"4",
+            "Freeze Spell":"6",
+            "name":"P.E.K.K.A BoBat",
+            "youtubeLink":"https://www.youtube.com/watch?v=chHcY1dBuOw"
+        },
+        {
+            "P.E.K.K.A":"7",
+            "Bowler":"3",
+            "Healer":"5",
+            "name":"P.E.K.K.A Smash",
+            "youtubeLink":"https://www.youtube.com/watch?v=nCSAU0OY5D4"
+        },
+        {
+            "Lava Hound":"4",
+            "Balloon":"7",
+            "Clone Spell":"5",
+            "name":"Electrone",
+            "youtubeLink":"https://youtu.be/bUhSSpE_rBg"
+        },
+        {
+            "Lava Hound":"4",
+            "Balloon":"7",
+            "Rage Spell":"5",
+            "name":"Lavaloon",
+            "youtubeLink":"https://www.youtube.com/watch?v=2MfJwnOacP8"
+        },
+        {
+            "Dragon":"6",
+            "Balloon":"7",
+            "Bat Spell":"4",
+            "Freeze Spell":"6",
+            "name": "Drag bat",
+            "youtubeLink":"https://www.youtube.com/watch?v=-c-ynwtbsH0"
+        }
+    ],
+
+    "12":[
+        {   
+            "Dragon":"7",
+            "Balloon":"8",
+            "Bat Spell":"5",
+            "Freeze Spell":"7",
+            "name":"Drag Bat",
+            "youtubeLink":"https://www.youtube.com/watch?v=FndPAzdgPQs"
+        },
+        {
+            "P.E.K.K.A":"8",
+            "Bowler":"4",
+            "Healer":"5",
+            "name": "Pekka Smash",
+            "youtubeLink":"https://www.youtube.com/watch?v=qKIMRBX9K8w&t=396s"
+        },
+        {
+            "Yeti":"2",
+            "Bowler":"4",
+            "Healer":"5",
+            "name":"Yeti Smash",
+            "youtubeLink":"https://www.youtube.com/watch?v=ZiRj4f8vYjM"
+        },
+        {
+            "Dragon":"7",
+            "Balloon":"8",
+            "Freeze Spell":"7",
+            "name":"Frozen Dragon",
+            "youtubeLink":"https://www.youtube.com/watch?v=Tq2-awjEf3I"
+        },
+        {
+            "Healer":"5",
+            "Miner":"6",
+            "Archer Queen":"60",
+            "name":"QW/QC Mass miner",
+            "youtubeLink":"https://www.youtube.com/watch?v=8VXUVW-WX4I"
+        },
+        {
+            "Healer":"5",
+            "Hog Rider":"9",
+            "Miner":"6",
+            "Archer Queen":"65",
+            "name": "QW/QC Hybrid",
+            "youtubeLink":"https://www.youtube.com/watch?v=01onU9obOSg"
+        }
+    ],
+
+    "13":[
+        {
+            "Yeti":"3",
+            "Healer":"6",
+            "Head Hunter": "3",
+            "name": "Yeti Hunter",
+            "youtubeLink":"https://youtu.be/gXbzAuMEmaw"
+        },
+        {
+            "Healer":"6",
+            "Hog Rider":"10",
+            "Miner":"7",
+            "Healing Spell":"8",
+            "Archer Queen":"65",
+            "name": "QW/QC Hybrid",
+            "youtubeLink":"https://www.youtube.com/watch?v=C4H0oJmnFBQ"
+        },
+        {
+            "Dragon":"8",
+            "Balloon":"9",
+            "Bat Spell":"5",
+            "Freeze Spell":"7",
+            "name": "Drag Bat",
+            "youtubeLink":"https://www.youtube.com/watch?v=vhLd0dXm8Co"
+        },
+        {
+            "Healer":"6",
+            "Hog Rider":"10",
+            "Archer Queen":"65",
+            "name": "QW/QC Hog",
+            "youtubeLink":"https://www.youtube.com/watch?v=c0fgbDui-0I"
+        },
+        {
+            "Electro Dragon":"4",
+            "Balloon":"9",
+            "Lightning Spell":"9",
+            "name":"E-Lightning",
+            "youtubeLink":"https://youtu.be/nYf2-NaKaw4"
+        },
+        {
+            "Healer":"6",
+            "Yeti":"3",
+            "Bowler":"5",
+            "name": "Yeti Smash",
+            "youtubeLink":"https://www.youtube.com/watch?v=j3OsofyMlI8"
+        }
+    ]
+}

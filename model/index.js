@@ -12,6 +12,5 @@ mongoose.connect("mongodb://localhost:27017/Coc", { useNewUrlParser: true, useUn
 module.exports = {
     Base: require("./base"),
     Clan: require("./clan"),
-    BaseRequirements: require("./baseRequirements"),
-    ClanDetails: require("./clanDetails")
+    RegisteredClan: require("./registeredClan")
 }

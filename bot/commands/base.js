@@ -1,12 +1,11 @@
-const App = require('../../playmate/app.js');
-
+const Base = require('../../playmate/commandDetails').Base;
+const base = new Base();
 module.exports = {
   name: 'base',
   description: 'Base info details, shows linked bases.',
-  execute(msg, args, embed, msgCollector, bot) {
-    console.log(msg.content);
+  execute(bot, msg, args, Discord, recentUser) {
     console.log(args);
-    App.getBaseCommandDetails(args[0], msg.channel, embed, msg.author, bot);
-  },
+    base.getBaseCommandDetails(args[0], msg, bot, Discord);
+  }
 };
 

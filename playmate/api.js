@@ -1,4 +1,4 @@
-const Utils = require('./utils.js');
+const Utils = require('./multipleUse/utils.js');
 const  Constants = require('./constants.js');
 
 const getUrl = Utils.getUrl;
@@ -49,7 +49,7 @@ class Api {
                 });
     }
 
-    static  getAllPlayerDetails(clanData) {
+    static  getMembersDetails(clanData) {
         let playerRequests = [];
         let players = clanData.memberList;
         players.map((player) => {
@@ -72,8 +72,7 @@ class Api {
 
 module.exports = {
     getPlayerDetails: Api.getPlayerDetails,
-    getClanMembersDetails: Api.getClanMembersDetails,
     getClanDetails: Api.getClanDetails,
-    getAllPlayerDetails: Api.getAllPlayerDetails,
+    getMembersDetails: Api.getMembersDetails,
     getWarLog: Api.getWarLog
 }

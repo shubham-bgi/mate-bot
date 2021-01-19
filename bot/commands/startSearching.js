@@ -1,10 +1,14 @@
-const App = require('../../playmate/app.js');
-
+const Searching = require('../../playmate/commandDetails').Searching;
+const searching = new Searching();
 module.exports = {
     name: 'startsearch',
     description: 'Start searching players back for a clan.',
-    execute(msg, args, embed, msgCollector) {
+    execute(bot, msg, args, Discord, recentUser) {
+      if (!msg.member.hasPermission("ADMINISTRATOR")){
+        msg.channel.send('Admin only command.');
+        return;
+      }
       console.log(args);
-        App.startSearchingCommandDetails(args[0], msg, embed, msgCollector);
+      searching.searchingCommandDetails(args[0], msg, true);
     },
 };

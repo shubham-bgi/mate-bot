@@ -1,10 +1,11 @@
-const App = require('./../../playmate/app.js');
+const invite = require('../../playmate/commandDetails').invite;
 
 module.exports = {
     name: 'invite',
     description: 'Invites user to playmate server and send playmate bot invite link.',
-    execute(msg, args, embed, msgCollector, bot, embed2, embed3, talkedRecently) {
+    execute(bot, msg, args, Discord, recentUser) {
       console.log(args);
-        App.inviteCommandDetails(msg, embed, msgCollector, bot, embed2, embed3, talkedRecently);
+      const embed = new Discord.RichEmbed();
+      invite(msg, embed);
     } 
 }

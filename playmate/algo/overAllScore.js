@@ -1,4 +1,4 @@
-const cwl = require("../json/cwl")
+const cwl = require("../standardData/cwl")
 
 function getCwlPoints(clanLeague) {
     const leagueRank = cwl[clanLeague];
@@ -9,23 +9,21 @@ function getTrophyPoints(clanPoints) {
     return Math.round((clanPoints/500))/10;
 }
 
-function overallPoints(clanDetails, clanActivityFeel, nonRushPoints, last15WarWinRate, warWinRate, siegePoints, maxDonoPoints) {
+function overallPoints(clanDetails, rushedMetrics, activeMetrics, siegeDonors, maxDonation, war) {
     let cwlPoints = getCwlPoints(clanDetails.warLeague.name);
     let clanLevelPoints = clanDetails.clanLevel/5;
     const trophyPoints = getTrophyPoints(clanDetails.clanPoints);
     const versusTrophyPoints = getTrophyPoints(clanDetails.clanVersusPoints);
-    const warPoints = Math.round((last15WarWinRate+warWinRate)/2)/10;
+    const membersPoints = clanDetails.members/5;
+    let overAllPoints = cwlPoints + clanLevelPoints + trophyPoints + versusTrophyPoints + war.points + activeMetrics.attackWinsPoints + activeMetrics.donationRationPoints + rushedMetrics.nonRushPoints + rushedMetrics.maxPoints + siegeDonors.points + maxDonation.points + membersPoints;
+    overAllPoints = Math.round((overAllPoints/12)*10)/10;
     return { 
-        cwl: cwlPoints,
-        level: clanLevelPoints,
+        CWL: cwlPoints,
+        clanLevel: clanLevelPoints,
         trophy: trophyPoints,
         versusTrophy: versusTrophyPoints,
-        war: warPoints,
-        activity: clanActivityFeel,
-        nonRush: nonRushPoints,
-        maxDonation: maxDonoPoints,
-        siege: siegePoints,
-        overall: Math.round((cwlPoints + clanLevelPoints + trophyPoints + versusTrophyPoints + warPoints + clanActivityFeel + nonRushPoints + siegePoints + maxDonoPoints) / 0.9) / 10,//add all the points and making it base of 10
+        members: membersPoints,
+        overall: overAllPoints
     }
 }
  

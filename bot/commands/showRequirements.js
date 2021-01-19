@@ -1,10 +1,11 @@
-const App = require('../../playmate/app.js');
-
-module.exports = {
+const ShowRequirements = require('../../playmate/commandDetails').ShowRequirements;
+const showRequirements = new ShowRequirements();
+module.exports ={
     name: 'showreq',
     description: 'Shows you clan requirements.',
-    execute(msg, args, embed, msgCollector) {
+    execute(bot, msg, args, Discord, recentUser) {
       console.log(args);
-        App.showRequirementsCommandDetails(args[0], msg, embed);
+      const embed = new Discord.RichEmbed();
+      showRequirements.showRequirementsCommandDetails(args[0], msg, embed);
     },
 };

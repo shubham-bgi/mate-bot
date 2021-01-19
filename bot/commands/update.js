@@ -1,10 +1,10 @@
-const App = require('../../playmate/app.js');
-
+const Update = require('../../playmate/commandDetails').Update;
+const update = new Update();
 module.exports = {
     name: 'update',
     description: 'Updates clan details.',
-    execute(msg, args, embed, msgCollector, bot) {
+    execute(bot, msg, args, Discord, recentUser) {
       console.log(args);
-        App.updateCommandDetails(msg);
+        update.updateCommandDetails(msg);
     },
 };
