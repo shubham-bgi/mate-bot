@@ -4,7 +4,6 @@ const {clanEmbed, baseEmbed, settingsEmbed} = require('../multipleUse/embed');
 const {removeByProperty, sum} = require('../multipleUse/oneLineFunctions');
 const {fixTag} = require('../multipleUse/fixTag');
 const {getMetricForBase} = require('../multipleUse/points');
-const baseRegister = require('../../miscCode/baseRegister');
 const {listBases} = require('../multipleUse/listBases');
 const {fetchChannel} = require('../multipleUse/discordOneLine');
 const keyMap = require('../standardData/keyMap');
