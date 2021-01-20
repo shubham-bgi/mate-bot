@@ -1,5 +1,5 @@
 const Api = require('../api');
-const db = require('../dataBase/registeredClanQueries');
+const registereredClanCollection = require('../dataBase/registeredClanQueries');
 const {getMetricForBase} = require('../multipleUse/points');
 const {removeByProperty, sum} = require('../multipleUse/oneLineFunctions');
 const {fixTag} = require('../multipleUse/fixTag');
@@ -17,7 +17,6 @@ async function checkBaseCommandDetails(baseTag, msg) {
     checkingBaseDetails.townHallLevel = baseDetails.townHallLevel;
     checkingBaseDetails.nonRushPoints = baseMetrics.result.playerRushPoints;
     checkingBaseDetails.maxPoints = baseMetrics.result.playerMaxPoints;
-    /* checkingBaseDetails.activityPoints = Number(baseMetrics.playerActivity.activityPoints); */
     checkingBaseDetails.attackWinsPoints = baseMetrics.playerActivity.attackWinsPoints;
     checkingBaseDetails.trophies = baseDetails.trophies;
     checkingBaseDetails.versusTrophies = baseDetails.versusTrophies;

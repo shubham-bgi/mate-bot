@@ -153,7 +153,6 @@ class registeredClanQueries {
     } 
 
     static async getUserChoiceClan(availableClanTags, userOptions) {
-        console.log(userOptions);
         try {
             const clan = await RegisteredClan.aggregate(
                 [

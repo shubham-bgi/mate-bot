@@ -2,7 +2,7 @@ const checkBaseCommandDetails = require('../../playmate/commandDetails').checkBa
 
 module.exports = {
     name: 'checkbase',
-    description: 'Check base whether it fit requirements or not.',
+    description: 'Check base whether it fits the requirements or not.',
     execute(bot, msg, args, Discord, recentUser) {
       console.log(args);
       if(args.length > 0) {
