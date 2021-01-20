@@ -15,7 +15,6 @@ const OverAllPoints = Algo.overallPoints;
 (function init() {
     "use strict";
     activeAlgo.setStandardParameters();
-    console.log('Updated activity parameters...');
     setTimeout(init, 900000)
 }());
 
