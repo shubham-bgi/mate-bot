@@ -29,10 +29,10 @@ module.exports = {
        embed.setDescription(`Find players from all over discord.`);
        embed.addField('-setreq [ADMIN ONLY]', 'Set requirements for your clan.');
        embed.addField('-startsearch/-stopsearch [ADMIN ONLY]', 'Stops or starts search for your clan.');
-       embed.addField('-showreq', 'Shows your clan requirements.');
        embed.addField('-delreq [ADMIN ONLY]', 'Delete your clan requirements.');
+       embed.addField('-showreq', 'Shows your clan requirements.');
        embed.addField('-update', 'Updates your clan details with us.');
-        //embed1.addField('-checkbase', 'Check any base if it passes your clan requirements.');
+       embed.addField('-checkbase', 'Check any base if it passes your clan requirements.');
         msg.channel.send(embed);
       }
       else if(args[0] == 'search') {

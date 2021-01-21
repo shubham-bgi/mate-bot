@@ -4,19 +4,26 @@ const {getMetricForBase} = require('../multipleUse/points');
 const {removeByProperty, sum} = require('../multipleUse/oneLineFunctions');
 const {fixTag} = require('../multipleUse/fixTag');
 async function checkBaseCommandDetails(baseTag, msg) {
-    let baseRequirements = await db.getBaseRequirementsByDiscordID(msg.author.id);
+    let regClanDetails = await registereredClanCollection.getByDiscordID(msg.guild.id);
     let flag = 1;
-    if(!baseRequirements) { msg.channel.send('Bruh, there are no clan requirements linked with you. Use ``-setreq`` command to set them up.'); return;}
+    if(!regClanDetails) { 
+        msg.channel.send('Set clan requirements first. Use ``-setreq`` command to set them up.'); 
+        return;
+    }
+    let baseRequirements = regClanDetails.baseRequirements;
     baseTag = fixTag(baseTag);
     let baseDetails = await Api.getPlayerDetails(baseTag);
-    if(!baseDetails) { msg.channel.send('Bruh base tag is incorrect.'); return; }
+    if(!baseDetails) { 
+        msg.channel.send('Bruh base tag is incorrect.'); 
+        return; 
+    }
     const baseMetrics = getMetricForBase(baseDetails);
 
     let heroes = baseDetails.heroes;
     let checkingBaseDetails = {};
     checkingBaseDetails.townHallLevel = baseDetails.townHallLevel;
-    checkingBaseDetails.nonRushPoints = baseMetrics.result.playerRushPoints;
-    checkingBaseDetails.maxPoints = baseMetrics.result.playerMaxPoints;
+    checkingBaseDetails.nonRushPoints = baseMetrics.rushedMetrics.nonRushPoints;
+    checkingBaseDetails.maxPoints = baseMetrics.rushedMetrics.maxPoints;
     checkingBaseDetails.attackWinsPoints = baseMetrics.playerActivity.attackWinsPoints;
     checkingBaseDetails.trophies = baseDetails.trophies;
     checkingBaseDetails.versusTrophies = baseDetails.versusTrophies;
@@ -29,7 +36,7 @@ async function checkBaseCommandDetails(baseTag, msg) {
         checkingBaseDetails.sumOfHeroes = sum(heroes, 'level');
         checkingBaseDetails.heroLevels = heroes.map(hero => hero.level);
     }
-    if(!(baseRequirements.minimumTownHallLevel <= checkingBaseDetails.townHallLevel || baseRequirements.onlyTownHall == checkingBaseDetails.townHallLevel)) {
+    if(!(baseRequirements.townHallLevel <= checkingBaseDetails.townHallLevel || baseRequirements.onlyTownHall == checkingBaseDetails.townHallLevel)) {
         msg.channel.send(`❌ TownHall Level : ${checkingBaseDetails.townHallLevel}\n`);
         flag = 0;
     }

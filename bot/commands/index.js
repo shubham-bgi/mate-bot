@@ -15,7 +15,7 @@ module.exports = {
   Update: require('./update'),
   UpdateAll: require('./updateAll'),
   showRequirements: require('./showRequirements'),
-  /* CheckBase: require('./checkBase'), */
+  CheckBase: require('./checkBase'),
   Invite: require('./invite'),
   nos: require('./nos')
 }
