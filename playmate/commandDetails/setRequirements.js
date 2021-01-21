@@ -101,7 +101,7 @@ class SetRequirements {
                         return;
                     } else if (clanRegister.quiz[0].negativeAnswer.includes(message.content.toLowerCase())){
                         count = 0;
-                        if( clanMetrics.townHall.level.startsWith('O') ) {
+                        if( clanMetrics.townHall.type.startsWith('O') ) {
                             msg.reply(clanRegister.quiz[1].question + clanMetrics.townHall.predominantTownHall );
                             questionNumber = 1;
                         } else {
