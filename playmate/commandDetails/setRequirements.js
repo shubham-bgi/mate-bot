@@ -108,6 +108,7 @@ class SetRequirements {
                             msg.reply(clanRegister.quiz[2].question + clanMetrics.townHall.predominantTownHall);
                             questionNumber = 2;
                         }
+                        return;
                     } else if(count < clanRegister.wrongAnswerCount) {
                         count ++;
                         msg.channel.send(clanRegister.quiz[0].onWrongReply);
