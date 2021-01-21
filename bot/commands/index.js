@@ -17,4 +17,5 @@ module.exports = {
   showRequirements: require('./showRequirements'),
   /* CheckBase: require('./checkBase'), */
   Invite: require('./invite'),
+  nos: require('./nos')
 }
