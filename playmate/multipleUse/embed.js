@@ -91,7 +91,6 @@ function baseEmbed(baseMetrics, baseDetails, embed, bot) {
     const darkExEmoji = fetchEmoji(bot, "Dark Elixir");
     const heartEmoji = fetchEmoji(bot, "Heart");
     const warLeagueEmoji = fetchEmoji(bot, "warLeague");
-    const builderHallEmoji = fetchEmoji(bot, "BH" + baseDetails.builderHallLevel);
     const threeStarEmoji = fetchEmoji(bot, "Three Stars");
     const clanGamesEmoji = fetchEmoji(bot, "Clan Games");
     const clanEmoji = fetchEmoji(bot, "Clan");
@@ -99,7 +98,14 @@ function baseEmbed(baseMetrics, baseDetails, embed, bot) {
     const barbKingEmoji = fetchEmoji(bot, 'Barb King');
     const shieldEmoji = ':shield:';
     const tagEmoji = ':label:';
+    let builderHallEmoji;
     let heroLevels;
+    if(!baseDetails.builderHallLevel) {
+        baseDetails.builderHallLevel = "Anti Explorer";
+        builderHallEmoji = fetchEmoji(bot, "BH1");
+    } else {
+        builderHallEmoji = fetchEmoji(bot, "BH" + baseDetails.builderHallLevel);
+    }
     if(!baseDetails.clan) {
         baseDetails.clan = {};
         baseDetails.clan.name = '';
@@ -110,13 +116,13 @@ function baseEmbed(baseMetrics, baseDetails, embed, bot) {
         baseDetails.league.iconUrls = {};
         baseDetails.league.iconUrls.medium = "https://static.wikia.nocookie.net/clashofclans/images/c/c0/Unranked_League.png/revision/latest/scale-to-width-down/92?cb=20171003011534";
     }
-    if(baseDetails.heroes) {
+    if(baseDetails.heroes[0]) {
         let heroes = baseDetails.heroes;
         heroes = removeByProperty(heroes, "name", "Battle Machine");
         heroLevels = heroes.map(hero => hero.level).toString();
         heroLevels = heroLevels.replace(/,/g, '/')
     } else {
-        heroLevels = redCrossEmoji;
+        heroLevels = "None";
     }
     embed.setColor('#2f3136');
     embed.setAuthor(baseDetails.name, baseDetails.league.iconUrls.medium, constants.baseInfoUrl + removeFirstLetter(baseDetails.tag));
