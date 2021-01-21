@@ -14,7 +14,7 @@ class RemoveClan {
         else {
             argument = fixTag(argument);
             let regClanDetails = await regesteredClanCollection.getByDiscordID(msg.guild.id);
-            if(regClanDetails.clanDetails.tag == argument) {
+            if(regClanDetails && regClanDetails.clanDetails.tag == argument) {
                 msg.channel.send('This clan can\'t be removed, as this clan is also registered to serach for players. Use ``-delreq`` first.')
                 return;
             }
