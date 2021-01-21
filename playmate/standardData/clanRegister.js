@@ -2,7 +2,7 @@ module.exports = {
     "wrongAnswerCount" : 1,
     "quiz" : [
         {//0
-            "question": "In your clan description there is mention of war farming, do you guys do war farming?\nType ``yes`` or ``no``",
+            "question": "In your clan description there is mention of farming, do you guys do war farming like FWA or GWA?\nIf you don't know what it is, the awnser will be no...\nType ``yes`` or ``no``",
             "positiveAnswer": ["yes","y"],
             "negativeAnswer": ["no", "n"],
             "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
