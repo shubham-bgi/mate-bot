@@ -1,8 +1,8 @@
 const verifiedClanCollection = require('../dataBase/verifiedClanQueries');
 
 async function verifyClanLead(discordId, clanDetails) {
-    const verifiedClan = await verifiedClanCollection.getByDiscordId(discordId); 
-    if(verifiedClan && verifiedClan.clans.some(clan =>{ clan.tag === clanDetails.tag})){
+    const verifiedClan = await verifiedClanCollection.getByDiscordId(discordId);
+    if(verifiedClan && verifiedClan.clans.some(clan =>{ return clan.tag === clanDetails.tag})){
         return true;
     } else if(clanDetails.description.toLowerCase().search( "pm" + discordId.substr(discordId.length - 4)) != -1) {
         const clanToBeAdded = [{
@@ -19,7 +19,6 @@ async function verifyClanLead(discordId, clanDetails) {
         }
         return true;
     } else {
-        console.log('hwer');
         return false;
     }
 }
