@@ -27,7 +27,7 @@ class clanQueries {
         try {
             const numberOfDocumentsModified = await Clan.updateOne(
                 { discordID: discordId },
-                { $push: { clans: clanToBeAdded } 
+                { $push: { clans: clanToBeAdded }
             });
             return numberOfDocumentsModified;
         }

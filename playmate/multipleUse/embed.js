@@ -1,7 +1,6 @@
 const constants = require('../constants');
 const {removeByProperty, removeFirstLetter, numberWithCommas, capitalizeFirstLetter} = require('./oneLineFunctions');
 const {fetchEmoji} = require('./discordOneLine');
-const base = require('../../model/base');
 
 function clanEmbed(clanDetails, clanMetrics, embed, bot) {
     const gapEmoji = fetchEmoji(bot, "gap");
@@ -257,11 +256,28 @@ function settingsEmbed(embed) {
     embed.setFooter(`Once reacted, it can't be undone.`)
     return embed;
 }
+
+function verificationEmbed(clanDetails, code, embed){
+    let clanDescription = "";
+    if(clanDetails.description){
+        clanDescription = clanDetails.description;
+    }
+    clanDescription = `**Current Clan Description**
+    ${clanDescription}
+    \n**Verify your clan**
+    Add the code \`\`${code}\`\` in your clan Description.To verify you are leader or coleader of the clan.If you have done it already, please wait atleast 2 minutes before running the command again.
+    \nPlease also make sure to make your war log public, It helps players to choose the right clan.`.replace(/.{30}\S*\s+/g, "$&@").split(/\s+@/);
+    embed.setColor('#2f3136');
+    embed.setAuthor(clanDetails.name, clanDetails.badgeUrls.medium, constants.clanInfoUrl + removeFirstLetter(clanDetails.tag));
+    embed.setDescription(clanDescription);
+    return embed;
+}
 module.exports = {
     clanEmbed: clanEmbed,
     baseEmbed: baseEmbed,
     requirementsEmbed: requirementsEmbed,
     listBasesEmbed: listBasesEmbed,
     listClansEmbed: listClansEmbed,
-    settingsEmbed: settingsEmbed
+    settingsEmbed: settingsEmbed,
+    verificationEmbed: verificationEmbed
 }

@@ -1,18 +1,19 @@
 const Api = require('../api');
 const registeredClanCollection = require('../dataBase/registeredClanQueries');
 const {checkFWA} = require('../multipleUse/checkFWA');
-const {fixTag} = require('../multipleUse/fixTag');
 const {getMetricsForMembersOfClan} = require('../multipleUse/points');
 const {askQuestion} = require('../multipleUse/questions');
-const {fetchChannel, checkRole, fetchEmoji} = require('../multipleUse/discordOneLine');
+const {fetchChannel, checkRole} = require('../multipleUse/discordOneLine');
 const {listClans}= require('../multipleUse/listClans');
+const {verifyLead} = require('../multipleUse/verifyClanLead');
+const {verificationEmbed}= require('../multipleUse/embed');
 const clanRegister = require('../standardData/clanRegister');
 class SetRequirements {
-    async lookingForClanMatesCommandDetails(argument, msg, embed, bot) {
+    async lookingForClanMatesCommandDetails(argument, msg, embed, bot, embed1) {
         const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 400000 });
         let regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
         if (regClanDetails) { 
-            msg.channel.send('You can only register one clan per server.'); 
+            msg.channel.send('You can only register one clan per server right now.'); 
             return; 
         }
         const question = "Which one?\nType the corresponding number or ``no``.";
@@ -30,8 +31,13 @@ class SetRequirements {
         }
         let clanDetails = await Api.getClanDetails(clanTag);
         if (!clanDetails) {
-            msg.channel.send('Wrong clan tag bro.');
+            msg.channel.send('Clash of clans servers are down, please try again later.');
             return; 
+        }
+        if(!await verifyLead(msg.guild.id, clanDetails)){
+            const code = "PM" + msg.guild.id.substr(msg.guild.id.length - 4);
+            msg.channel.send(verificationEmbed(clanDetails, code, embed1));
+            return;
         }
         if (!clanDetails.isWarLogPublic) {
             msg.channel.send('War log is private, make it public and try again, it helps players searching for the clan. If you have make it public, wait a few minutes.'); 

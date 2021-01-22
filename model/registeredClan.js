@@ -74,10 +74,6 @@ let RegisteredClanSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    isUserClanLeader:{
-        type: Boolean,
-        default: false
-    },
     totalPlayersFound:{
         type: Number,
         default: 0
@@ -138,4 +134,4 @@ let RegisteredClanSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("RegisteredClan", RegisteredClanSchema)
+module.exports = mongoose.model("RegisteredClan", RegisteredClanSchema);
