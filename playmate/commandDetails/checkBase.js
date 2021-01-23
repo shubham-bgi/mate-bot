@@ -7,7 +7,7 @@ async function checkBaseCommandDetails(baseTag, msg) {
     let regClanDetails = await registereredClanCollection.getByDiscordID(msg.guild.id);
     let flag = 1;
     if(!regClanDetails) { 
-        msg.channel.send('Set clan requirements first. Use ``-setreq`` command to set them up.'); 
+        msg.channel.send('Set clan requirements first. Use ``setreq`` command to set them up.'); 
         return;
     }
     let baseRequirements = regClanDetails.baseRequirements;

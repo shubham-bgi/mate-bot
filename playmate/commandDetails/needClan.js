@@ -151,7 +151,7 @@ class NeedClan{
         clanChannel.send(finalClan.discordID.role);
         clanChannel.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
         clanChannel.send(baseEmbed(this.baseMetrics, this.baseDetails, embed, this.bot));
-        clanChannel.send('If you wish to stop these pings, use ``-stopsearch`` command.');
+        clanChannel.send('If you wish to stop these pings, use ``stopsearch`` command.');
         registeredClanCollection.foundPlayer(finalClan.discordID.guild);
     }
 }

@@ -17,12 +17,12 @@ class Searching {
         } else {
             let regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
             if(!regClanDetails) { 
-                msg.channel.send('First set a clan for search bro. Use command ``-setreq``.'); 
+                msg.channel.send('First set a clan for search bro. Use command ``setreq``.'); 
                 return; 
             }
             if(setTo){
                 if(!regClanDetails.areDetailsUpdated) { 
-                    msg.channel.send('Your clan details are not updated. Please make clan war log public and then use ``-update`` command.')
+                    msg.channel.send('Your clan details are not updated. Please make clan war log public and then use ``update`` command.')
                     return; 
                 }
                 if(!regClanDetails.searchSetByAdmin) {

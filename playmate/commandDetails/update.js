@@ -5,7 +5,7 @@ class Update {
     async updateCommandDetails(msg) {
         let regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
         if(!regClanDetails) { 
-            msg.channel.send('No clans are registered in this server. Use ``-setreq`` command.'); 
+            msg.channel.send('No clans are registered in this server. Use ``setreq`` command.'); 
             return; 
         }
         let clanDetails = await Api.getClanDetails(regClanDetails.clanDetails.tag);

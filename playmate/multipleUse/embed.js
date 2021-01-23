@@ -47,7 +47,6 @@ function clanEmbed(clanDetails, clanMetrics, embed, bot) {
     embed.setAuthor(clanDetails.name, clanDetails.badgeUrls.medium, constants.clanInfoUrl + removeFirstLetter(clanDetails.tag));
     if(clanDetails.description){
         let clanDescription = clanDetails.description.replace(/.{30}\S*\s+/g, "$&@").split(/\s+@/);
-        //clanDescription = clanDescription.concat(['\u200B'])
         embed.setDescription(clanDescription);
     }
     embed.addField('\u200B',
@@ -266,7 +265,7 @@ function verificationEmbed(clanDetails, code, embed){
     ${clanDescription}
     \n**Verify your clan**
     Add the code \`\`${code}\`\` in your clan Description.To verify you are leader or coleader of the clan.If you have done it already, please wait atleast 2 minutes before running the command again.
-    \nPlease also make sure to make your war log public, It helps players to choose the right clan.`.replace(/.{30}\S*\s+/g, "$&@").split(/\s+@/);
+    \nPlease also make your war log public during registration. It helps players to choose the right clan for them.`.replace(/.{30}\S*\s+/g, "$&@").split(/\s+@/);
     embed.setColor('#2f3136');
     embed.setAuthor(clanDetails.name, clanDetails.badgeUrls.medium, constants.clanInfoUrl + removeFirstLetter(clanDetails.tag));
     embed.setDescription(clanDescription);
