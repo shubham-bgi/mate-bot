@@ -7,9 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./bot/bot.js"
   },
-  "nodemonConfig": {
-    "ignore": ["./bot/prefixes.json"]
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
