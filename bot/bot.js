@@ -21,6 +21,40 @@ bot.on('ready', () => {
   })
 });
 
+bot.on('guildCreate', guild => {
+  let channelID;
+  let channels = guild.channels;
+  channelLoop:
+  for (let key in channels) {
+      let c = channels[key];
+      if (c[1].type === "text") {
+          channelID = c[0];
+          break channelLoop;
+      }
+  }
+  let channel = guild.channels.get(guild.systemChannelID || channelID);
+  let embed = new Discord.RichEmbed();
+  embed.setTitle('Thank you for adding me!');
+  embed.setColor('#2f3136');
+  embed.setDescription(`This is a recruitment bot. If you want to register your clan 
+  to search for players. Follow these steps:
+
+  1) Use \`\`-addclan <Your clan tag>\`\` command to link your clan
+    to the discord server.
+  2) Then use \`\`-setreq\`\` command to set the minimum requirements of 
+  your clan, it can take upto 5 mins. Please be patient.
+
+  If you want to search for a clan:
+
+  1) Use \`\`-addbase <your base tag>\`\` command to link your base
+    to your discord account.
+  2) Then use \`\`-needclan\`\` command to search for the clan.
+  
+  My default prefix is \`\`-\`\` but you can easily change it by
+  using command \`\`-prefix <desired prefix>\`\`.`)
+  channel.send(embed);
+})
+
 bot.on('message', async msg => {
   if (msg.author.bot || msg.channel.type === 'dm' || messageCollectorOn(msg.author.id)) return;  //returns if the message is from a 1 bot or 2 is a direct message or 3  does not start with bot prefix
   let prefixes = JSON.parse(fs.readFileSync(path.resolve(__dirname,"./prefixes.json"), "utf-8"));

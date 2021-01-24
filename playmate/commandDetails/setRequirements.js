@@ -40,7 +40,7 @@ class SetRequirements {
             return;
         }
         if (!clanDetails.isWarLogPublic) {
-            msg.channel.send('War log is private, make it public and try again, it helps players searching for the clan. If you have make it public, wait a few minutes.'); 
+            msg.channel.send('War log is private, make it public and try again, it helps players searching for the clan. If you have make it public, wait atleast 2 minutes before retrying.'); 
             return; 
         }
 
