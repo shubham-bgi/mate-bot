@@ -48,7 +48,7 @@ bot.on('guildCreate', guild => {
 
   1) Use \`\`-addbase <your base tag>\`\` command to link your base
     to your discord account.
-  2) Then use \`\`-needclan\`\` command to search for the clan.
+  2) Then use \`\`-needclan\`\` command to search for a clan.
   
   My default prefix is \`\`-\`\` but you can easily change it by
   using command \`\`-prefix <desired prefix>\`\`.`)
