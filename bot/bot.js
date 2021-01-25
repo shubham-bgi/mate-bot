@@ -21,18 +21,19 @@ bot.on('ready', () => {
   })
 });
 
-bot.on('guildCreate', guild => {
+/* bot.on('guildCreate', guild => {
   let channelID;
   let channels = guild.channels;
-  channelLoop:
   for (let key in channels) {
       let c = channels[key];
-      if (c[1].type === "text") {
+      console.log(c)
+      if (c[1].type === "text" &&  guild.channels.get(key).permissionsFor(guild.me).has('SEND_MESSAGES')) {
           channelID = c[0];
-          break channelLoop;
+          break;
       }
   }
   let channel = guild.channels.get(guild.systemChannelID || channelID);
+  const channel = guild.channels.find(c => c.permissionsFor(guild.me) && c.type === 'text' && c.permissionsFor(guild.me).has('SEND_MESSAGES'));
   let embed = new Discord.RichEmbed();
   embed.setTitle('Thank you for adding me!');
   embed.setColor('#2f3136');
@@ -51,8 +52,20 @@ bot.on('guildCreate', guild => {
   2) Then use \`\`-needclan\`\` command to search for a clan.
   
   My default prefix is \`\`-\`\` but you can easily change it by
-  using command \`\`-prefix <desired prefix>\`\`.`)
-  channel.send(embed);
+  using command \`\`-prefix <desired prefix>\`\`.`);
+  guild.channels.sort(function(chan1,chan2){
+    if(chan1.type!==`text`) return -1;
+    if(!chan1.permissionsFor(guild.me).has(`SEND_MESSAGES`)) return -1;
+    return chan1.position < chan2.position ? 1 : -1;
+}).first().send(embed);
+  if(channel) {
+    channel.send(embed);
+  }
+}) */
+
+bot.on("guildDelete", guild => {
+  console.log("Left a guild: " + guild.name);
+  //remove from guildArray
 })
 
 bot.on('message', async msg => {

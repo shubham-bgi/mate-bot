@@ -80,7 +80,6 @@ class registeredClanQueries {
     
     static async setAreDetailsUpdatedByDiscordId(discordId, setToThis){
         try{
-            console.log('here')
             const docsModified = await RegisteredClan.updateOne({
                 "discordID.guild": discordId
             }, {
@@ -172,7 +171,6 @@ class registeredClanQueries {
         const now = new Date();
         updatedClanDetails.lastUpdateDate = now;
         try {
-            console.log('here');
             const docsModified = await RegisteredClan.replaceOne({"discordID.guild": discordId}, updatedClanDetails);
             return docsModified.nModified;
         } catch (error) {
