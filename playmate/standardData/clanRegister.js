@@ -16,36 +16,36 @@ module.exports = {
         {//2
             "question": "What is the minimum townhall level are you guys accepting?\nType any number from Th``1`` to Th``13``.\nSuggested Townhall: Th",
             "answer": ["1","2","3","4","5","6","7","8","9","10","11","12","13"],
-            "onWrongReply": "Wrong awnser Bruh, Type a number to choose any townhall level between ``1`` to ``13``."
+            "onWrongReply": "Wrong awnser, Type a number to choose any townhall level between ``1`` to ``13``."
         },
         {//3
             "info": "On a scale of 0 to 10, 0 being totally rushed & 10 being non rushed.",
             "question": "Are you okay with rushed players or are you looking for non-rushed only?\nEnter a value between ``0`` to ``10``.\nCurrent clan Average: ",
             "answer": ["0","10"],
-            "onWrongReply": "Wrong awnser bruh, Type a value between ``0`` and ``10``."
+            "onWrongReply": "Wrong awnser, Type a value between ``0`` and ``10``."
         },
         {//4
             "info": "On a scale of 0 to 10, 0 being newbie & 10 being maxed.",
             "question": "Since most players in your clan are maxed are you looking for max players only?\nEnter a value between ``0`` to ``10``.\nCurrent clan average: ",
             "answer": ["0","10"],
-            "onWrongReply": "Wrong awnser bruh, Type a value between ``0`` and ``10``."
+            "onWrongReply": "Wrong awnser, Type a value between ``0`` and ``10``."
         },
         {//5
             "question": "What are minimum home base trophies are you guys accepting?\nPlease type any number between ``0`` to ``5500``.",
             "answer": ["0","5500"],
-            "onWrongReply": "Wrong awnser bruh, Type a number between ``0`` to ``5500``."
+            "onWrongReply": "Wrong awnser, Type a number between ``0`` to ``5500``."
         },
         {//6
             "question": "What are minimum builder base trophies are you guys accepting?\nPlease type any number between ``0`` to ``5500``",
             "answer": ["0","5500"],
-            "onWrongReply": "Wrong awnser bruh, Type a number between ``0`` to ``5500``."
+            "onWrongReply": "Wrong awnser, Type a number between ``0`` to ``5500``."
         },
         {//7
             "info": "",
             "question": "Do you want player's attacks won to be greater or equal than your clan's average?\nType ``yes`` or ``no``.",
             "positiveAnswer": ["yes","y"],
             "negativeAnswer": ["no", "n"],
-            "onWrongReply":"Wrong awnser bruh, Type either ``yes`` or ``no``."
+            "onWrongReply":"Wrong awnser, Type either ``yes`` or ``no``."
         },
         {//8
             "question": "Do you wanna filter by hero levels for each townhall level?\nType from any of these options: ``sum of heroes``, ``hero levels``or ``no``.",

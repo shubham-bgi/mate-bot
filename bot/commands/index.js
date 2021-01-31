@@ -18,5 +18,6 @@ module.exports = {
   CheckBase: require('./checkBase'),
   Invite: require('./invite'),
   nos: require('./nos'),
-  prefix: require('./prefix')
+  prefix: require('./prefix'),
+  //leaderBoard: require('./leaderBoard')
 }

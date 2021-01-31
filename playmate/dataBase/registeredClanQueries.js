@@ -221,7 +221,18 @@ class registeredClanQueries {
             console.error(error);
         }
     }
+
+    static async leaderBoard() {
+        try {
+            const clans = await RegisteredClan.find().sort({"clanMetrics.points.overall": -1}).limit(10);
+            return clans;
+        }
+        catch (error) {
+            console.log(error);
+        } 
+    } 
 }
+
 
    
    
@@ -238,5 +249,6 @@ module.exports = {
     getUserChoiceClan: registeredClanQueries.getUserChoiceClan,
     updateDetails: registeredClanQueries.updateDetails,
     findStaleDetails: registeredClanQueries.findStaleDetails,
-    updateDetailsByClanTag: registeredClanQueries.updateDetailsByClanTag
+    updateDetailsByClanTag: registeredClanQueries.updateDetailsByClanTag,
+    leaderBoard: registeredClanQueries.leaderBoard
 }

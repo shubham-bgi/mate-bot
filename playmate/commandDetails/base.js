@@ -16,7 +16,7 @@ class Base{
         } else {
             argument = fixTag(argument);
             const baseDetails = await Api.getPlayerDetails(argument);
-            if(!baseDetails) { botMsgChannel.send('Base Tag is incorrect bro.'); return;}
+            if(!baseDetails) { botMsgChannel.send('Base Tag is incorrect.'); return;}
             const baseMetric = getMetricForBase(baseDetails);
             msg.channel.send(baseEmbed(baseMetric, baseDetails, embed, bot));
         }

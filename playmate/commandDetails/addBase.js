@@ -15,7 +15,7 @@ class AddBase {
         baseTag = fixTag(baseTag);
         const baseDetails = await Api.getPlayerDetails(baseTag);
         if (!baseDetails) { 
-            botMsgChannel.send('Base tag is incorrect bro.'); 
+            botMsgChannel.send('Base tag is incorrect.'); 
             return; 
         }
         let bases = await baseCollection.getBasesByDiscordId(botUserDetails.id);
@@ -42,12 +42,12 @@ class AddBase {
                 msgCollector.stop('got it');
                 baseType = message.content.toLowerCase();
             } else if (count < 1) {
-                botMsgChannel.send(`**${botUserDetails.username}**, that's not a valid option bro, you must choose between` + baseTypeStr + `.`);
+                botMsgChannel.send(`**${botUserDetails.username}**, that's not a valid option, you must choose between` + baseTypeStr + `.`);
                 msg.reply('Do you wanna give it a type? ' + baseTypeStr + '? \n Type your choice.');
                 count ++;
                 return;
             } else {
-                botMsgChannel.send(`Again bruh? I have to stop this before you make me crazy.`);
+                botMsgChannel.send(`Again? I have to stop this before you make me crazy.`);
                 msgCollector.stop('wrong response');
                 return;
             }

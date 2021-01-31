@@ -514,6 +514,7 @@ class SetRequirements {
                         registeredClanDetails.discordID.role = message.content;
                         if(await registeredClanCollection.newClanRegister(registeredClanDetails)) {
                             fetchChannel(registeredClanDetails.discordID.channel, bot).send(clanRegister.endText + registeredClanDetails.discordID.role);
+                            msg.channel.send('Requirements are now set. You can use ``showreq`` command to see your clan requirements.');
                             msgCollector.stop('Finished');
                             return;
                         } else {
@@ -522,8 +523,9 @@ class SetRequirements {
                         }
                     } else if(clanRegister.quiz[14].negativeAnswer.includes(message.content)){
                         if(await registeredClanCollection.newClanRegister(registeredClanDetails)) {
-                        fetchChannel(registeredClanDetails.discordID.channel, bot).send(clanRegister.endText);
-                        msgCollector.stop('Finished');
+                            fetchChannel(registeredClanDetails.discordID.channel, bot).send(clanRegister.endText);
+                            msg.channel.send('Requirements are now set. You can use ``showreq`` command to see your clan requirements.');
+                            msgCollector.stop('Finished');
                         } else {
                             msg.channel.send('Some error occured, never really happens. If happens again please report in our support server.')
                             msgCollector.stop('Database error');

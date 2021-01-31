@@ -14,7 +14,7 @@ async function checkBaseCommandDetails(baseTag, msg) {
     baseTag = fixTag(baseTag);
     let baseDetails = await Api.getPlayerDetails(baseTag);
     if(!baseDetails) { 
-        msg.channel.send('Bruh base tag is incorrect.'); 
+        msg.channel.send('Base tag is incorrect.'); 
         return; 
     }
     const baseMetrics = getMetricForBase(baseDetails);

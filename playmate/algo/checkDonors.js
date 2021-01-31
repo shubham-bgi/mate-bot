@@ -21,7 +21,7 @@ function checkSiege(memberDetails){
     return {
         count: siegePoints.length,
         points: Math.round(totalPoints/0.5)/10
-    } 
+    }
 }
 
 function calculateMaxDonationPoints(memberDetails, clanLevel) {

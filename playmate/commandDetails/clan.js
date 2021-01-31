@@ -17,7 +17,7 @@ class Clan {
             let clanMetrics;
             let clanDetails = await Api.getClanDetails(argument); 
             if(!clanDetails){ 
-                msg.channel.send('Clan tag is incorrect bro'); 
+                msg.channel.send('Clan tag is incorrect.'); 
                 return; 
             } 
             let memberDetails = await Api.getMembersDetails(clanDetails);

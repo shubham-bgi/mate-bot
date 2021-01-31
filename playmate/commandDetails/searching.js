@@ -17,7 +17,7 @@ class Searching {
         } else {
             let regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
             if(!regClanDetails) { 
-                msg.channel.send('First set a clan for search bro. Use command ``setreq``.'); 
+                msg.channel.send('First set a clan for search. Use command ``setreq``.'); 
                 return; 
             }
             if(setTo){

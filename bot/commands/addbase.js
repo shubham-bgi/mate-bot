@@ -8,7 +8,7 @@ module.exports = {
       console.log(args[0]);
       addBase.pushAddBaseCommandDetails(args[0], msg);
     } else {
-      msg.channel.send('Which base to add bruh? Specify the base tag.')
+      msg.channel.send('Which base to add? Specify the base tag.')
     }
   }
 }

@@ -46,7 +46,7 @@ function listClanQuestion(msg, showClans, question) {
             return showClans[message.content-1].tag;
         } else if (count < 1) {
             count++;
-            msg.channel.send('bruh? Type the corresponding number or ``no``.')
+            msg.channel.send('Not valid, Type the corresponding number or ``no``.')
             msg.reply(question);
         } else {
             msg.channel.send('I am stopping this lunacy right now.');

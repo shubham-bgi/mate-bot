@@ -40,7 +40,7 @@ class NeedClan{
         }
         this.topClans = await registeredClanCollection.defaultTopClans(checkingBaseDetails);
         if(!this.topClans[0]) {
-            msg.channel.send('Didn\'t found any clans for you bro. Please try again later.');
+            msg.channel.send('I couldn\’t find any clan for you right now. Please try again later.');
             return;
         }
         this.availableClanTags = this.topClans.map(clan => clan.clanDetails.tag);

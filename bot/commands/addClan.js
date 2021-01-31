@@ -12,7 +12,7 @@ module.exports = {
       console.log(args[0]);
       addClan.pushAddClanCommandDetails(args[0], msg);
     } else {
-      msg.channel.send('Which clan to add bruh? Specify the clan tag.')
+      msg.channel.send('Which clan to add? Specify the clan tag.')
     }
   }
 }
