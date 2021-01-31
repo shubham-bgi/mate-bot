@@ -36,6 +36,7 @@ module.exports = {
         embed.setTitle('👩🏼‍🤝‍🧑🏿 Searching clan Commands');
         embed.setDescription(`Find best clans from all over discord.`);
         embed.addField(prefix + 'needclan', 'Find best clan for you in one command.');
+        embed.addField(prefix + 'lb', 'Shows top 10 clans on discord.')
         msg.channel.send(embed);
       } else if(args[0].toLowerCase() == 'config') {
         embed.setColor('#2f3136');
