@@ -271,6 +271,15 @@ function verificationEmbed(clanDetails, code, embed){
     embed.setDescription(clanDescription);
     return embed;
 }
+
+function topClansEmbed(topClansDetails, embed){
+    embed.setTitle('Clans Leader Board');
+    embed.setColor('#2f3136');
+    for (let i = 0; i < topClansDetails.length; i++ ) {
+        embed.addField(`\u200B`, `${i+1}) [${topClansDetails[i].clanDetails.name}](${constants.clanInfoUrl}${removeFirstLetter(topClansDetails[i].clanDetails.tag)}) - ${topClansDetails[i].clanMetrics.points.overall}`);
+    }
+    return embed;
+}
 module.exports = {
     clanEmbed: clanEmbed,
     baseEmbed: baseEmbed,
@@ -278,5 +287,6 @@ module.exports = {
     listBasesEmbed: listBasesEmbed,
     listClansEmbed: listClansEmbed,
     settingsEmbed: settingsEmbed,
-    verificationEmbed: verificationEmbed
+    verificationEmbed: verificationEmbed,
+    topClansEmbed: topClansEmbed
 }

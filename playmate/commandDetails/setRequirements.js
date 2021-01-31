@@ -518,7 +518,7 @@ class SetRequirements {
                             msgCollector.stop('Finished');
                             return;
                         } else {
-                            msg.channel.send('Some error occured, never really happens. If happens again please report in our support server.')
+                            msg.channel.send('Some error occured,this never really happens. If happens again please report in our support server.')
                             msgCollector.stop('Database error');
                         }
                     } else if(clanRegister.quiz[14].negativeAnswer.includes(message.content)){
@@ -527,7 +527,7 @@ class SetRequirements {
                             msg.channel.send('Requirements are now set. You can use ``showreq`` command to see your clan requirements.');
                             msgCollector.stop('Finished');
                         } else {
-                            msg.channel.send('Some error occured, never really happens. If happens again please report in our support server.')
+                            msg.channel.send('Some error occured,this never really happens. If happens again please report in our support server.')
                             msgCollector.stop('Database error');
                         }
                         return;

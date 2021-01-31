@@ -19,5 +19,5 @@ module.exports = {
   Invite: require('./invite'),
   nos: require('./nos'),
   prefix: require('./prefix'),
-  //leaderBoard: require('./leaderBoard')
+  leaderBoard: require('./leaderBoard')
 }
