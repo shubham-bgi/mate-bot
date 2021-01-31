@@ -19,7 +19,7 @@ class ActiveAlgo {
     getParametersForPlayer(playerDetails) {
         return {
             attackWins: playerDetails.attackWins,
-            donationRation: playerDetails.donations+playerDetails.donationReceived
+            donationRation: playerDetails.donations+playerDetails.donationsReceived
         }
     }
 
