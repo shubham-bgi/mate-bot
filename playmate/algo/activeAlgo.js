@@ -43,6 +43,7 @@ class ActiveAlgo {
     getLastMonthsLastMonday() {
         let d = new Date();
         let y = new Date();
+        y.setUTCDate(15)
         y.setMonth(y.getMonth()+1)
         y.setUTCDate(0);
         while (y.getUTCDay() !== 1) { // Roll the days backwards until Monday.
@@ -62,6 +63,7 @@ class ActiveAlgo {
     
     calculateTimeDifference () {
         let lastMonthMonday = this.getLastMonthsLastMonday();
+        console.log('monday', lastMonthMonday);
         let d = new Date();
         let differnce = (d.getTime() - lastMonthMonday.getTime())/(1000*60*60*24);
         return differnce;
