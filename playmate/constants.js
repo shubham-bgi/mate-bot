@@ -16,6 +16,7 @@ const playerByTagUrl = '/players/';
 const warLogByTagUrl = '/warlog';
 const playmateDiscordInvite = "https://discord.gg/Zh29Kjk";
 const playmateInvite = "https://discord.com/oauth2/authorize?client_id=704996785499799582&scope=bot&permissions=805694545";
+const x = 'https://discord.com/oauth2/authorize?client_id=704996785499799582&scope=bot&permissions=805694545';
 const TOWNHALL_MAX = 13;
 const LAB_MAX = TOWNHALL_MAX - 2;
 const TOP_CLAN_TAG = '#2JGYRJVL';//mega empire

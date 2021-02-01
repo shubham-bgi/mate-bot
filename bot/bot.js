@@ -76,6 +76,10 @@ bot.on('message', async msg => {
       prefixes: botSet.prefix
     };
   }
+  if (msg.mentions.users.has(bot.user.id)) {
+    msg.channel.send(`Current Prefix ${prefixes[msg.guild.id].prefixes}`);
+    return;
+  }
   let prefix = prefixes[msg.guild.id].prefixes;
   if(!msg.content.startsWith(prefix)) return;
 

@@ -520,15 +520,18 @@ class SetRequirements {
                         } else {
                             msg.channel.send('Some error occured,this never really happens. If happens again please report in our support server.')
                             msgCollector.stop('Database error');
+                            return;
                         }
-                    } else if(clanRegister.quiz[14].negativeAnswer.includes(message.content)){
+                    } else if(clanRegister.quiz[14].negativeAnswer.includes(message.content.toLowerCase())){
                         if(await registeredClanCollection.newClanRegister(registeredClanDetails)) {
                             fetchChannel(registeredClanDetails.discordID.channel, bot).send(clanRegister.endText);
                             msg.channel.send('Requirements are now set. You can use ``showreq`` command to see your clan requirements.');
                             msgCollector.stop('Finished');
+                            return;
                         } else {
                             msg.channel.send('Some error occured,this never really happens. If happens again please report in our support server.')
                             msgCollector.stop('Database error');
+                            return;
                         }
                         return;
                     } else if ( count < clanRegister.wrongAnswerCount ) {
