@@ -63,7 +63,6 @@ class ActiveAlgo {
     
     calculateTimeDifference () {
         let lastMonthMonday = this.getLastMonthsLastMonday();
-        console.log('monday', lastMonthMonday);
         let d = new Date();
         let differnce = (d.getTime() - lastMonthMonday.getTime())/(1000*60*60*24);
         return differnce;

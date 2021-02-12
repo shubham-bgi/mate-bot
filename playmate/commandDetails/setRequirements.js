@@ -209,6 +209,7 @@ class SetRequirements {
                         count = 0;
                         msg.reply( clanRegister.quiz[5].question )
                         questionNumber = 5;
+                        return;
                     } else if (count < clanRegister.wrongAnswerCount) {
                         msg.channel.send( clanRegister.quiz[4].onWrongReply);
                         msg.reply( clanRegister.quiz[4].question + clanMetrics.rushedMetrics.maxPoints );
