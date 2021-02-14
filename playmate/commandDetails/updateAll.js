@@ -11,7 +11,7 @@ class UpdateAll {
         let modified = 0;
         let failed = 0;
         let now = new Date();
-        now = new Date(now.setDate(now.getDate()-4));
+        now = new Date(now.setDate(now.getDate()-1));
         let clanDetailsToBeUpdated = await registeredClanCollection.findStaleDetails(now);
         msg.channel.send('Clans to be updated: ' + clanDetailsToBeUpdated.length);
         for(let i = 0; i < clanDetailsToBeUpdated.length; i++) {
