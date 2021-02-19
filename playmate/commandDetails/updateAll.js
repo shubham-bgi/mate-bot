@@ -34,10 +34,12 @@ class UpdateAll {
             };
             let memberDetails = await Api.getMembersDetails(clanDetails);
             let warLog = await Api.getWarLog(clanDetails.tag);
+            console.log(clanDetails.name, '\n');
+            console.log(warLog);
             let clanMetrics = getMetricsForMembersOfClan(memberDetails, clanDetails, warLog.items);
             const oldDetails = await registeredClanCollection.updateDetailsByClanTag(clanDetails, clanMetrics);
-            if (oldDetails) { 
-                modified++; 
+            if (oldDetails) {
+                modified++;
             }
             else {
                 msg.channel.send('Failed to update for clan ' + clanDetailsToBeUpdated[i].clanDetails.name + clanDetailsToBeUpdated[i].clanDetails.tag);
