@@ -7,15 +7,16 @@ class RemoveClan {
     async pullRemoveClanCommandDetails(argument, msg, embed){
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
             const question = "Which one?\n Type the corresponding number or ``no``.";
-            const clanTag = await listClans(argument, msg, embed, question);
-            if(!clanTag){ return; }
+            const clan = await listClans(argument, msg, embed, question);
+            if(!clan){ return; }
+            const clanTag = clan.tag
             this.pullRemoveClanCommandDetails(clanTag, msg)
         }
         else {
             argument = fixTag(argument);
             let regClanDetails = await regesteredClanCollection.getByDiscordID(msg.guild.id);
-            if(regClanDetails && regClanDetails.clanDetails.tag == argument) {
-                msg.channel.send('This clan can\'t be removed, as this clan is also registered to serach for players. Use ``-delreq`` first.')
+            if(regClanDetails[0] && regClanDetails.clanDetails.tag == argument) {
+                msg.channel.send('This clan can\'t be removed, as this clan is also registered to search for players. Use ``-delreq`` first.')
                 return;
             }
             let numberOfDocsModified = await clanCollections.pullOldClanByClanTag(msg.guild.id, argument);

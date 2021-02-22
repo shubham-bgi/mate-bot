@@ -223,11 +223,24 @@ function listBasesEmbed(bases, msg, embed) {
     return embed;
 }
 
-function listClansEmbed(clans, msg, embed) {
+function listClansEmbed(clans, msg, embed, flag) {
     embed.setAuthor(msg.guild.name, msg.guild.iconURL);
     embed.setColor('#2f3136');
     for (let i = 0; i < clans.length; i++ ) {
+        if(!flag) {
         embed.addField(`${i+1}. ${clans[i].name}`, `Lvl${clans[i].level}, [${clans[i].tag}](${constants.clanInfoUrl}${removeFirstLetter(clans[i].tag)}), ${clans[i].type}`);
+        } else {
+        embed.addField(`${i+1}. ${clans[i].name}`, `Lvl${clans[i].clanLevel}, [${clans[i].tag}](${constants.clanInfoUrl}${removeFirstLetter(clans[i].tag)})`);
+        }
+    }
+    return embed;
+}
+
+function listRegClansEmbed(clans, msg, embed) {
+    embed.setAuthor(msg.guild.name, msg.guild.iconURL);
+    embed.setColor('#2f3136');
+    for (let i = 0; i < clans.length; i++ ) {
+        embed.addField(`${i+1}. ${clans[i].clanDetails.name}`, `Lvl${clans[i].clanDetails.level}, [${clans[i].clanDetails.tag}](${constants.clanInfoUrl}${removeFirstLetter(clans[i].clanDetails.tag)})`);
     }
     return embed;
 }
@@ -288,5 +301,6 @@ module.exports = {
     listClansEmbed: listClansEmbed,
     settingsEmbed: settingsEmbed,
     verificationEmbed: verificationEmbed,
-    topClansEmbed: topClansEmbed
+    topClansEmbed: topClansEmbed,
+    listRegClansEmbed: listRegClansEmbed
 }

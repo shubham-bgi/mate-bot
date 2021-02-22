@@ -6,6 +6,7 @@ module.exports ={
     execute(bot, msg, args, Discord, recentUser) {
       console.log(args);
       const embed = new Discord.RichEmbed();
-      showRequirements.showRequirementsCommandDetails(args[0], msg, embed);
+      const embed2 = new Discord.RichEmbed();
+      showRequirements.showRequirementsCommandDetails(args[0], msg, embed, embed2);
     },
 };

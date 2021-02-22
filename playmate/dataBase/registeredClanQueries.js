@@ -30,7 +30,7 @@ class registeredClanQueries {
 
     static async getByDiscordID(discordID) {
         try {
-            const regClanDetails = await RegisteredClan.findOne({ "discordID.guild": discordID });
+            const regClanDetails = await RegisteredClan.find({ "discordID.guild": discordID });
             return regClanDetails;
         }
         catch (error) {
@@ -38,18 +38,18 @@ class registeredClanQueries {
         } 
     }
 
-    static async deleteByDiscordID(discordID){
-        RegisteredClan.findOneAndDelete( {"discordID.guild": discordID}, (err, result) => {
+    static async deleteByTag(clanTag){
+        RegisteredClan.findOneAndDelete( {"clanDetails.tag": clanTag}, (err, result) => {
         if (err) 
         throw err;
         return;
         })
     }
 
-    static async setSearchByUserByDiscordID(discordID, setToThis){
+    static async setSearchByUserByDiscordID(clanTag, setToThis){
         try{
             const docsModified = await RegisteredClan.updateOne({
-                "discordID.guild": discordID
+                "clanDetails.tag": clanTag
             }, {
                 $set: { 
                     searchSetByUser: setToThis
@@ -62,10 +62,10 @@ class registeredClanQueries {
         }
     }
 
-    static async setSearchByAdminByDiscordID(discordId, setToThis){
+    static async setSearchByAdminByDiscordID(clanTag, setToThis){
         try{
             const docsModified = await RegisteredClan.updateOne({
-                "discordID.guild" : discordId
+                "clanDetails.tag" : clanTag
             }, {
                 $set: { 
                     searchSetByAdmin: setToThis
@@ -78,10 +78,10 @@ class registeredClanQueries {
         }
     }
     
-    static async setAreDetailsUpdatedByDiscordId(discordId, setToThis){
+    static async setAreDetailsUpdatedByDiscordId(clanTag, setToThis){
         try{
             const docsModified = await RegisteredClan.updateOne({
-                "discordID.guild": discordId
+                "clanDetails.tag": clanTag
             }, {
                 $set: { 
                     areDetailsUpdated: setToThis
@@ -139,6 +139,7 @@ class registeredClanQueries {
                         }
                     }
                 },
+                "baseRequirements.needWarFarmers": baseDetails.needWarFarmers,
                 searchSetByUser: true,
                 searchSetByAdmin: true,
                 areDetailsUpdated: true,
@@ -240,7 +241,7 @@ module.exports = {
     getByClanTag: registeredClanQueries.getByClanTag,
     getByDiscordID: registeredClanQueries.getByDiscordID,
     newClanRegister: registeredClanQueries.newClanRegister,
-    deleteByDiscordID: registeredClanQueries.deleteByDiscordID,
+    deleteByTag: registeredClanQueries.deleteByTag,
     setSearchByUser: registeredClanQueries.setSearchByUserByDiscordID,
     setSearchByAdmin: registeredClanQueries.setSearchByAdminByDiscordID,
     setAreDetailsUpdated: registeredClanQueries.setAreDetailsUpdatedByDiscordId,

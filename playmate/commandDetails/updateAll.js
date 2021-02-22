@@ -34,8 +34,6 @@ class UpdateAll {
             };
             let memberDetails = await Api.getMembersDetails(clanDetails);
             let warLog = await Api.getWarLog(clanDetails.tag);
-            console.log(clanDetails.name, '\n');
-            console.log(warLog);
             let clanMetrics = getMetricsForMembersOfClan(memberDetails, clanDetails, warLog.items);
             const oldDetails = await registeredClanCollection.updateDetailsByClanTag(clanDetails, clanMetrics);
             if (oldDetails) {

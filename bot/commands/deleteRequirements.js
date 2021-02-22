@@ -4,11 +4,12 @@ module.exports = {
     name: 'delreq',
     description: 'Deletes your base requirements',
     execute(bot, msg, args, Discord, recentUser) {
+      const embed = new Discord.RichEmbed();
       if (!msg.member.hasPermission("ADMINISTRATOR")){
         msg.channel.send('Admin only command.');
         return;
       }
       console.log(args);
-      deleteRequirements.deleteRequiremetnsCommandDetails(msg);
+      deleteRequirements.deleteRequiremetnsCommandDetails(msg, embed);
     },
 };

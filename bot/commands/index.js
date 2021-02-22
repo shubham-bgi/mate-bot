@@ -8,6 +8,7 @@ module.exports = {
   RemoveClan: require('./removeClan'),
   SetRequirements: require('./setRequirements'),
   NeedClan: require('./needClan'),
+  NeedFWA: require('./needFWA'),
   Help: require('./help'),
   StopSearching: require('./stopSearching'),
   StartSearching: require('./startSearching'),

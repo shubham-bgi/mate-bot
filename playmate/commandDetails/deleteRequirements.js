@@ -1,22 +1,36 @@
 const registeredClanCollection = require('../dataBase/registeredClanQueries');
 const {askQuestion} = require('../multipleUse/questions');
+const {listClans} = require('../multipleUse/listClans')
 const {playmateDiscordInvite} = require('../constants');
 class DeleteRequirements {
-    async deleteRequiremetnsCommandDetails(msg) {
+    async deleteRequiremetnsCommandDetails(msg, embed) {
+        let clanTag;
+        let regClanDetail;
         const regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
-        if(!regClanDetails) { msg.channel.send('There are no clan requirements set.'); return; }
-        if(!regClanDetails.searchSetByAdmin) { msg.channel.send('Sorry, you can\'t do this right now. Contact our server support (' + playmateDiscordInvite +')'); return; }
+        if(!regClanDetails[0]) { 
+            msg.channel.send('There are no clan requirements set.'); 
+            return; 
+        } else {
+            const question = "Which one?\nType the corresponding number or ``no``.";
+            regClanDetail = await listClans(null, msg, embed, question, regClanDetails);
+            if(!regClanDetail) { return; }
+            clanTag = regClanDetail.tag;
+        }
+        if(!regClanDetails.filter(clan => {return clan.clanDetails.tag === clanTag})[0].searchSetByAdmin) { 
+            msg.channel.send('Sorry, you can\'t do this. Contact our server support (' + playmateDiscordInvite +')'); 
+            return; 
+        }
         msg.reply('Are you sure?\nType ``yes`` or ``no``.');
         const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 20000 });
-        askQuestion(msg, msgCollector, this.deleteRequirementsQuestinaire(msg, regClanDetails))
+        askQuestion(msg, msgCollector, this.deleteRequirementsQuestinaire(msg, regClanDetail))
     }
 
-    deleteRequirementsQuestinaire(msg, regClanDetails) {
+    deleteRequirementsQuestinaire(msg, regClanDetail) {
         let count = 0; 
         return (message, msgCollector) => {
             if (['yes', 'y'].includes(message.content.toLowerCase())) {
-                registeredClanCollection.deleteByDiscordID(msg.guild.id);
-                msg.channel.send(regClanDetails.clanDetails.name + ' requirements deleted.');
+                registeredClanCollection.deleteByTag(regClanDetail.tag);
+                msg.channel.send(regClanDetail.name + ' requirements deleted.');
                 msgCollector.stop('done');
             } else if (['no', 'n'].includes(message.content.toLowerCase())) {
                 msg.channel.send('oof, ok.');

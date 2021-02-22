@@ -3,14 +3,21 @@ const registereredClanCollection = require('../dataBase/registeredClanQueries');
 const {getMetricForBase} = require('../multipleUse/points');
 const {removeByProperty, sum} = require('../multipleUse/oneLineFunctions');
 const {fixTag} = require('../multipleUse/fixTag');
-async function checkBaseCommandDetails(baseTag, msg) {
+const {listClans} = require('../multipleUse/listClans')
+async function checkBaseCommandDetails(baseTag, msg, embed) {
     let regClanDetails = await registereredClanCollection.getByDiscordID(msg.guild.id);
     let flag = 1;
-    if(!regClanDetails) { 
+    let regClanDetail;
+    if(!regClanDetails[0]) { 
         msg.channel.send('Set clan requirements first. Use ``setreq`` command to set them up.'); 
         return;
+    } else {
+        const question = "For which Clan?\nType the corresponding number or ``no``.";
+        regClanDetail = await listClans(null, msg, embed, question, regClanDetails);
+        if(!regClanDetail) { return; }
     }
-    let baseRequirements = regClanDetails.baseRequirements;
+    let finalDetails = regClanDetails.filter(clan => {return clan.clanDetails.tag === regClanDetail.tag})[0];
+    let baseRequirements = finalDetails.baseRequirements;
     baseTag = fixTag(baseTag);
     let baseDetails = await Api.getPlayerDetails(baseTag);
     if(!baseDetails) { 

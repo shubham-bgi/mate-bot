@@ -11,15 +11,16 @@ const clanRegister = require('../standardData/clanRegister');
 class SetRequirements {
     async lookingForClanMatesCommandDetails(argument, msg, embed, bot, embed1) {
         const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 400000 });
-        let regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
+        /* let regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
         if (regClanDetails) { 
             msg.channel.send('You can only register one clan per server right now.'); 
             return; 
-        }
+        } */
         const question = "Which one?\nType the corresponding number or ``no``.";
-        const clanTag = await listClans(argument, msg, embed, question);
+        const clan = await listClans(argument, msg, embed, question);
+        const clanTag = clan.tag;
         if(!clanTag) { return; }
-        regClanDetails = await registeredClanCollection.getByClanTag(clanTag);
+        let regClanDetails = await registeredClanCollection.getByClanTag(clanTag);
         if(regClanDetails) {
             if(regClanDetails.discordID.guild != msg.guild.id) {
                 const guild = await bot.guilds.get(regClanDetails.discordID.guild);
@@ -52,11 +53,10 @@ class SetRequirements {
 
         msg.channel.send('You can cancel this anytime by typing ``cancel``.');
         if(clanDetails.members < 5) {
-            msg.channel.send('Since, you have less than 5 players in your clan, requirements will be auto set for you to get max players.');
+            msg.channel.send('Since, you have less than 5 players in your clan, requirements will be auto set for you to get most no of players.');
             msg.reply(clanRegister.quiz[13].question);
             askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 13, bot))
-        }
-        if( checkFWA(clanDetails.description) ) {
+        } else if(checkFWA(clanDetails.description) ) {
             msg.reply(clanRegister.quiz[0].question);
             askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 0, bot))
         } else if( clanMetrics.townHall.type.startsWith('O') ) {
@@ -68,7 +68,7 @@ class SetRequirements {
         }
     }
 
-     clanRegisterQuestionaire(msg, clanDetails, clanMetrics, questionNumber, bot) {
+    clanRegisterQuestionaire(msg, clanDetails, clanMetrics, questionNumber, bot) {
         let count = 0;
         let i = 0;
         let j = 0;
@@ -80,6 +80,10 @@ class SetRequirements {
         registeredClanDetails.baseRequirements.heroLevels = clanRegister.quiz[10].default;
         registeredClanDetails.baseRequirements.warStars = clanRegister.quiz[12].default;
         registeredClanDetails.discordID.guild = msg.guild.id;
+        registeredClanDetails.baseRequirements.townHallLevel = 1;
+        registeredClanDetails.baseRequirements.nonRushPoints = 0;
+        registeredClanDetails.baseRequirements.trophies = 0;
+        registeredClanDetails.baseRequirements.versusTrophies = 0;
         registeredClanDetails.clanDetails = clanDetails;
         registeredClanDetails.clanMetrics = clanMetrics;
         let townhallCount;
@@ -424,7 +428,7 @@ class SetRequirements {
                     }
 
                 case 11://do you wanna set war stars for each town hall?
-                    if (clanRegister.quiz[11].positiveAnswer(message.content)) {
+                    if (clanRegister.quiz[11].positiveAnswer(message.content.toLowerCase())) {
                         count = 0;
                         registeredClanDetails.baseRequirements.warStars = [];
                         if ( registeredClanDetails.baseRequirements.onlyTownHall ) {

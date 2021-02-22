@@ -9,7 +9,8 @@ class Clan {
         const embed = new Discord.RichEmbed();
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
             const question = "Do you want info on any of "+ msg.guild.name +" clans?\nType the corresponding number or ``no``.";
-            const clanTag = await listClans(argument, msg, embed, question);
+            let clan = await listClans(argument, msg, embed, question);
+            let clanTag = clan.tag;
             if(!clanTag) { return; }
             this.getClanCommandDetails(clanTag, msg, bot, Discord); 
         } else {
