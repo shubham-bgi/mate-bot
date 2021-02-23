@@ -21,7 +21,7 @@ async function listClansCommandDetails(type, msg, e1, question, regClans) {
     }
     if (!type) {
         if (botUserClans.clans.length == 1) {
-            return botUserClans.clans[0].tag;
+            return botUserClans.clans[0];
         }
         showClans = botUserClans.clans;
         msg.channel.send(listClansEmbed(showClans, msg, e1));
