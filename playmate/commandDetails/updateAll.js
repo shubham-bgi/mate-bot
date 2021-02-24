@@ -13,7 +13,7 @@ async function updateAllClanDetailsCommandDetails(msg, bot) {
     for(let i = 0; i < clanDetailsToBeUpdated.length; i++) {
         await task(i, clanDetailsToBeUpdated, msg, bot);
     }
-    setTimeout(function() {updateAllClanDetailsCommandDetails(msg, bot);}, 7200000);
+    setTimeout(function() {updateAllClanDetailsCommandDetails(msg, bot);}, 10000);
     /* const allBases = db.getAllBases();
     const allClans = db.getAllClans();
     let flag = 0;
