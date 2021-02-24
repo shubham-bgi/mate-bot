@@ -13,7 +13,7 @@ async function updateAllClanDetailsCommandDetails(msg, bot) {
     for(let i = 0; i < clanDetailsToBeUpdated.length; i++) {
         await task(i, clanDetailsToBeUpdated, msg, bot);
     }
-    setTimeout(function() {updateAllClanDetailsCommandDetails(msg, bot);}, 10000);
+    setTimeout(function() {updateAllClanDetailsCommandDetails(msg, bot);}, 7200000);
     /* const allBases = db.getAllBases();
     const allClans = db.getAllClans();
     let flag = 0;
@@ -52,6 +52,8 @@ async function task(i, clanDetailsToBeUpdated, msg, bot) {
         const oldDetails = await registeredClanCollection.updateDetailsByClanTag(clanDetails, clanMetrics);
         if (!oldDetails) {
             msg.channel.send('Failed to update for clan databse error' + clanDetailsToBeUpdated[i].clanDetails.name + clanDetailsToBeUpdated[i].clanDetails.tag);
+        } else {
+            console.log('Modified clan details succesfully!');
         }
     }, 1000*i);
 }
