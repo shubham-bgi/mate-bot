@@ -14,7 +14,6 @@ function checkSiege(memberDetails){
         return countPoints;
     })
     siegePoints = Olf.removeElement(siegePoints, 0);
-    console.log(siegePoints);
     if(siegePoints.length > 0)
     {
         totalPoints = siegePoints.reduce((a,b) => a+b) * Math.max(...siegePoints);
@@ -81,8 +80,6 @@ function calculateMaxDonationPoints(memberDetails, clanLevel) {
     let troopStatus = troopCount.toString() + '/' + troopNames.length.toString();
     let siegeStatus = siegeCount.toString() + '/' + siegeNames.length.toString();
     let spellStatus = spellCount.toString() + '/' + spellNames.length.toString();
-    //console.log(troopStatus,siegeStatus, spellStatus);
-    //console.log(maxUnitsClanCanDonate);
     let totalMaxDonationPoitns = (Math.round(maxDonationPoints.reduce((a,b) => a+b)/0.5*maxUnitsClanCanDonate.length/totalUnitsCount)/10);//totalpoints and then multipllying it with the percentage of different type of units whole clan can donate
     return {
         units: maxUnitsClanCanDonate,
