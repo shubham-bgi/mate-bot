@@ -9,11 +9,12 @@ function checkSiege(memberDetails){
         playerDetails = playerDetails.data;
         countPoints = 0
         playerDetails.troops.map((troop) => {
-            if(siegeNames.includes(troop.name)) countPoints+=0.25;
+            if(siegeNames.includes(troop.name)) countPoints+=1/siegeNames.length;
         })
         return countPoints;
     })
     siegePoints = Olf.removeElement(siegePoints, 0);
+    console.log(siegePoints);
     if(siegePoints.length > 0)
     {
         totalPoints = siegePoints.reduce((a,b) => a+b) * Math.max(...siegePoints);

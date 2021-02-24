@@ -11,7 +11,7 @@ module.exports = {
     ShowRequirements: require('./showRequirements').ShowRequirements,
     Searching: require('./searching').Searching,
     Update: require('./update').Update,
-    UpdateAll: require('./updateAll').UpdateAll,
+    updateAllClanDetailsCommandDetails: require('./updateAll').updateAllClanDetailsCommandDetails,
     invite: require('./invite').inviteCommandDetails,
     checkBaseCommandDetails: require('./checkBase').checkBaseCommandDetails,
     leaderBoard: require('./leaderBoard').leaderBoard
