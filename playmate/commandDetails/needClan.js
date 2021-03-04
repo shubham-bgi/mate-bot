@@ -13,7 +13,7 @@ class NeedClan{
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
             const embed = new Discord.RichEmbed();
             const question = "Which base are you searching for?\n Type the corresponding number or ``no``";
-            const baseTag = await listBases(argument, msg, embed, question);
+            const baseTag = await listBases(argument, msg, embed, question, "needclan");
             if(!baseTag) { return; }
             this.iNeedAClanCommandDetails(baseTag, msg, bot, Discord, recentUser, needWarFarmers); 
         } else {

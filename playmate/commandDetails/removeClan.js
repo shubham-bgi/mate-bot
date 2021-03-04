@@ -9,10 +9,9 @@ class RemoveClan {
             const question = "Which one?\n Type the corresponding number or ``no``.";
             const clan = await listClans(argument, msg, embed, question);
             if(!clan){ return; }
-            const clanTag = clan.tag
+            const clanTag = clan.tag;
             this.pullRemoveClanCommandDetails(clanTag, msg)
-        }
-        else {
+        } else {
             argument = fixTag(argument);
             let regClanDetails = await regesteredClanCollection.getByDiscordID(msg.guild.id);
             if(regClanDetails[0] && regClanDetails.clanDetails.tag == argument) {

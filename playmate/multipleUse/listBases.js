@@ -1,13 +1,20 @@
 const baseCollection = require('../dataBase/baseQueries');
 const {listBasesEmbed} = require('./embed');
 const askQuestion = require('./questions').askQuestionPromise;
-async function listBasesCommandDetails(type, msg, e1, question) {
+async function listBasesCommandDetails(type, msg, e1, question, fromWhere) {
     let showBases;
     const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 20000 });
     let botMsgChannel = msg.channel;
     let botUserDetails = msg.author;
     let botUserBases = await baseCollection.getBasesByDiscordId(botUserDetails.id);
-    if(!botUserBases || botUserBases.bases.length == 0) { botMsgChannel.send('No bases are currently linked with you. Use ``addbase`` command.'); return; }
+    if(!botUserBases || botUserBases.bases.length == 0) { 
+        if(fromWhere == "needclan") {
+            botMsgChannel.send("Usage : ``-needclan <#base_Tag>``, E.g. ``-needclan #cjo28pr8``");
+        } else {
+            botMsgChannel.send('No bases are currently linked with you. Use ``addbase`` command.'); 
+        }
+        return;
+    }
     if (!type) {
         if (botUserBases.bases.length == 1) {
             return botUserBases.bases[0].tag;
