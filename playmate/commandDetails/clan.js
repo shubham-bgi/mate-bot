@@ -10,8 +10,8 @@ class Clan {
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
             const question = "Do you want info on any of "+ msg.guild.name +" clans?\nType the corresponding number or ``no``.";
             let clan = await listClans(argument, msg, embed, question);
+            if(!clan.tag) { return; }
             let clanTag = clan.tag;
-            if(!clanTag) { return; }
             this.getClanCommandDetails(clanTag, msg, bot, Discord); 
         } else {
             argument = fixTag(argument);

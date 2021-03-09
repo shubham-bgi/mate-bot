@@ -16,7 +16,8 @@ class RemoveBase {
             if (numberOfDocsModified.nModified > 0) {
                 msg.channel.send('Successfully removed.');
             } else {
-                msg.channel.send('No base found with that tag.');
+                msg.channel.send('Error! I have logged the error.');
+                console.log('Remove Base Error.');
             }
         }
     }

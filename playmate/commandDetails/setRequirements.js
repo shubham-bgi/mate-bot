@@ -18,8 +18,8 @@ class SetRequirements {
         } */
         const question = "Which one?\nType the corresponding number or ``no``.";
         const clan = await listClans(argument, msg, embed, question);
+        if(!clan.tag) { return; }
         const clanTag = clan.tag;
-        if(!clanTag) { return; }
         let regClanDetails = await registeredClanCollection.getByClanTag(clanTag);
         if(regClanDetails) {
             if(regClanDetails.discordID.guild != msg.guild.id) {

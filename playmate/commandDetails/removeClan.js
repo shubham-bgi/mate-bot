@@ -8,7 +8,7 @@ class RemoveClan {
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
             const question = "Which one?\n Type the corresponding number or ``no``.";
             const clan = await listClans(argument, msg, embed, question);
-            if(!clan){ return; }
+            if(!clan.tag){ return; }
             const clanTag = clan.tag;
             this.pullRemoveClanCommandDetails(clanTag, msg)
         } else {
