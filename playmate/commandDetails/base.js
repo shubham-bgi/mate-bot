@@ -10,7 +10,8 @@ class Base{
         const botMsgChannel = msg.channel;
         if(!argument || baseTypes.includes(argument.toLowerCase())) {
             const question = "Do you want info on any base?\n Type the corresponding number or ``no``";
-            const baseTag = await listBases(argument, msg, embed, question);
+            const noBaseFoundText = "No base are currently linked with you. Use ``addbase`` command.";
+            const baseTag = await listBases(argument, msg, embed, question, noBaseFoundText);
             if(!baseTag) { return; }
             this.getBaseCommandDetails(baseTag, msg, bot, Discord);
         } else {

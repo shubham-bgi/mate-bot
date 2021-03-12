@@ -1,18 +1,14 @@
 const baseCollection = require('../dataBase/baseQueries');
 const {listBasesEmbed} = require('./embed');
 const askQuestion = require('./questions').askQuestionPromise;
-async function listBasesCommandDetails(type, msg, e1, question, fromWhere) {
+async function listBasesCommandDetails(type, msg, e1, question, noBaseFoundText) {
     let showBases;
     const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 20000 });
     let botMsgChannel = msg.channel;
     let botUserDetails = msg.author;
     let botUserBases = await baseCollection.getBasesByDiscordId(botUserDetails.id);
-    if(!botUserBases || botUserBases.bases.length == 0) { 
-        if(fromWhere == "needclan") {
-            botMsgChannel.send("Usage : ``-needclan <#base_Tag>``, E.g. ``-needclan #cjo28pr8``");
-        } else {
-            botMsgChannel.send('No bases are currently linked with you. Use ``addbase`` command.'); 
-        }
+    if(!botUserBases || botUserBases.bases.length == 0) {
+            botMsgChannel.send(noBaseFoundText);
         return;
     }
     if (!type) {
@@ -25,9 +21,9 @@ async function listBasesCommandDetails(type, msg, e1, question, fromWhere) {
         return await askQuestion(msg, msgCollector, listBaseQuestion(msg, showBases, question));
     } else {
         showBases = botUserBases.bases.filter(base => { if (base.type == type.toLowerCase()) { return base; } });
-        if(showBases.length == 0) { botMsgChannel.send('No bases with that type found. Use ``addbase`` command.'); return; }
+        if(showBases.length == 0) { botMsgChannel.send('No base with that type found. Use ``addbase`` command.'); return; }
         if(showBases.length == 1) { return showBases[0].tag; }
-        msg.channel.send(listBasesEmbed(showBases, msg, e1));
+        msg.channel.send(listBasesEmbed(showBases, msg, e1)); 
         msg.reply(question);
         return await askQuestion(msg, msgCollector, listBaseQuestion(msg, showBases, question));
     }

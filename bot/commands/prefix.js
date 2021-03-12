@@ -9,7 +9,7 @@ module.exports = {
         return;
     }
     if(!args[0] || args[0] == "help"){
-        msg.channel.send(`Usage: \`\`${prefix}prefix <desired prefix>\`\`. `);
+        msg.channel.send(`Usage: \`\`${prefix}prefix <desired prefix>\`\` `);
         return;
     }
     if(args[0].length>3) {

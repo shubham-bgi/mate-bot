@@ -8,7 +8,7 @@ class DeleteRequirements {
         let regClanDetail;
         const regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
         if(!regClanDetails[0]) { 
-            msg.channel.send('There are no clan requirements set.'); 
+            msg.channel.send('There are no clan requirements set. Use ``setreq`` command to set them up.'); 
             return; 
         } else {
             const question = "Which one?\nType the corresponding number or ``no``.";

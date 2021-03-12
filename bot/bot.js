@@ -7,6 +7,7 @@ bot.commands = new Discord.Collection();
 const recentUser = new Set();
 const fs = require('fs');
 const path = require('path');
+const whenKicked = require('./whenKicked');
 
 Object.keys(commands).map(key => {
   bot.commands.set(commands[key].name, commands[key]);
@@ -21,8 +22,8 @@ bot.on('ready', () => {
   })
 });
 
-/* bot.on('guildCreate', guild => {
-  let channelID;
+bot.on('guildCreate', guild => {
+  /* let channelID;
   let channels = guild.channels;
   for (let key in channels) {
       let c = channels[key];
@@ -32,8 +33,29 @@ bot.on('ready', () => {
           break;
       }
   }
-  let channel = guild.channels.get(guild.systemChannelID || channelID);
-  const channel = guild.channels.find(c => c.permissionsFor(guild.me) && c.type === 'text' && c.permissionsFor(guild.me).has('SEND_MESSAGES'));
+  let channel = guild.channels.get(guild.systemChannelID || channelID); */
+  //const channel = guild.channels.find(c => c.permissionsFor(guild.me) && c.type === 'text' && c.permissionsFor(guild.me).has('SEND_MESSAGES'));
+  
+  let defaultChannel = "";
+  /* guild.channels.forEach((channel) => {
+    if(channel.type == "text" && defaultChannel == "") {
+      if(channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+        defaultChannel = channel;
+        console.log(defaultChannel.name);
+      }
+    }
+  }) */
+
+  guild.channels.every((channel) => {
+    //console.log(channel.name);
+    if(channel.type == "text" && channel.permissionsFor(guild.me).has("SEND_MESSAGES") && channel.permissionsFor(guild.me).has("READ_MESSAGES")) {
+        defaultChannel = channel;
+        //console.log(defaultChannel.name);
+        return false;
+    }
+    return true;
+  })
+  
   let embed = new Discord.RichEmbed();
   embed.setTitle('Thank you for adding me!');
   embed.setColor('#2f3136');
@@ -47,24 +69,24 @@ bot.on('ready', () => {
 
   If you want to search for a clan:
 
-  1) Use \`\`-addbase <your base tag>\`\` command to link your base
-    to your discord account.
-  2) Then use \`\`-needclan\`\` command to search for a clan.
+  1) Use \`\`-needclan <your base tag>\`\` command to search for a clan.
   
   My default prefix is \`\`-\`\` but you can easily change it by
   using command \`\`-prefix <desired prefix>\`\`.`);
-  guild.channels.sort(function(chan1,chan2){
+  /* guild.channels.sort(function(chan1,chan2){
     if(chan1.type!==`text`) return -1;
     if(!chan1.permissionsFor(guild.me).has(`SEND_MESSAGES`)) return -1;
     return chan1.position < chan2.position ? 1 : -1;
-}).first().send(embed);
+  }).first().send(embed);
   if(channel) {
     channel.send(embed);
-  }
-}) */
+  } */
+  defaultChannel.send(embed);
+})
 
 bot.on("guildDelete", guild => {
   console.log("Left a guild: " + guild.name);
+  whenKicked.whenKicked(guild);
   //remove from guildArray
 })
 

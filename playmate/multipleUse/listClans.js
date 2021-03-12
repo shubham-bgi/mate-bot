@@ -2,7 +2,7 @@ const clanCollection = require('../dataBase/clanQueries');
 const {listClansEmbed} = require('./embed');
 const askQuestion = require('./questions').askQuestionPromise;
 const {} = require('./oneLineFunctions')
-async function listClansCommandDetails(type, msg, e1, question, regClans) {
+async function listClansCommandDetails(type, msg, e1, question, regClans, noClansFoundText) {
     let showClans;
     const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 20000 });
     if(regClans) {
@@ -16,7 +16,7 @@ async function listClansCommandDetails(type, msg, e1, question, regClans) {
     }
     let botUserClans = await clanCollection.getClansByDiscordId(msg.guild.id);
     if(!botUserClans || botUserClans.clans.length == 0) { 
-        msg.channel.send('No clans are linked with the server. Use ``addclan`` command.'); 
+        msg.channel.send(noClansFoundText); 
         return; 
     }
     if (!type) {

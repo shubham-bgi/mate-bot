@@ -3,13 +3,13 @@ const checkBaseCommandDetails = require('../../playmate/commandDetails').checkBa
 module.exports = {
     name: 'checkbase',
     description: 'Check base whether it fits the requirements or not.',
-    execute(bot, msg, args, Discord, recentUser) {
+    execute(bot, msg, args, Discord, recentUser, prefix) {
       console.log(args);
       const embed = new Discord.RichEmbed();
       if(args.length > 0) {
         checkBaseCommandDetails(args[0], msg, embed);
       } else {
-          msg.channel.send('Specify the base tag.');
+          msg.channel.send(`Usage: \`\`${prefix}checkbase <player base tag>\`\``);
       }
     }
 };

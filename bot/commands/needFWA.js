@@ -3,8 +3,8 @@ const needClan = new NeedClan();
 module.exports = {
     name: 'needfwa',
     description: 'Searches clan.',
-    execute(bot, msg, args, Discord, recentUser) {
+    execute(bot, msg, args, Discord, recentUser, prefix) {
       console.log(args);
-      needClan.iNeedAClanCommandDetails(args[0], msg, bot, Discord, recentUser, true);
+      needClan.iNeedAClanCommandDetails(args[0], msg, bot, Discord, recentUser, true, prefix);
     },
 };

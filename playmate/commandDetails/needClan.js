@@ -9,11 +9,17 @@ const {fetchChannel} = require('../multipleUse/discordOneLine');
 const keyMap = require('../standardData/keyMap');
 const {clanTypes} = require('../standardData/types.json');
 class NeedClan{   
-    async  iNeedAClanCommandDetails(argument, msg, bot, Discord, recentUser, needWarFarmers) {
+    async  iNeedAClanCommandDetails(argument, msg, bot, Discord, recentUser, needWarFarmers, prefix) {
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
             const embed = new Discord.RichEmbed();
+            let noBaseFoundText;
             const question = "Which base are you searching for?\n Type the corresponding number or ``no``";
-            const baseTag = await listBases(argument, msg, embed, question, "needclan");
+            if (!needWarFarmers) {
+                noBaseFoundText = "Usage: ``" + prefix + "needclan <your base tag>``\n example. " + prefix + "needclan #cjo28pr8";
+            } else {
+                noBaseFoundText = "Usage: ``" + prefix + "needfwa <your base tag>``\n example. " + prefix + "needfwa #cjo28pr8";
+            }
+            const baseTag = await listBases(argument, msg, embed, question, noBaseFoundText);
             if(!baseTag) { return; }
             this.iNeedAClanCommandDetails(baseTag, msg, bot, Discord, recentUser, needWarFarmers); 
         } else {

@@ -7,8 +7,9 @@ class RemoveClan {
     async pullRemoveClanCommandDetails(argument, msg, embed){
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
             const question = "Which one?\n Type the corresponding number or ``no``.";
-            const clan = await listClans(argument, msg, embed, question);
-            if(!clan.tag){ return; }
+            const noClansFoundText = "No clan currently linked with this server.";
+            const clan = await listClans(argument, msg, embed, question, undefined, noClansFoundText);
+            if(!clan){ return; }
             const clanTag = clan.tag;
             this.pullRemoveClanCommandDetails(clanTag, msg)
         } else {

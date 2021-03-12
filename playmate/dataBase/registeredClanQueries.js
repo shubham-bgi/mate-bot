@@ -46,7 +46,7 @@ class registeredClanQueries {
         })
     }
 
-    static async setSearchByUserByDiscordID(clanTag, setToThis){
+    static async setSearchByUser(clanTag, setToThis){
         try{
             const docsModified = await RegisteredClan.updateOne({
                 "clanDetails.tag": clanTag
@@ -62,7 +62,7 @@ class registeredClanQueries {
         }
     }
 
-    static async setSearchByAdminByDiscordID(clanTag, setToThis){
+    static async setSearchByAdmin(clanTag, setToThis){
         try{
             const docsModified = await RegisteredClan.updateOne({
                 "clanDetails.tag" : clanTag
@@ -232,6 +232,22 @@ class registeredClanQueries {
             console.log(error);
         } 
     } 
+
+    static async SetAllSearchByUser(discordId, setToThis) {
+        try{
+            const docsModified = await RegisteredClan.updateMany({
+                "discordID.guild": discordId
+            }, {
+                $set: { 
+                    searchSetByUser: setToThis
+                }
+            });
+            return docsModified;
+        }
+        catch(error) {
+            console.log(error);
+        }
+    }
 }
 
 
@@ -242,8 +258,9 @@ module.exports = {
     getByDiscordID: registeredClanQueries.getByDiscordID,
     newClanRegister: registeredClanQueries.newClanRegister,
     deleteByTag: registeredClanQueries.deleteByTag,
-    setSearchByUser: registeredClanQueries.setSearchByUserByDiscordID,
-    setSearchByAdmin: registeredClanQueries.setSearchByAdminByDiscordID,
+    setSearchByUser: registeredClanQueries.setSearchByUser,
+    SetAllSearchByUser: registeredClanQueries.SetAllSearchByUser,
+    setSearchByAdmin: registeredClanQueries.setSearchByAdmin,
     setAreDetailsUpdated: registeredClanQueries.setAreDetailsUpdatedByDiscordId,
     defaultTopClans: registeredClanQueries.getDefaultTopClans,
     foundPlayer: registeredClanQueries.foundPlayer,

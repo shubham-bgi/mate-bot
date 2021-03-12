@@ -17,8 +17,9 @@ class SetRequirements {
             return; 
         } */
         const question = "Which one?\nType the corresponding number or ``no``.";
-        const clan = await listClans(argument, msg, embed, question);
-        if(!clan.tag) { return; }
+        const noClanFoundText = "No clans are currently linked with this server. Use ``addclan`` command."
+        const clan = await listClans(argument, msg, embed, question, undefined, noClanFoundText);
+        if(!clan) { return; }
         const clanTag = clan.tag;
         let regClanDetails = await registeredClanCollection.getByClanTag(clanTag);
         if(regClanDetails) {

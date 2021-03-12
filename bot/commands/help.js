@@ -16,15 +16,15 @@ module.exports = {
         embed.setColor('#2f3136');
         embed.setTitle('🔗 Link Commands');
         embed.setDescription(`Bookmark bases or clans with your id.`);
-        embed.addField(prefix + 'addbase/removebase', 'Links/unlinks base with user.');
-        embed.addField(prefix + 'addclan/removeclan [ADMIN ONLY]', 'Links/unlinks clan with server.');
-        embed.addField(prefix + 'base/clan', 'Shows all linked clan or base.');
+        embed.addField(prefix + 'addbase <your base tag>/removebase', 'Links/unlinks base with user.');
+        embed.addField(prefix + 'addclan <your clan tag>/removeclan [ADMIN ONLY]', 'Links/unlinks clan with server.');
+        embed.addField(prefix + 'base/clan', 'Shows all linked bases/clans.');
         msg.channel.send(embed);
       } else if(args[0].toLowerCase() == 'recruit') {
         embed.setColor('#2f3136');
         embed.setTitle('🏹 Clan Recruiter\'s Commands');
         embed.setDescription(`Find players from all over discord.`);
-        embed.addField(prefix + 'setreq [ADMIN ONLY]', 'Set requirements for your clan.');
+        embed.addField(prefix + 'setreq [ADMIN ONLY]', 'Set minimum base requirements for your clan.');
         embed.addField(prefix + 'startsearch/stopsearch [ADMIN ONLY]', 'Stops or starts search for your clan.');
         embed.addField(prefix + 'delreq [ADMIN ONLY]', 'Delete your clan requirements.');
         embed.addField(prefix + 'showreq', 'Shows your clan requirements.');

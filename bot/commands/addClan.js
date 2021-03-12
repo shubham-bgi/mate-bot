@@ -3,7 +3,7 @@ const addClan = new AddClan();
 module.exports = {
   name: 'addclan',
   description: 'Links clan to the discord server.',
-  execute(bot, msg, args, Discord, recentUser) {
+  execute(bot, msg, args, Discord, recentUser, prefix) {
     if (!msg.member.hasPermission("ADMINISTRATOR")){
       msg.channel.send('Admin only');
       return;
@@ -12,7 +12,7 @@ module.exports = {
       console.log(args[0]);
       addClan.pushAddClanCommandDetails(args[0], msg);
     } else {
-      msg.channel.send('Which clan to add? Specify the clan tag.')
+      msg.channel.send(`Usage: \`\`${prefix}addclan <your clan tag>\`\``)
     }
   }
 }
