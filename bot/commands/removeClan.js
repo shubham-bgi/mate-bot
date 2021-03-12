@@ -2,7 +2,7 @@ const RemoveClan = require('../../playmate/commandDetails').RemoveClan;
 const removeClan = new RemoveClan();
 module.exports = {
   name: 'removeclan',
-  aliases: ['clnhata', 'rmvcln'],
+  aliases: ['clanhta', 'rmvcln'],
   description: 'Removes base from the database, from your discord Id.',
   execute(bot, msg, args, Discord, recentUser) {
   if (!msg.member.hasPermission("ADMINISTRATOR")){
