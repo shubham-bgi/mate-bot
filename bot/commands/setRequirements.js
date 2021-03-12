@@ -2,6 +2,7 @@ const SetRequirements = require('../../playmate/commandDetails').SetRequirements
 const setRequirements = new SetRequirements();
 module.exports = {
     name: 'setreq',
+    aliases: ['setrequirements', 'setr', 'reqlaga'],
     description: 'Registers your clan to get desired clan mates',
     execute(bot, msg, args, Discord, recentUser) {
       console.log(args);

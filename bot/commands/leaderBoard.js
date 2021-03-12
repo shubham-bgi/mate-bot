@@ -1,7 +1,8 @@
 const leaderBoard = require('../../playmate/commandDetails').leaderBoard;
 
 module.exports = {
-    name: 'lb',
+    name: 'leaderboard',
+    aliases: ['lb', 'sabseupar'],
     description: 'Shows the top 10 clans.',
     execute(bot, msg, args, Discord, recentUser) {
       console.log(args);

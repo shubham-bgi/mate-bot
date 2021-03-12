@@ -108,9 +108,10 @@ bot.on('message', async msg => {
   const message = msg.content.substr(prefix.length);
   const args = message.split(/ +/);
   const command = args.shift().toLowerCase();  //passes command to command variable from the whole
-  if(!bot.commands.has(command)) return;
   try {
-    bot.commands.get(command).execute(bot, msg, args, Discord, recentUser, prefix);
+    const bigBoi = bot.commands.get(command)||bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(command));
+    if(!bigBoi) return;
+    else bigBoi.execute(bot, msg, args, Discord, recentUser, prefix);
   } catch (error) {
     console.error(error.stack);
     msg.reply('There was an error trying to execute that command!');

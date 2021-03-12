@@ -2,6 +2,7 @@ const AddBase = require('../../playmate/commandDetails').AddBase;
 const addBase = new AddBase();
 module.exports = {
   name: 'addbase',
+  aliases: ['addb'],
   description: 'Links base to the user.',
   execute(bot, msg, args, Discord, recentUser, prefix) {
     if(args.length > 0) {

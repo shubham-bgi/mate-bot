@@ -2,6 +2,7 @@ const Searching = require('../../playmate/commandDetails').Searching;
 const searching = new Searching();
 module.exports = {
     name: 'stopsearch',
+    aliases: ['stosrc', 'srcroko'],
     description: 'Stop searching players for a clan.',
     execute(bot, msg, args, Discord, recentUser) {
       const embed = new Discord.RichEmbed();

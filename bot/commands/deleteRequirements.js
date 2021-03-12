@@ -2,6 +2,7 @@ const DeleteRequirements = require('../../playmate/commandDetails').DeleteRequir
 const deleteRequirements = new DeleteRequirements();
 module.exports = {
     name: 'delreq',
+    aliases: ['deleterequirements', 'delr', 'reqhta'],
     description: 'Deletes your base requirements',
     execute(bot, msg, args, Discord, recentUser) {
       const embed = new Discord.RichEmbed();

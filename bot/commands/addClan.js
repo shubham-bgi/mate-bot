@@ -2,6 +2,7 @@ const AddClan = require('../../playmate/commandDetails').AddClan;
 const addClan = new AddClan();
 module.exports = {
   name: 'addclan',
+  aliases: ['addc'],
   description: 'Links clan to the discord server.',
   execute(bot, msg, args, Discord, recentUser, prefix) {
     if (!msg.member.hasPermission("ADMINISTRATOR")){

@@ -2,6 +2,7 @@ const ShowRequirements = require('../../playmate/commandDetails').ShowRequiremen
 const showRequirements = new ShowRequirements();
 module.exports ={
     name: 'showreq',
+    aliases: ['showrequirements', 'showr', 'reqdikha'],
     description: 'Shows you clan requirements.',
     execute(bot, msg, args, Discord, recentUser) {
       console.log(args);

@@ -2,6 +2,7 @@ const Searching = require('../../playmate/commandDetails').Searching;
 const searching = new Searching();
 module.exports = {
     name: 'startsearch',
+    aliases: ['strsrc', 'srcshuru'],
     description: 'Start searching players back for a clan.',
     execute(bot, msg, args, Discord, recentUser) {
       const embed = new Discord.RichEmbed();
