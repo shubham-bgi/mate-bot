@@ -8,7 +8,8 @@ module.exports = {
       console.log(args[0]);
       addBase.pushAddBaseCommandDetails(args[0], msg);
     } else {
-      msg.channel.send(`Usage: \`\`${prefix}addbase <your base tag>\`\``)
+      msg.channel.send(`Usage: \`\`${prefix}addbase <your base tag>\`\``);
+      msg.channel.send('https://youtu.be/hkUzGWSkzOg');
     }
   }
 }

@@ -27,13 +27,13 @@ class SetRequirements {
                 const guild = await bot.guilds.get(regClanDetails.discordID.guild);
                 msg.channel.send(regClanDetails.clanDetails.name + ' is already regiestered in ' + guild.name + ' server.');
             } else {
-                msg.channel.send(regClanDetails.clanDetails.name + ' is already registered in this server.');
+                msg.channel.send(regClanDetails.clanDetails.name + ' is already registered in this server. To set more clans, link them first using ``addclan`` command.');
             }
             return;
         }
         let clanDetails = await Api.getClanDetails(clanTag);
         if (!clanDetails) {
-            msg.channel.send('Clash of clans servers are down, please try again later.');
+            msg.channel.send('Servers are down, please try again later.');
             return; 
         }
         if(!await verifyLead(msg.guild.id, clanDetails)){

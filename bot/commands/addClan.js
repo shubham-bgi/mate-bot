@@ -13,6 +13,7 @@ module.exports = {
       addClan.pushAddClanCommandDetails(args[0], msg);
     } else {
       msg.channel.send(`Usage: \`\`${prefix}addclan <your clan tag>\`\``)
+      msg.channel.send("https://youtu.be/sXogmMzczVc");
     }
   }
 }
