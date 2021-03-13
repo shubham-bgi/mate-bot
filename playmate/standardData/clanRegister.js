@@ -14,7 +14,7 @@ module.exports = {
             "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
         },
         {//2
-            "question": "What is the minimum townhall level are you guys accepting?\nType any number from Th``1`` to Th``13``.\nSuggested Townhall: Th",
+            "question": "What is the minimum townhall level are you guys accepting?\nType any number from Th``1`` to Th``13``.\nSuggested Townhall: ",
             "answer": ["1","2","3","4","5","6","7","8","9","10","11","12","13"],
             "onWrongReply": "Wrong awnser, Type a number to choose any townhall level between ``1`` to ``13``."
         },

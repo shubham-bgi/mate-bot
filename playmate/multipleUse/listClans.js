@@ -34,7 +34,7 @@ async function listClansCommandDetails(type, msg, e1, question, regClans, noClan
             return; 
         }
         if(showClans.length == 1) {
-            return showClans[0].tag;
+            return showClans[0];
         }
         msg.channel.send(listClansEmbed(showClans, msg, e1));
         msg.reply(question);

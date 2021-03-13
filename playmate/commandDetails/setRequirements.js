@@ -336,6 +336,7 @@ class SetRequirements {
                                 townhallCount = registeredClanDetails.baseRequirements.townHallLevel;
                             }
                             questionNumber = 10;
+                            msg.channel.send(clanRegister.quiz[10].info);
                             msg.reply( clanRegister.quiz[10].question + townhallCount + "?" );
                             return;
                         }

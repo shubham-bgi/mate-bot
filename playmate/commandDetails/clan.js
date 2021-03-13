@@ -11,7 +11,9 @@ class Clan {
             const question = "Do you want info on any of "+ msg.guild.name +" clans?\nType the corresponding number or ``no``.";
             const noClanFoundText = "No clans are currently linked with this server. Use ``addclan`` command."
             let clan = await listClans(argument, msg, embed, question, undefined, noClanFoundText);
-            if(!clan) { return; }
+            if(!clan) { 
+                return; 
+            }
             let clanTag = clan.tag;
             this.getClanCommandDetails(clanTag, msg, bot, Discord); 
         } else {
