@@ -19,7 +19,6 @@ module.exports = {
             "onWrongReply": "Wrong awnser, Type a number to choose any townhall level between ``1`` to ``13``."
         },
         {//3
-            "info": "",
             "question": "Are you okay with rushed players or are you looking for non-rushed only?\nOn a scale of 0 to 10, 0 being totally rushed & 10 being non rushed.Enter a value between ``0`` to ``10``.\nCurrent clan Average: ",
             "answer": ["0","10"],
             "onWrongReply": "Wrong awnser, Type a value between ``0`` and ``10``."

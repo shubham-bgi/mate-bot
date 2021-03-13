@@ -3,3 +3,4 @@ aws
 bot/botsettings.json
 bot/prefixes.json
 miscCode
+playmate/multipleUse/listClansReaction.js

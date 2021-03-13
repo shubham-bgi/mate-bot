@@ -142,7 +142,6 @@ class SetRequirements {
                             return;
                         } else {
                             questionNumber = 3;
-                            msg.channel.send(clanRegister.quiz[3].info);
                             msg.reply( clanRegister.quiz[3].question + clanMetrics.rushedMetrics.nonRushPoints);  
                             return;
                         }
@@ -173,7 +172,6 @@ class SetRequirements {
                             return;
                         } else {
                             questionNumber = 3;
-                            msg.channel.send(clanRegister.quiz[3].info);
                             msg.reply( clanRegister.quiz[3].question + clanMetrics.rushedMetrics.nonRushPoints);  
                             return;
                         }
