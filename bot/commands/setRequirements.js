@@ -12,6 +12,7 @@ module.exports = {
       }
       const embed = new Discord.RichEmbed();
       const embed1 = new Discord.RichEmbed();
-      setRequirements.lookingForClanMatesCommandDetails(args[0], msg, embed, bot, embed1);
+      const embed2 = new Discord.RichEmbed();
+      setRequirements.lookingForClanMatesCommandDetails(args[0], msg, embed, bot, embed1, embed2);
     },
 };

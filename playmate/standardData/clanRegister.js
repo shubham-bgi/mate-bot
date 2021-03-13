@@ -19,7 +19,7 @@ module.exports = {
             "onWrongReply": "Wrong awnser, Type a number to choose any townhall level between ``1`` to ``13``."
         },
         {//3
-            "question": "Are you okay with rushed players or are you looking for non-rushed only?\nOn a scale of 0 to 10, 0 being totally rushed & 10 being non rushed.Enter a value between ``0`` to ``10``.\nCurrent clan Average: ",
+            "question": "Are you okay with rushed players or are you looking for non-rushed only?\nOn a scale of 0 to 10, 0 being totally rushed & 10 being non rushed. Enter a value between ``0`` to ``10``.\nCurrent clan Average: ",
             "answer": ["0","10"],
             "onWrongReply": "Wrong awnser, Type a value between ``0`` and ``10``."
         },
@@ -189,11 +189,11 @@ module.exports = {
             "onWrongReply": "Wasn't able to find that channel please make sure to type '#' before typing the name."
         },
         {//14
-            "question": "Which role should I ping upon founding someone?\n Type the ``@role``, use '@' in front or ``no``.",
+            "question": "Which role should I ping upon founding someone?\n Type the ``@role`` or ``no``, use '@' in front.",
             "negativeAnswer": ["no", "n"],
             "onWrongReply": "Wasn't able to find that role please use '@' before typing the role."
         }
     ],
     "autoCancel": "Due to back to back invalid awnsers, i\'ma stop this.",
-    "endText": "Thank you for answering, I have stored all the info, if anyone wants to join the clan, I will ping in this channel."
+    "endText": "If anyone wants to join the clan, I will ping in this channel."
 }

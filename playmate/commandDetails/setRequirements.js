@@ -6,10 +6,10 @@ const {askQuestion} = require('../multipleUse/questions');
 const {fetchChannel, checkRole} = require('../multipleUse/discordOneLine');
 const {listClans}= require('../multipleUse/listClans');
 const {verifyLead} = require('../multipleUse/verifyClanLead');
-const {verificationEmbed}= require('../multipleUse/embed');
+const {verificationEmbed, requirementsEmbed}= require('../multipleUse/embed');
 const clanRegister = require('../standardData/clanRegister');
 class SetRequirements {
-    async lookingForClanMatesCommandDetails(argument, msg, embed, bot, embed1) {
+    async lookingForClanMatesCommandDetails(argument, msg, embed, bot, embed1, embed2) {
         const msgCollector = msg.channel.createMessageCollector(m => m.author.id === msg.author.id, { time: 400000 });
         /* let regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
         if (regClanDetails) { 
@@ -56,20 +56,20 @@ class SetRequirements {
         if(clanDetails.members < 5) {
             msg.channel.send('Since, you have less than 5 players in your clan, requirements will be auto set for you to get most no of players.');
             msg.reply(clanRegister.quiz[13].question);
-            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 13, bot))
+            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 13, bot, embed2))
         } else if(checkFWA(clanDetails.description) ) {
             msg.reply(clanRegister.quiz[0].question);
-            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 0, bot))
+            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 0, bot, embed2))
         } else if( clanMetrics.townHall.type.startsWith('O') ) {
             msg.reply(clanRegister.quiz[1].question + clanMetrics.townHall.predominantTownHall );
-            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 1, bot));
+            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 1, bot, embed2));
         } else {
             msg.reply(clanRegister.quiz[2].question + clanMetrics.townHall.predominantTownHall);
-            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 2, bot));
+            askQuestion(msg, msgCollector, this.clanRegisterQuestionaire(msg, clanDetails, clanMetrics, 2, bot, embed2));
         }
     }
 
-    clanRegisterQuestionaire(msg, clanDetails, clanMetrics, questionNumber, bot) {
+    clanRegisterQuestionaire(msg, clanDetails, clanMetrics, questionNumber, bot, embed) {
         let count = 0;
         let i = 0;
         let j = 0;
@@ -519,26 +519,27 @@ class SetRequirements {
                         registeredClanDetails.discordID.role = message.content;
                         if(await registeredClanCollection.newClanRegister(registeredClanDetails)) {
                             fetchChannel(registeredClanDetails.discordID.channel, bot).send(clanRegister.endText + registeredClanDetails.discordID.role);
-                            msg.channel.send('Requirements are now set. You can use ``showreq`` command to see your clan requirements.');
+                            msg.channel.send('Requirements are now set!');
+                            msg.channel.send(requirementsEmbed(registeredClanDetails, embed));
                             msgCollector.stop('Finished');
                             return;
                         } else {
-                            msg.channel.send('Some error occured,this never really happens. If happens again please report in our support server.')
+                            msg.channel.send('Some error occured,this never really happens. Please try again later.');
                             msgCollector.stop('Database error');
                             return;
                         }
                     } else if(clanRegister.quiz[14].negativeAnswer.includes(message.content.toLowerCase())){
                         if(await registeredClanCollection.newClanRegister(registeredClanDetails)) {
                             fetchChannel(registeredClanDetails.discordID.channel, bot).send(clanRegister.endText);
-                            msg.channel.send('Requirements are now set. You can use ``showreq`` command to see your clan requirements.');
+                            msg.channel.send('Requirements are now set!');
+                            msg.channel.send(requirementsEmbed(registeredClanDetails, embed));                            
                             msgCollector.stop('Finished');
                             return;
                         } else {
-                            msg.channel.send('Some error occured,this never really happens. If happens again please report in our support server.')
+                            msg.channel.send('Some error occured,this never really happens. Please try again later.');
                             msgCollector.stop('Database error');
                             return;
                         }
-                        return;
                     } else if ( count < clanRegister.wrongAnswerCount ) {
                         count++;
                         msg.channel.send( clanRegister.quiz[14].onWrongReply );
