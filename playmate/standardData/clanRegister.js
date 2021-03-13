@@ -14,13 +14,13 @@ module.exports = {
             "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
         },
         {//2
-            "question": "What is the minimum townhall level are you guys accepting?\nType any number from Th``1`` to Th``13``.\nSuggested Townhall: ",
+            "question": "What is the minimum townhall level are you guys accepting?\nType any number from ``1`` to ``13``.\nSuggested Townhall: ",
             "answer": ["1","2","3","4","5","6","7","8","9","10","11","12","13"],
             "onWrongReply": "Wrong awnser, Type a number to choose any townhall level between ``1`` to ``13``."
         },
         {//3
             "info": "",
-            "question": "Are you okay with rushed players or are you looking for non-rushed only?\nOn a scale of 0 to 10, 0 being totally rushed & 10 being non rushed.\nEnter a value between ``0`` to ``10``.\nCurrent clan Average: ",
+            "question": "Are you okay with rushed players or are you looking for non-rushed only?\nOn a scale of 0 to 10, 0 being totally rushed & 10 being non rushed.Enter a value between ``0`` to ``10``.\nCurrent clan Average: ",
             "answer": ["0","10"],
             "onWrongReply": "Wrong awnser, Type a value between ``0`` and ``10``."
         },
