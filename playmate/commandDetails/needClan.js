@@ -15,9 +15,9 @@ class NeedClan{
             let noBaseFoundText;
             const question = "Which base are you searching for?\n Type the corresponding number or ``no``";
             if (!needWarFarmers) {
-                noBaseFoundText = "Usage: ``" + prefix + "needclan <your base tag>``\n example. " + prefix + "needclan #cjo28pr8 \n https://youtu.be/T3Kr6EOJMoM";
+                noBaseFoundText = "Usage: ``" + prefix + "needclan <your base tag>``\n example. " + prefix + "needclan #cjo28pr8 \n https://youtu.be/x608VYBLqog";
             } else {
-                noBaseFoundText = "Usage: ``" + prefix + "needfwa <your base tag>``\n example. " + prefix + "needfwa #cjo28pr8 \n https://youtu.be/T3Kr6EOJMoM";
+                noBaseFoundText = "Usage: ``" + prefix + "needfwa <your base tag>``\n example. " + prefix + "needfwa #cjo28pr8 \n https://youtu.be/x608VYBLqog";
             }
             const baseTag = await listBases(argument, msg, embed, question, noBaseFoundText);
             if(!baseTag) { return; }
