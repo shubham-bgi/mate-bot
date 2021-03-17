@@ -177,7 +177,7 @@ function requirementsEmbed(regClanDetails, embed) {
     }
     embed.addField('Home Trophies', regClanDetails.baseRequirements.trophies);
     embed.addField('Builder Base Trophies', regClanDetails.baseRequirements.versusTrophies);
-
+    embed.addField('Need FWA players', regClanDetails.baseRequirements.needWarFarmers, true);
     if(regClanDetails.baseRequirements.heroLevels[0].heroLevels[0] != -1) {
         if(regClanDetails.baseRequirements.onlyTownHall == 0) {
             

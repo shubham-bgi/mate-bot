@@ -81,10 +81,16 @@ class SetRequirements {
         registeredClanDetails.baseRequirements.heroLevels = clanRegister.quiz[10].default;
         registeredClanDetails.baseRequirements.warStars = clanRegister.quiz[12].default;
         registeredClanDetails.discordID.guild = msg.guild.id;
-        registeredClanDetails.baseRequirements.townHallLevel = 1;
-        registeredClanDetails.baseRequirements.nonRushPoints = 0;
-        registeredClanDetails.baseRequirements.trophies = 0;
-        registeredClanDetails.baseRequirements.versusTrophies = 0;
+        registeredClanDetails.baseRequirements.townHallLevel = 30;
+        registeredClanDetails.baseRequirements.onlyTownHall = 0;
+        registeredClanDetails.baseRequirements.warLeagueTownHallLevel = 30;
+        registeredClanDetails.baseRequirements.nonRushPoints = -1;
+        registeredClanDetails.baseRequirements.maxPoints = -1;
+        registeredClanDetails.baseRequirements.attackWinsPoints = -1;
+        registeredClanDetails.baseRequirements.trophies = -1;
+        registeredClanDetails.baseRequirements.versusTrophies = -1;
+        registeredClanDetails.baseRequirements.needWarFarmers = false;
+        registeredClanDetails.totalPlayersFound = 0;
         registeredClanDetails.clanDetails = clanDetails;
         registeredClanDetails.clanMetrics = clanMetrics;
         let townhallCount;
@@ -497,7 +503,7 @@ class SetRequirements {
                     }
 
                 case 13://asking for channel id
-                    if(fetchChannel(message.content, bot)){
+                    if(fetchChannel(message.content, bot)) {
                         count = 0;
                         registeredClanDetails.discordID.channel = message.content;
                         questionNumber = 14;

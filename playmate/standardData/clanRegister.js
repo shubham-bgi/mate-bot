@@ -1,50 +1,50 @@
 module.exports = {
-    "wrongAnswerCount" : 1,
+    "wrongAnswerCount" : 2,
     "quiz" : [
         {//0
             "question": "In your clan description there is mention of farming, do you guys do war farming like FWA or GWA?\nIf you don't know what it is, the awnser will be no...\nType ``yes`` or ``no``",
-            "positiveAnswer": ["yes","y"],
-            "negativeAnswer": ["no", "n"],
+            "positiveAnswer": ["yes","y", "yes "],
+            "negativeAnswer": ["no", "n", "no "],
             "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
         },
         {//1
             "question": "I see your clan only have single Townhall level, Are you guys looking for that TH level only?\nType ``yes`` or ``no``\nTownhall level: ",
-            "positiveAnswer": ["yes","y"],
-            "negativeAnswer": ["no", "n"],
+            "positiveAnswer": ["yes","y", "yes "],
+            "negativeAnswer": ["no", "n", "no "],
             "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``."
         },
         {//2
             "question": "What is the minimum townhall level are you guys accepting?\nType any number from ``1`` to ``13``.\nSuggested Townhall: ",
             "answer": ["1","2","3","4","5","6","7","8","9","10","11","12","13"],
-            "onWrongReply": "Wrong awnser, Type a number to choose any townhall level between ``1`` to ``13``."
+            "onWrongReply": "Not a valid number, Type a number to choose any townhall level between ``1`` to ``13``."
         },
         {//3
             "question": "Are you okay with rushed players or are you looking for non-rushed only?\nOn a scale of 0 to 10, 0 being totally rushed & 10 being non rushed. Enter a value between ``0`` to ``10``.\nCurrent clan Average: ",
             "answer": ["0","10"],
-            "onWrongReply": "Wrong awnser, Type a value between ``0`` and ``10``."
+            "onWrongReply": "Not a valid number, Type a value between ``0`` and ``10``."
         },
         {//4
             "info": "On a scale of 0 to 10, 0 being newbie & 10 being maxed.",
             "question": "Since most players in your clan are maxed are you looking for max players only?\nEnter a value between ``0`` to ``10``.\nCurrent clan average: ",
             "answer": ["0","10"],
-            "onWrongReply": "Wrong awnser, Type a value between ``0`` and ``10``."
+            "onWrongReply": "Not a valid number, Type a value between ``0`` and ``10``."
         },
         {//5
             "question": "What are minimum home base trophies are you guys accepting?\nPlease type any number between ``0`` to ``5500``.",
             "answer": ["0","5500"],
-            "onWrongReply": "Wrong awnser, Type a number between ``0`` to ``5500``."
+            "onWrongReply": "Not a valid number, Type a number between ``0`` to ``5500``."
         },
         {//6
             "question": "What are minimum builder base trophies are you guys accepting?\nPlease type any number between ``0`` to ``5500``",
             "answer": ["0","5500"],
-            "onWrongReply": "Wrong awnser, Type a number between ``0`` to ``5500``."
+            "onWrongReply": "Not a valid number, Type a number between ``0`` to ``5500``."
         },
         {//7
             "info": "",
             "question": "Do you want player's attacks won to be greater or equal than your clan's average?\nType ``yes`` or ``no``.",
-            "positiveAnswer": ["yes","y"],
-            "negativeAnswer": ["no", "n"],
-            "onWrongReply":"Wrong awnser, Type either ``yes`` or ``no``."
+            "positiveAnswer": ["yes","y", "yes "],
+            "negativeAnswer": ["no", "n", "no "],
+            "onWrongReply":"Not a valid option, Type either ``yes`` or ``no``."
         },
         {//8
             "question": "Do you wanna filter by hero levels for each townhall level?\nType from any of these options: ``sum of heroes``, ``hero levels``or ``no``.",
@@ -96,7 +96,7 @@ module.exports = {
                     "sumOfHeroes": "-1"
                 },
             ],
-            "onWrongReply": "Not a valid sum of hero levels for that town hall level."
+            "onWrongReply": "Not valid sum of hero levels for that town hall level."
         },
         {//10
             "info": "Type hero levels in this format < King level/Queen level/Warden level/Royal Champ level> Example for a th12 - ``60/60/40``.",
@@ -144,8 +144,8 @@ module.exports = {
         }, 
         {//11
             "question": "Do you want to set minimum war stars for each town hall level?\nType ``yes`` or ``no``?",
-            "positiveAnswer": (message)=>{if(["yes","y"].includes(message)) return true; else return false;},
-            "negativeAnswer": ["no", "n"],
+            "positiveAnswer": (message)=>{if(["yes","y", "yes ", " yes "].includes(message)) return true; else return false;},
+            "negativeAnswer": ["no", "n", "no ", " no "],
             "onWrongReply": "Not a valid option. Type either ``yes`` or ``no``"
         },
         {//12
@@ -190,10 +190,10 @@ module.exports = {
         },
         {//14
             "question": "Which role should I ping upon founding someone?\n Type the ``@role`` or ``no``, use '@' in front.",
-            "negativeAnswer": ["no", "n"],
+            "negativeAnswer": ["no", "n", "no "],
             "onWrongReply": "Wasn't able to find that role please use '@' before typing the role."
         }
     ],
-    "autoCancel": "Due to back to back invalid awnsers, i\'ma stop this.",
+    "autoCancel": "Due to back to back invalid awnsers, I am going to stop this.",
     "endText": "If anyone wants to join the clan, I will ping in this channel."
 }
