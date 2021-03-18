@@ -8,6 +8,7 @@ const {listBases} = require('../multipleUse/listBases');
 const {fetchChannel} = require('../multipleUse/discordOneLine');
 const keyMap = require('../standardData/keyMap');
 const {clanTypes} = require('../standardData/types.json');
+const { clanInfoUrl } = require('../constants');
 class NeedClan{   
     async  iNeedAClanCommandDetails(argument, msg, bot, Discord, recentUser, needWarFarmers, prefix) {
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
@@ -160,6 +161,7 @@ class NeedClan{
         })
         msg.channel.send('**'+msg.author.username + '**, I have pinged the clan recruiters.');
         msg.channel.send("https://discord.gg/" + invite.code);
+        msg.channel.send("Clan Link : " + clanInfoUrl + finalClan.clanDetails.tag)
         if(finalClan.discordID.role)
         clanChannel.send(finalClan.discordID.role);
         clanChannel.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
