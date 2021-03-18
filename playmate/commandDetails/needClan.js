@@ -8,7 +8,7 @@ const {listBases} = require('../multipleUse/listBases');
 const {fetchChannel} = require('../multipleUse/discordOneLine');
 const keyMap = require('../standardData/keyMap');
 const {clanTypes} = require('../standardData/types.json');
-const { clanInfoUrl } = require('../constants');
+const { clanInfoUrl, baseInfoUrl } = require('../constants');
 class NeedClan{   
     async  iNeedAClanCommandDetails(argument, msg, bot, Discord, recentUser, needWarFarmers, prefix) {
         if(!argument || clanTypes.includes(argument.toLowerCase())) {
@@ -167,6 +167,7 @@ class NeedClan{
         clanChannel.send('Found a player for you! Discord name is ' + msg.author.username + '#' + msg.author.discriminator + '.');
         clanChannel.send(baseEmbed(this.baseMetrics, this.baseDetails, embed, this.bot));
         clanChannel.send('If you wish to stop these pings, use ``stopsearch`` command.');
+        clanChannel.send("Base Link : " + baseInfoUrl + this.baseDetails.tag);
         registeredClanCollection.foundPlayer(finalClan.discordID.guild);
     }
 }
