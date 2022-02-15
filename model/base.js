@@ -25,8 +25,7 @@ let BaseSchema = new mongoose.Schema({
         dateAdded: {
             type: Date,
             default: Date.now
-        },
-        
+        }
     }]
 });
 

@@ -17,7 +17,7 @@ function overallPoints(clanDetails, rushedMetrics, activeMetrics, siegeDonors, m
     const membersPoints = clanDetails.members/5;
     let overAllPoints = cwlPoints + clanLevelPoints + trophyPoints + versusTrophyPoints + war.points + activeMetrics.attackWinsPoints + activeMetrics.donationRationPoints + rushedMetrics.nonRushPoints + rushedMetrics.maxPoints + siegeDonors.points + maxDonation.points + membersPoints;
     overAllPoints = Math.round((overAllPoints/12)*10)/10;
-    return { 
+    return {
         CWL: cwlPoints,
         clanLevel: clanLevelPoints,
         trophy: trophyPoints,
