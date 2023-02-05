@@ -4,6 +4,7 @@ const {listClans} = require('../multipleUse/listClans')
 const {playmateDiscordInvite} = require('../constants');
 class DeleteRequirements {
     async deleteRequiremetnsCommandDetails(msg, embed) {
+        
         let clanTag;
         let regClanDetail;
         const regClanDetails = await registeredClanCollection.getByDiscordID(msg.guild.id);
